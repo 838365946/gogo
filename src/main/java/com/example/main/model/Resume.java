@@ -52,7 +52,7 @@ private String r_name;
     @JoinColumn(name = "r_id")
     private List<Experience> experiences;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "u_id")
     private User user;
 
     public String getR_name() {

@@ -38,10 +38,21 @@ public class Company {
     @OneToMany
     @JoinColumn(name = "c_id")
     private List<Position> positions;
+    @OneToMany
+    @JoinColumn(name = "c_id")
+    private List<Delivery> deliveries;
 @Column
     private String c_phone_number;
 @Column
     private String c_addr;
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
 
     public int getC_id() {
         return c_id;

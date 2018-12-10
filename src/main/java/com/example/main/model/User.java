@@ -33,6 +33,17 @@ public class User {
 @OneToMany
 @JoinColumn(name = "phone_number")
         private List<Resume> resumes;
+@OneToMany
+@JoinColumn(name = "phone_number")
+private List<Delivery> deliveries;
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
 
     public int getId() {
         return id;
