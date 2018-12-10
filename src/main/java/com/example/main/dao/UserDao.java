@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
     @Query(value = "select * from user u where u.phone_number =:phonenumber and u.password=:password",nativeQuery = true)
-    public User Login(@Param("phonenumber") String phone_number,@Param("password") String password);
+     User Login(@Param("phonenumber") String phone_number,@Param("password") String password);
     @Query(value = "select * from user u where u.phone_number =:phonenumber",nativeQuery = true)
-    public User WxLogin(@Param("phonenumber")String phone_number);
+     User WxLogin(@Param("phonenumber")String phone_number);
 
 }
