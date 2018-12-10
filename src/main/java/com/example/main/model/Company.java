@@ -45,6 +45,14 @@ private String c_img;
 @Column
     private String c_addr;
 
+    public String getC_img() {
+        return c_img;
+    }
+
+    public void setC_img(String c_img) {
+        this.c_img = c_img;
+    }
+
     public List<Delivery> getDeliveries() {
         return deliveries;
     }
