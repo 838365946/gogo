@@ -26,7 +26,7 @@ public class UserController {
 if (userService.Login(user)!=null){
     message.setB(true);
 
-    message.setDes("登录成功");
+    message.setDes("登录成sas功");
     modelAndView.addObject(message);
     modelAndView.addObject(user);
 }else {
