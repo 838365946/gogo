@@ -1,11 +1,9 @@
 package com.example.main.model;
 
-import org.springframework.stereotype.Component;
-
 /**
  * Created by Administrator on 2018/12/7.
  */
-@Component
+
 public class Message {
 
     private int m_id;

@@ -19,8 +19,8 @@ public class CompanyController {
     private CompanyService companyService;
     @Autowired
     private CompanyIO companyIO;
-    @Autowired
-    private Message message;
+
+    private Message message =new Message();
 
     @RequestMapping("/companyRegistered")
     @ResponseBody
