@@ -8,5 +8,5 @@ import com.example.main.model.User;
 public interface UserService {
     User Login(User user);
     User WxLogin(String phone_number);
- User AddUser(User user);
+    User AddUser(User user);
 }

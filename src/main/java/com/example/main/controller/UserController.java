@@ -21,7 +21,7 @@ public class UserController {
 @ResponseBody
     public ModelAndView Login(User user){
 
-        ModelAndView modelAndView=new ModelAndView();
+    ModelAndView modelAndView=new ModelAndView();
     Message message=new Message();
 if (userService.Login(user)!=null){
     message.setB(true);
