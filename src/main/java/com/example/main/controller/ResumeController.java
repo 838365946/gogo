@@ -22,7 +22,7 @@ message.setB(true);
 message.setDes("新增简历成功");
 }else {
     message.setB(false);
-    message.setDes("新增简历失败");
+    message.setDes("新增简历失说败");
 }
 return message;
 }
