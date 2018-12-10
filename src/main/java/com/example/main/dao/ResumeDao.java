@@ -2,6 +2,8 @@ package com.example.main.dao;
 
 import com.example.main.model.Resume;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ResumeDao  extends JpaRepository<Resume,Long>{
+    @Query(value = "select * from resume r where r.phone_number = :phone")
+    public Resume QueryResumeByPhoneNumber(@Param("phone")String phone);
+
 }

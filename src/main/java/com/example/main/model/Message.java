@@ -1,8 +1,11 @@
 package com.example.main.model;
 
+import javax.persistence.Entity;
+
 /**
  * Created by Administrator on 2018/12/7.
  */
+@Entity
 public class Message {
 
     private int m_id;

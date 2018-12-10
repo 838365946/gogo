@@ -12,14 +12,59 @@ public class Delivery {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int d_id;
+        //投递日期
         @Column
     private String d_date;
+        //被查看
+        @Column
+        private boolean d_BeViewed;
+        //有意向
+        @Column
+        private boolean d_intent;
+        //邀请面试
+        @Column
+        private boolean d_offer;
+        //不合适
+        @Column
+        private boolean d_pass;
         @ManyToOne
         @JoinColumn(name = " c_id")
         private Company company;
         @ManyToOne
         @JoinColumn(name = "phone_number")
         private User user;
+
+    public boolean isD_BeViewed() {
+        return d_BeViewed;
+    }
+
+    public void setD_BeViewed(boolean d_BeViewed) {
+        this.d_BeViewed = d_BeViewed;
+    }
+
+    public boolean isD_intent() {
+        return d_intent;
+    }
+
+    public void setD_intent(boolean d_intent) {
+        this.d_intent = d_intent;
+    }
+
+    public boolean isD_offer() {
+        return d_offer;
+    }
+
+    public void setD_offer(boolean d_offer) {
+        this.d_offer = d_offer;
+    }
+
+    public boolean isD_pass() {
+        return d_pass;
+    }
+
+    public void setD_pass(boolean d_pass) {
+        this.d_pass = d_pass;
+    }
 
     public int getD_id() {
         return d_id;
