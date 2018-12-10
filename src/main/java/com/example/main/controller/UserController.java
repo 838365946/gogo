@@ -20,13 +20,13 @@ public class UserController {
 @RequestMapping("login")
 @ResponseBody
     public ModelAndView Login(User user){
-    System.out.println("1");
+
         ModelAndView modelAndView=new ModelAndView();
     Message message=new Message();
 if (userService.Login(user)!=null){
     message.setB(true);
 
-    message.setDes("登录成sass功");
+    message.setDes("登录成功");
     modelAndView.addObject(message);
     modelAndView.addObject(user);
 }else {
