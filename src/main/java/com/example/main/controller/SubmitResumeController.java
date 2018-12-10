@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -23,12 +24,15 @@ public class SubmitResumeController {
 @ResponseBody
 public Message Submit(User user, Company company){
     Message message=new Message();
-    Date date=new Date("yyyy-mm-dd");
+    Date date=new Date();
+    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+    String date1=simpleDateFormat.format(date);
+
     System.out.println(date);
     Delivery delivery =new Delivery();
     delivery.setUser(user);
     delivery.setCompany(company);
-    delivery.setD_date(String.valueOf(date));
+    delivery.setD_date(date1);
 Delivery delivery1=deliveryService.SubmitRuseme(delivery);
 if (delivery1!=null){
     message.setB(true);

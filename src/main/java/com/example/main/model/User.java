@@ -15,7 +15,7 @@ public class User {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 @Column
-        private String username;
+        private String nickname;
 @Column
         private String password;
 @Column
@@ -53,12 +53,12 @@ private List<Delivery> deliveries;
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {

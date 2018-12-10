@@ -16,6 +16,8 @@ public class Company {
 @Column
         private String c_name;
 @Column
+private String c_img;
+@Column
         private String c_username;
 @Column
         private String c_password;
@@ -34,10 +36,7 @@ public class Company {
     //公司介绍
     @Column
     private String c_des;
-    //职位表
-    @OneToMany
-    @JoinColumn(name = "c_id")
-    private List<Position> positions;
+
     @OneToMany
     @JoinColumn(name = "c_id")
     private List<Delivery> deliveries;
@@ -126,13 +125,7 @@ public class Company {
         this.c_des = c_des;
     }
 
-    public List<Position> getPositions() {
-        return positions;
-    }
 
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
-    }
 
     public String getC_phone_number() {
         return c_phone_number;
