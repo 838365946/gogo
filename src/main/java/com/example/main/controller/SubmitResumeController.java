@@ -24,6 +24,7 @@ public class SubmitResumeController {
 public Message Submit(User user, Company company){
     Message message=new Message();
     Date date=new Date("yyyy-mm-dd");
+    System.out.println(date);
     Delivery delivery =new Delivery();
     delivery.setUser(user);
     delivery.setCompany(company);
