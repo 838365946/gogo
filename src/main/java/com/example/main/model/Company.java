@@ -150,4 +150,23 @@ private String c_img;
     public void setC_addr(String c_addr) {
         this.c_addr = c_addr;
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "c_id=" + c_id +
+                ", c_name='" + c_name + '\'' +
+                ", c_img='" + c_img + '\'' +
+                ", c_username='" + c_username + '\'' +
+                ", c_password='" + c_password + '\'' +
+                ", c_welfare='" + c_welfare + '\'' +
+                ", c_industry='" + c_industry + '\'' +
+                ", c_nature='" + c_nature + '\'' +
+                ", c_scale='" + c_scale + '\'' +
+                ", c_des='" + c_des + '\'' +
+                ", deliveries=" + deliveries +
+                ", c_phone_number='" + c_phone_number + '\'' +
+                ", c_addr='" + c_addr + '\'' +
+                '}';
+    }
 }

@@ -5,12 +5,14 @@ import com.example.main.model.Message;
 import com.example.main.service.CompanyService;
 import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -22,14 +24,15 @@ public class CompanyController {
 
     private Message message =new Message();
 
-    @RequestMapping("/companyRegistered")
+    @RequestMapping(value = "companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Message companyRegistered(Company company, MultipartFile multpartFile, HttpServletRequest request){
+    public Message companyRegistered(@Param("files")MultipartFile[] files, Company company){
 
         String des=company.getC_des();
         company.setC_des("上传中");
         Company company1=companyService.registered(company);
-        String imgpath= String.valueOf(companyIO.UploadImg(request,company1.getC_id()));
+        String imgpath= companyIO.UploadImg(files,company1.getC_id());
+
         try {
             String despath=companyIO.WriteDes(des,company1.getC_id());
             company1.setC_des(despath);
@@ -48,5 +51,6 @@ public class CompanyController {
         return message;
         }
 
-
 }
+
+
