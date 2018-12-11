@@ -29,9 +29,19 @@ public class Position {
     //工作地址
     @Column
     private String p_addr;
+    @Column
+    private String p_des;
 @ManyToOne
 @JoinColumn(name = "p_c_id")
     private Company company;
+
+    public String getP_des() {
+        return p_des;
+    }
+
+    public void setP_des(String p_des) {
+        this.p_des = p_des;
+    }
 
     public int getP_id() {
         return p_id;

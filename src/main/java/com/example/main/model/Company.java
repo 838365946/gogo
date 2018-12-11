@@ -36,7 +36,8 @@ private String c_img;
     //公司介绍
     @Column
     private String c_des;
-
+@Column
+    private String c_check_status;
     @OneToMany
     @JoinColumn(name = "c_id")
     private List<Delivery> deliveries;
@@ -44,6 +45,14 @@ private String c_img;
     private String c_phone_number;
 @Column
     private String c_addr;
+
+    public String getC_check_status() {
+        return c_check_status;
+    }
+
+    public void setC_check_status(String c_check_status) {
+        this.c_check_status = c_check_status;
+    }
 
     public String getC_img() {
         return c_img;
