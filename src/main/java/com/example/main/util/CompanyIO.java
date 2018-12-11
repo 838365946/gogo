@@ -11,19 +11,21 @@ import java.util.Objects;
  */
 @Component
 public class CompanyIO {
+    private String propath=System.getProperty("user.dir");
     //写入公司介绍
     public String WriteDes(String des,int c_id) throws IOException {
-        File file=new File("C:/Users/Administrator/company_des");
+
+        File file=new File(propath+"\\src\\main\\resources\\static\\companydes");
         if(file.getParentFile().exists()){
             file.mkdir();
         }
-        FileOutputStream fileOutputStream=new FileOutputStream(c_id+".txt");
+        FileOutputStream fileOutputStream=new FileOutputStream(file.getPath()+"/"+c_id+".txt");
         OutputStreamWriter osw=new OutputStreamWriter(fileOutputStream);
         osw.flush();
         osw.write(des);
         osw.close();
         fileOutputStream.close();
-        return "C:/Users/Administrator/company_des/"+c_id+".txt";
+        return propath+"/src/main/resources/static/companydes"+c_id+".txt";
     }
     //读取公司介绍
     public StringBuffer ReadDes(String filepath){
@@ -58,10 +60,10 @@ public class CompanyIO {
         }
         try {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("C:/Users/Administrator/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
+            Path path = Paths.get(propath+"/src/main/resources/static/img/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
             //如果没有files文件夹，则创建
             if (!Files.isWritable(path)) {
-                Files.createDirectories(Paths.get("C:/Users/Administrator/" + id));
+                Files.createDirectories(Paths.get(propath+"/src/main/resources/static/img/" + id));
             }
             //文件写入指定路径
             Files.write(path, bytes);
