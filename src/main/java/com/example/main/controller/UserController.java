@@ -29,11 +29,19 @@ public String ToIndex(){
     ModelAndView modelAndView=new ModelAndView();
     Message message=new Message();
 if (userService.Login(user)!=null){
-    message.setB(true);
+    if(user.getIsadmin()==true){
 
-    message.setDes("登录成功");
-    modelAndView.addObject(message);
     modelAndView.addObject(user);
+    modelAndView.addObject(message);
+
+    }else {
+        message.setB(true);
+        message.setDes("登录成功");
+        modelAndView.addObject(message);
+        modelAndView.addObject(user);
+    }
+
+
 }else {
     message.setB(false);
     message.setDes("登录失败");
