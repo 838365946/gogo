@@ -55,24 +55,29 @@ public class CompanyIO {
         }
         String allName = file.getOriginalFilename();
         System.out.println("上传的文件名： "+allName);
-        if(!allName.substring(allName.lastIndexOf(".")).equals(".png")){
-            return "文件格式不正确!";
-        }
-        try {
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(propath+"/src/main/resources/static/img/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
-            //如果没有files文件夹，则创建
-            if (!Files.isWritable(path)) {
-                Files.createDirectories(Paths.get(propath+"/src/main/resources/static/img/" + id));
+        boolean b=allName.substring(allName.lastIndexOf(".")).equals(".jpeg");
+        boolean b1=allName.substring(allName.lastIndexOf(".")).equals(".jpg");
+        boolean b2=allName.substring(allName.lastIndexOf(".")).equals(".gif");
+        if(allName.substring(allName.lastIndexOf(".")).equals(".png")||b|b1|b2){
+            try {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(propath+"/src/main/resources/static/img/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
+                //如果没有files文件夹，则创建
+                if (!Files.isWritable(path)) {
+                    Files.createDirectories(Paths.get(propath+"/src/main/resources/static/img/" + id));
+                }
+                //文件写入指定路径
+                Files.write(path, bytes);
+                System.out.println("存进去的path"+path);
+                String paths=String.valueOf(path);
+                return paths;
+            } catch (IOException e) {
+                return "文件上传失败";
             }
-            //文件写入指定路径
-            Files.write(path, bytes);
-            System.out.println("存进去的path"+path);
-           String paths=String.valueOf(path);
-            return paths;
-        } catch (IOException e) {
-            return "文件上传失败";
+        }else {
+            return "文件格式不正确";
         }
+
     }
     //上传公司图片
     public String UploadImg(MultipartFile[] files, int c_id) {

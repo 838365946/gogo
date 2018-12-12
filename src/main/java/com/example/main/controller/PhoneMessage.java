@@ -47,7 +47,7 @@ public class PhoneMessage {
     }
 
     //2.发送短信
-    @RequestMapping("phone")
+    @RequestMapping("works_home/phone")
     public static void getRequest2(String phone){
        int code= (int) ((Math.random()*9+1)*100000);
         System.out.println(code);

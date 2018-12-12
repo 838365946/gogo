@@ -22,7 +22,7 @@ public String ToIndex(){
 
     return "index";
 }
-@RequestMapping("login")
+@RequestMapping("works_home/login")
 @ResponseBody
     public ModelAndView Login(User user){
 
@@ -42,7 +42,7 @@ modelAndView.addObject(message);
 modelAndView.setView(new MappingJackson2JsonView());
 return modelAndView;
     }
-@RequestMapping("wxlogin")
+@RequestMapping("works_home/0wxlogin")
 @ResponseBody
     public User WxLogin(String phone_number){
         return userService.WxLogin(phone_number);
@@ -60,7 +60,7 @@ return modelAndView;
         return message;
     }
 
-@RequestMapping("addcheck")
+@RequestMapping("works_home/addcheck")
     public Message addcheck(String phonenumber){
 
         Message message =new Message();

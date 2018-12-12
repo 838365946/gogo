@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
-    @RequestMapping("saveresume")
+    @RequestMapping("works_home/saveresume")
 public Message SaveResume(Resume resume){
     Message message =new Message();
 if(resumeService.SaveResume(resume)!=null){

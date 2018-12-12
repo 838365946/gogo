@@ -20,7 +20,7 @@ import java.util.Date;
 public class SubmitResumeController {
 @Autowired
     private DeliveryService deliveryService;
-@RequestMapping("submitresume")
+@RequestMapping("works_home/submitresume")
 @ResponseBody
 public Message Submit(User user, Company company){
     Message message=new Message();

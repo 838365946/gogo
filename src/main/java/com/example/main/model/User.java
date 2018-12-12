@@ -30,12 +30,22 @@ public class User {
         private String sex;
 @Column
         private int age;
+@Column
+private boolean isadmin;
 @OneToMany
 @JoinColumn(name = "phone_number")
         private List<Resume> resumes;
 @OneToMany
 @JoinColumn(name = "phone_number")
 private List<Delivery> deliveries;
+
+    public boolean getIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
 
     public List<Delivery> getDeliveries() {
         return deliveries;

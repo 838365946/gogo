@@ -17,7 +17,7 @@ import java.util.List;
 public class ShowMessController {
 @Autowired
     private FindPositionService fp;
-@RequestMapping("/showmess")
+@RequestMapping("works_home/showmess")
     public List<Position> ShowMess(int page){
     PageRequest pageRequest=PageRequest.of(page,5);
     Page<Position> positionspage=  fp.ShowMess(pageRequest);
@@ -29,7 +29,7 @@ public class ShowMessController {
     return positions;
 }
 
-@RequestMapping("querybyinput")
+@RequestMapping("works_home/querybyinput")
 public List<Position> QueryByInput(int page,String input){
         PageRequest pageRequest=PageRequest.of(page,5);
         Page<Position> positionpage=fp.QueryByInput(input,pageRequest);

@@ -24,10 +24,10 @@ public class CompanyController {
 
     private Message message =new Message();
 
-    @RequestMapping(value = "companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "works_home/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message companyRegistered(@Param("files")MultipartFile[] files, Company company){
-
+        System.out.println("进入companycontroller");
         String des=company.getC_des();
         company.setC_des("上传中");
         Company company1=companyService.registered(company);
