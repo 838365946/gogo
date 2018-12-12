@@ -17,31 +17,37 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 public class UserController {
 @Autowired
     private UserService userService;
+
+
+
 @RequestMapping("/")
 public String ToIndex(){
 
     return "index";
 }
+
+
+
 @RequestMapping("works_home/login")
 @ResponseBody
     public ModelAndView Login(User user){
 
     ModelAndView modelAndView=new ModelAndView();
     Message message=new Message();
-if (userService.Login(user)!=null){
-    if(user.getIsadmin()==true){
+    User user1=userService.Login(user);
+if (user1!=null){
 
-    modelAndView.addObject(user);
+    if(user1.getIsadmin()){
+        message.setB(true);
+        message.setDes("管理员登录成功");
+    modelAndView.addObject(user1);
     modelAndView.addObject(message);
-
     }else {
         message.setB(true);
         message.setDes("登录成功");
         modelAndView.addObject(message);
-        modelAndView.addObject(user);
+        modelAndView.addObject(user1);
     }
-
-
 }else {
     message.setB(false);
     message.setDes("登录失败");
@@ -50,6 +56,10 @@ modelAndView.addObject(message);
 modelAndView.setView(new MappingJackson2JsonView());
 return modelAndView;
     }
+
+
+
+
 @RequestMapping("works_home/0wxlogin")
 @ResponseBody
     public User WxLogin(String phone_number){
