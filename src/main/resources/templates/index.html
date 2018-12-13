@@ -3,15 +3,68 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
     <meta charset="UTF-8">
+
     <title>Title</title>
 </head>
+<script type="text/javascript">
+    var socket;
+
+        function test() {
+            var username=document.getElementById("username").value;
+        console.log("被点击")
+
+        if (typeof (WebSocket)=="undefined"){
+            console.log("不支持")
+        }else {
+            console.log("支持")
+            socket=new WebSocket("ws:192.168.80.110:8080/websocket/"+username)
+            socket.onopen=function () {
+                console.log("socket打开")
+            };
+            socket.onmessage=function (msg) {
+                console.log(msg.data);
+
+setMessageInnerHTML(msg.data);
+            }
+
+            socket.onclose=function () {
+                console.log("关闭了")
+            };
+            socket.onerror=function () {
+                console.log("错了")
+            };
+            function setMessageInnerHTML(innerHTML) {
+                document.getElementById('message').innerHTML += innerHTML + '<br/>';
+            }
+
+
+        }
+    }function send() {
+
+            var tousername=document.getElementById("tousername").value;
+                var mess=document.getElementById("text").value;
+                var message=mess+"|"+tousername;
+                console.log(message);
+                socket.send(message);
+        document.getElementById("text").value="";
+        }
+</script>
 <body>
 <form  action="/works_home/companyRegistered?c_des='qwewqeqw'&c_password='123'" enctype="multipart/form-data" method="post">
     <p>文件1：<input type="file" name="files" /></p>
     <p>文件2：<input type="file" name="files" /></p>
     <p><input type="submit" value="上传" /></p>
 </form>
+
+
+你的名字<input type="text" id="username" />
+<button id="sess" onclick="test()">登录一波</button>
+<div id="message"></div>
+发送的消息<input type="text" id="tousername"/>
+发送给谁<input type="text" id="text">
+<button id="send" onclick="send()">发送</button>
 </body>
 </html>

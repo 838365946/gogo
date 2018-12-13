@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class CompanyController {
@@ -24,7 +27,7 @@ public class CompanyController {
 
     private Message message =new Message();
 
-    @RequestMapping(value = "works_home/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/works_home/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message companyRegistered(@Param("files")MultipartFile[] files, Company company){
         System.out.println("进入companycontroller");
@@ -50,6 +53,15 @@ public class CompanyController {
         message.setDes("注册成功，请等待审核");
         return message;
         }
+@RequestMapping(value = "/pushViedoListToWeb",method = RequestMethod.POST,consumes = "application/json")
+public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<String,Object> param){
+
+    Map<String,Object> result =new HashMap<String,Object>();
+
+//    WebSocketServer.sendInfo("新客户呼入"+param);
+    result.put("operationResult",true);
+    return result;
+}
 
 }
 
