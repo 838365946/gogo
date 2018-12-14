@@ -42,7 +42,6 @@ public class WebSocketServer {
         } catch (IOException e) {
             System.out.println("websocket出问题了");
         }
-
     }
     //连接关闭的方法
     @OnClose
