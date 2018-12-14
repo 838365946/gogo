@@ -9,5 +9,5 @@ public interface ResumeService {
 
      Resume SaveResume(Resume resume);
     Resume QueryByPhone(String phone);
-boolean DelResume(Resume resume);
+    boolean DelResume(Resume resume);
 }

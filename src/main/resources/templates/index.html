@@ -12,7 +12,12 @@
 <script type="text/javascript">
     var socket;
 
-        function test() {
+    document.onkeydown = function(e){
+        if(e.keyCode == 13){
+            send();
+        }
+    }
+    function test() {
             var username=document.getElementById("username").value;
         console.log("被点击")
 
@@ -20,13 +25,12 @@
             console.log("不支持")
         }else {
             console.log("支持")
-            socket=new WebSocket("ws:192.168.80.110:8080/websocket/"+username)
+            socket=new WebSocket("ws:106.13.12.57:8081/works_home/websocket/"+username)
             socket.onopen=function () {
                 console.log("socket打开")
             };
             socket.onmessage=function (msg) {
                 console.log(msg.data);
-
 setMessageInnerHTML(msg.data);
             }
 

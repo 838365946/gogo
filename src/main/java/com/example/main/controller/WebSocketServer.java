@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Administrator on 2018/12/13.
  */
 @Slf4j
-@ServerEndpoint(value = "/websocket/{username}")
+@ServerEndpoint("/websocket/{username}")
 @Component
 public class WebSocketServer {
     //记录在线用户
@@ -61,7 +61,7 @@ public class WebSocketServer {
         String sf=new SimpleDateFormat().format(new Date());
         if (webSocketSet.get(tousername)!=null){
             try {
-                webSocketSet.get(tousername).sendMessage(sf+"\n"+username+":\t"+mess);
+                webSocketSet.get(tousername).sendMessage(sf+"'\n'"+username+":'\t'"+mess);
                 webSocketSet.get(username).sendMessage(sf+"\n"+username+":\t"+mess);
             } catch (IOException e) {
                 //    for (WebSocketServer item:webSocketServers){
