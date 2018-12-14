@@ -24,7 +24,7 @@ public class Delivery {
         //邀请面试
         @Column
         private boolean d_offer;
-        //不合适
+        //不合适ss
         @Column
         private boolean d_pass;
         @ManyToOne
