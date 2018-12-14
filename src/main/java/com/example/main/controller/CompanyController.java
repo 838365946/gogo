@@ -64,6 +64,26 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
     return result;
 }
 
+    @RequestMapping("/Audit_company")
+    public Message audit(){
+        Company gs = new Company();
+        Message message=new Message();
+        String s=gs.getC_check_status();
+        if (s.equals("等待审核")){
+
+            gs.setC_check_status("通过");
+
+            message.setDes("审核通过");
+        }else {
+
+            gs.setC_check_status("不通过");
+            message.setDes("审核未通过");
+        }
+
+        return message;
+
+    }
+
 
 }
 
