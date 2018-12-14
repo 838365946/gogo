@@ -88,7 +88,7 @@ public void onError(Session session,Throwable error){
 error.printStackTrace();
     }
 
-    //群发消息
+    //群发消息lll
 public static void sendInfo(String message){
     System.out.println(message);
    for (String str:webSocketSet.keySet()){
