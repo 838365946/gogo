@@ -29,17 +29,18 @@ public class CompanyController {
 
     @RequestMapping(value = "/works_home/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Message companyRegistered(@Param("files")MultipartFile[] files, Company company){
+    public Message companyRegistered(@Param("files")MultipartFile[] files,@Param("logo") MultipartFile logo, Company company){
         System.out.println("进入companycontroller");
         String des=company.getC_des();
         company.setC_des("上传中");
         Company company1=companyService.registered(company);
         String imgpath= companyIO.UploadImg(files,company1.getC_id());
-
+        String logopath=companyIO.LogoUpload(logo,company1.getC_id());
         try {
             String despath=companyIO.WriteDes(des,company1.getC_id());
             company1.setC_des(despath);
             company1.setC_img(imgpath);
+            company1.setLogopath(logopath);
             companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,10 +59,11 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
 
     Map<String,Object> result =new HashMap<String,Object>();
 
-//    WebSocketServer.sendInfo("新客户呼入"+param);
+  WebSocketServer.sendInfo("新客户呼入"+param);
     result.put("operationResult",true);
     return result;
 }
+
 
 }
 

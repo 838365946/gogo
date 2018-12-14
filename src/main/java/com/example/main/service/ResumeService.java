@@ -1,6 +1,5 @@
 package com.example.main.service;
 
-import com.example.main.model.Delivery;
 import com.example.main.model.Resume;
 
 /**
@@ -10,5 +9,5 @@ public interface ResumeService {
 
      Resume SaveResume(Resume resume);
     Resume QueryByPhone(String phone);
-
+boolean DelResume(Resume resume);
 }

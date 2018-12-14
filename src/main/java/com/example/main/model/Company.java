@@ -21,6 +21,9 @@ private String c_img;
         private String c_username;
 @Column
         private String c_password;
+@Column
+private String logopath;
+
 //公司福利
     @Column
         private String c_welfare;
@@ -45,6 +48,14 @@ private String c_img;
     private String c_phone_number;
 @Column
     private String c_addr;
+
+    public String getLogopath() {
+        return logopath;
+    }
+
+    public void setLogopath(String logopath) {
+        this.logopath = logopath;
+    }
 
     public String getC_check_status() {
         return c_check_status;

@@ -26,5 +26,31 @@ message.setDes("新增简历成功");
 }
 return message;
 }
+@RequestMapping("updateresume")
+public Message UpdateResume(Resume resume){
+    Message message =new Message();
+    if(resumeService.SaveResume(resume)!=null){
+        message.setB(true);
+        message.setDes("修改简历成功");
+    }else {
+        message.setB(false);
+        message.setDes("修改简历失败");
+    }
+    return message;
+}
+@RequestMapping("delresume")
+public Message DelResume(Resume resume) {
+    Message message = new Message();
+    boolean b = resumeService.DelResume(resume);
+    message.setB(b);
+if (b){
+    message.setDes("删除成功");
+}else {
+    message.setDes("删除失败");
+}return message;
+}
+
+
 
 }
+

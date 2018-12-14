@@ -89,17 +89,17 @@ error.printStackTrace();
     }
 
     //群发消息
-//public static void sendInfo(String message){
-//    System.out.println(message);
-//   for (WebSocketServer item:webSocketSet){
-//       try {
-//           item.sendMessage(message);
-//       } catch (IOException e) {
-//       continue;
-//       }
-//   }
-//
-//}
+public static void sendInfo(String message){
+    System.out.println(message);
+   for (String str:webSocketSet.keySet()){
+       try {
+           webSocketSet.get(str).sendMessage(message);
+       } catch (IOException e) {
+       continue;
+       }
+   }
+
+}
 
 
     public static synchronized void addonlinecount(){

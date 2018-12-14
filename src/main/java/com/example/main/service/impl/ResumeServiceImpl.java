@@ -25,6 +25,16 @@ public class ResumeServiceImpl implements ResumeService{
         return resume;
     }
 
+    @Override
+    public boolean DelResume(Resume resume) {
+        try {
+            resumeDao.delete(resume);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
 
 
 }
