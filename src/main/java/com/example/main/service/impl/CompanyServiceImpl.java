@@ -3,7 +3,6 @@ package com.example.main.service.impl;
 import com.example.main.dao.CompanyDao;
 import com.example.main.model.Company;
 import com.example.main.service.CompanyService;
-import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +20,11 @@ public class CompanyServiceImpl  implements CompanyService {
         return company1;
     }
 
+    @Override
+    public Page<Company> findall(Pageable pageable) {
+        Page<Company> companies=companyDao.findAll(pageable);
+        return companies;
+    }
 
 
 }

@@ -5,6 +5,8 @@ import com.example.main.model.Message;
 import com.example.main.service.CompanyService;
 import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -82,17 +84,14 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
     }
 
     @RequestMapping("/Audit_record")
-    public ModelAndView record(Company company){
-        ModelAndView md= new ModelAndView();
-        String record =company.getC_check_status();
-        String b ="等待审核";
-        if (!record.equals(b)){
-
-            md.addObject(company);
-
+    public List<Company> record(Company company,int page){
+        PageRequest pageRequest=PageRequest.of(page,10);
+        Page<Company> companies=companyService.findall(pageRequest);
+        List<Company> companies1=null;
+        if (companies.getContent()!=null){
+            companies1=companies.getContent();
         }
-
-        return md;
+        return companies1;
     }
 
 
