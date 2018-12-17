@@ -26,5 +26,11 @@ public class CompanyServiceImpl  implements CompanyService {
         return companies;
     }
 
+    @Override
+    public Company addcompany(Company company) {
+        Company company1=companyDao.save(company);
+        return company1;
+    }
+
 
 }

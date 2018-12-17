@@ -8,4 +8,5 @@ public interface CompanyService {
 
     Company registered(Company company);
     Page<Company> findall(Pageable pageable);
+    Company addcompany(Company company);
 }

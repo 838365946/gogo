@@ -94,8 +94,18 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
         return companies1;
     }
 
-
-
+@RequestMapping("/addcompany")
+public Message addcompany(Company company){
+        Message message=new Message();
+                if(companyService.addcompany(company)!=null){
+                    message.setB(true);
+                    message.setDes("修改信息成功");
+                }else {
+                    message.setB(false);
+                    message.setDes("修改信息成功");
+                }
+return message;
+    }
 }
 
 
