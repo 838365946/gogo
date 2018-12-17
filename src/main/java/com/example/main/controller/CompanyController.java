@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -80,7 +81,24 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
         return message;
     }
 
+    @RequestMapping("/Audit_record")
+    public ModelAndView record(Company company){
+        ModelAndView md= new ModelAndView();
+        String record =company.getC_check_status();
+        String b ="等待审核";
+        if (!record.equals(b)){
+
+            md.addObject(company);
+
+        }
+
+        return md;
+    }
+
+
 
 }
+
+
 
 
