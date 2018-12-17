@@ -25,8 +25,8 @@ import java.util.Map;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
-    @Autowired
-    private CompanyIO companyIO;
+
+    private CompanyIO companyIO =new CompanyIO();
 
     private Message message =new Message();
 

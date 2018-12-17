@@ -1,6 +1,6 @@
 package com.example.main.util;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Created by Administrator on 2018/12/10.
  */
-@Component
+
 public class CompanyIO {
     private String propath=System.getProperty("user.dir");
     //写入公司介绍
