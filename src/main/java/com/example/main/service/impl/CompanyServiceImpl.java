@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service("companyService")
 public class CompanyServiceImpl  implements CompanyService {
 @Autowired
@@ -30,6 +28,11 @@ public class CompanyServiceImpl  implements CompanyService {
     public Company addcompany(Company company) {
         Company company1=companyDao.save(company);
         return company1;
+    }
+
+    @Override
+    public Company CLogin(Company company) {
+        return companyDao.CLogin(company.getC_phone_number(),company.getC_password());
     }
 
 
