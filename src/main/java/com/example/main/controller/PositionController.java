@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class PositionController {
     @Autowired
 private PositionService positionService;
-@RequestMapping("works_home/addPosition")
+@RequestMapping("/addPosition")
 public Message AddPosition(Position position){
 Message message=new Message();
-if(positionService.addPosition(position)!=null){
+if(positionService.addposition(position)!=null){
     message.setB(true);
     message.setDes("发布职位成功");
 

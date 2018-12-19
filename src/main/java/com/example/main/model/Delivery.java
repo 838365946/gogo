@@ -27,12 +27,6 @@ public class Delivery {
         //不合适ss
         @Column
         private boolean d_pass;
-        @ManyToOne
-        @JoinColumn(name = " c_id")
-        private Company company;
-        @ManyToOne
-        @JoinColumn(name = "phone_number")
-        private User user;
 
     public boolean isD_BeViewed() {
         return d_BeViewed;
@@ -82,19 +76,5 @@ public class Delivery {
         this.d_date = d_date;
     }
 
-    public Company getCompany() {
-        return company;
-    }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

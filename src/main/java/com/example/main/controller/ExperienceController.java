@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExperienceController {
     @Autowired
     private ExService exService;
-@RequestMapping("addex")
+@RequestMapping("/addex")
 public Message AddEx(Experience experience){
     Message message=new Message();
     Experience experience1=exService.AddExperience(experience);
@@ -28,7 +28,7 @@ public Message AddEx(Experience experience){
 return message;
 }
 
-    @RequestMapping("updateex")
+    @RequestMapping("/updateex")
     public Message DelEx(Experience experience){
         Message message=new Message();
         Experience experience1=exService.UpdateEcperience(experience);
@@ -42,7 +42,7 @@ return message;
         return message;
     }
 
-    @RequestMapping("delex")
+    @RequestMapping("/delex")
     public Message UpdateEx(Experience experience){
         Message message=new Message();
         boolean b=exService.delEX(experience);

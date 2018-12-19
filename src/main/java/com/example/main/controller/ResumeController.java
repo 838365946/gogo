@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
-    @RequestMapping("works_home/saveresume")
+    @RequestMapping("/saveresume")
 public Message SaveResume(Resume resume){
     Message message =new Message();
 if(resumeService.SaveResume(resume)!=null){
@@ -26,7 +26,7 @@ message.setDes("新增简历成功");
 }
 return message;
 }
-@RequestMapping("updateresume")
+@RequestMapping("/updateresume")
 public Message UpdateResume(Resume resume){
     Message message =new Message();
     if(resumeService.SaveResume(resume)!=null){
@@ -38,7 +38,7 @@ public Message UpdateResume(Resume resume){
     }
     return message;
 }
-@RequestMapping("delresume")
+@RequestMapping("/delresume")
 public Message DelResume(Resume resume) {
     Message message = new Message();
     boolean b = resumeService.DelResume(resume);

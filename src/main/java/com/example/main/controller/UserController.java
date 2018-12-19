@@ -28,7 +28,7 @@ public String ToIndex(){
 
 
 
-@RequestMapping("works_home/login")
+@RequestMapping("/login")
 @ResponseBody
     public ModelAndView Login(User user){
 
@@ -37,7 +37,7 @@ public String ToIndex(){
     User user1=userService.Login(user);
 if (user1!=null){
 
-    if(user1.getIsadmin()){
+    if(user1.getIsadmin().equals("是")){
         message.setB(true);
         message.setDes("管理员登录成功");
     modelAndView.addObject(user1);

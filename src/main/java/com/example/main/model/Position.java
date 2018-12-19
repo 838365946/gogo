@@ -31,9 +31,6 @@ public class Position {
     private String p_addr;
     @Column
     private String p_des;
-@ManyToOne
-@JoinColumn(name = "p_c_id")
-    private Company company;
 
     public String getP_des() {
         return p_des;
@@ -47,13 +44,6 @@ public class Position {
         return p_id;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 
     public void setP_id(int p_id) {
         this.p_id = p_id;

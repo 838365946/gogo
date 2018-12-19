@@ -43,6 +43,9 @@ private String logopath;
     private String c_check_status;
     @OneToMany
     @JoinColumn(name = "c_id")
+    private List<Position> positions;
+    @OneToMany
+    @JoinColumn(name = "c_id")
     private List<Delivery> deliveries;
 @Column
     private String c_phone_number;
@@ -73,12 +76,13 @@ private String logopath;
         this.c_img = c_img;
     }
 
-    public List<Delivery> getDeliveries() {
-        return deliveries;
+
+    public List<Position> getPositions() {
+        return positions;
     }
 
-    public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries = deliveries;
+    public void setPositions(List<Position> positions) {
+        this.positions = positions;
     }
 
     public int getC_id() {
@@ -184,7 +188,7 @@ private String logopath;
                 ", c_nature='" + c_nature + '\'' +
                 ", c_scale='" + c_scale + '\'' +
                 ", c_des='" + c_des + '\'' +
-                ", deliveries=" + deliveries +
+                ", deliveries="  +
                 ", c_phone_number='" + c_phone_number + '\'' +
                 ", c_addr='" + c_addr + '\'' +
                 '}';

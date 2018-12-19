@@ -51,9 +51,7 @@ private String r_name;
     @OneToMany
     @JoinColumn(name = "r_id")
     private List<Experience> experiences;
-    @ManyToOne
-    @JoinColumn(name = "u_id")
-    private User user;
+
 
     public String getR_name() {
         return r_name;
@@ -79,13 +77,6 @@ private String r_name;
         this.r_edu_overdate = r_edu_overdate;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public int getR_id() {
         return r_id;

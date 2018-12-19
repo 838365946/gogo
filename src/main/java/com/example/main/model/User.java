@@ -31,19 +31,19 @@ public class User {
 @Column
         private int age;
 @Column
-private boolean isadmin;
+private String isadmin;
 @OneToMany
-@JoinColumn(name = "phone_number")
+@JoinColumn(name = "u_id")
         private List<Resume> resumes;
 @OneToMany
-@JoinColumn(name = "phone_number")
+@JoinColumn(name = "u_id")
 private List<Delivery> deliveries;
 
-    public boolean getIsadmin() {
+    public String getIsadmin() {
         return isadmin;
     }
 
-    public void setIsadmin(boolean isadmin) {
+    public void setIsadmin(String isadmin) {
         this.isadmin = isadmin;
     }
 

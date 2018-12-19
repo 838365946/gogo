@@ -30,7 +30,7 @@ public class CompanyController {
 
     private Message message =new Message();
 
-    @RequestMapping(value = "/works_home/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/companyRegistered",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message companyRegistered(@Param("files")MultipartFile[] files,@Param("logo") MultipartFile logo, Company company){
         System.out.println("进入companycontroller");
@@ -84,7 +84,7 @@ public @ResponseBody Map<String,Object> pushViedoListToWeb(@RequestBody Map<Stri
     }
 
     @RequestMapping("/Audit_record")
-    public List<Company> record(Company company,int page){
+    public List<Company> record(int page){
         PageRequest pageRequest=PageRequest.of(page,10);
         Page<Company> companies=companyService.findall(pageRequest);
         List<Company> companies1=null;
