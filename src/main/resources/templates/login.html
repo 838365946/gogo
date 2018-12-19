@@ -14,14 +14,14 @@
 <div id="container">
     <div id="bd">
     	<div id="main">
-				<form action="localhost:8080/login"></form>
+				<form action="/clogin" method="post" id="loginform">
         	<div class="login-box">
                 <div id="logo"></div>
                 <h1></h1>
                 <div class="input username" id="username">
                     <label for="userName">手机号</label>
                     <span></span>
-                    <input type="text" id="userName" name="phone_number"/>
+                    <input type="text"  name="phone_number"/>
                 </div>
                 <div class="input psw" id="psw">
                     <label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="input validate" id="validate">
                     <label for="valiDate">验证码</label>
-                    <input type="text" id="valiDate" />
+                    <input type="text"  />
                     <div class="value">X3D5</div>
                 </div>
                 <div class="styleArea">
@@ -43,9 +43,10 @@
                     </div>
                 </div>
                 <div id="btn" class="loginButton">
-                    <input type="submit" class="button" value="登录"  />
+                    <input type="submit" class="button" value="登录" id="login" />
                 </div>
             </div>
+                </form>
         </div>
 				
 				
@@ -67,7 +68,11 @@
 		$('#bd').css('padding-top', bdheight);
     });
 	$('select').select();
-	
+	$("#login").click(function () {
+        console.log(123);
+        $("#loginform").submit();
+        console.log("提交了")
+    })
 
 </script>
 

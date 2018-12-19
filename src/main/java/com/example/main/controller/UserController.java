@@ -23,7 +23,7 @@ public class UserController {
 @RequestMapping("/")
 public String ToIndex(){
 
-    return "index";
+    return "main";
 }
 
 
