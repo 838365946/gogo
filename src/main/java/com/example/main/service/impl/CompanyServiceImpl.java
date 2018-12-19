@@ -32,7 +32,8 @@ public class CompanyServiceImpl  implements CompanyService {
 
     @Override
     public Company CLogin(Company company) {
-        return companyDao.CLogin(company.getC_phone_number(),company.getC_password());
+        System.out.println(company.toString());
+        return companyDao.CLogin(company.getC_username(),company.getC_password());
     }
 
 

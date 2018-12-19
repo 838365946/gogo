@@ -17,7 +17,9 @@ html{*overflow:auto;}
 .login-box .username{ top:217px;}
 .login-box .username input{background:url(../../img/skin_/userinput.png);font-size:14px; font-weight:bold;color:#33AED8;}
 .login-box .psw{ top:267px;}
+.login-box .apsw{ top:300px;}
 .login-box .psw input { background:url(../../img/skin_/passwordinput.png);}
+.login-box .apsw input { background:url(../../img/skin_/passwordinput.png);}
 .login-box .validate{ position:relative; top:317px;}
 .login-box .validate input{width:204px; padding:0 20px 0 20px; background:url(../../img/skin_/yzminput.png);font-size:14px;}
 .login-box .validate .value{ position:absolute; right:33px; top:11px; height:16px; line-height:16px; color:#fff; font-size:16px;}

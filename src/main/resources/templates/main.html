@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/global.js"></script>
-<title>企业OA办公后台管理模板</title>
+<title>企业用户</title>
 </head>
 
 <body>
@@ -18,21 +18,11 @@
             <h1 class="logo"><a href="javascript:;" class="logo-icon"></a></h1>
             <div class="user-info">
                 <a href="javascript:;" class="user-avatar"><span><i class="info-num">2</i></span></a>
-                <span class="user-name">admin</span>
+                <span class="user-name" th:text="${name}" >点击登录</span>
                 <a href="javascript:;" class="more-info"></a>
             </div>
             <div class="setting ue-clear">
-            	<div class="setting-skin">
-                	<div class="switch-bar">
-                    	<i class="skin-icon"></i>
-                        <span class="text">皮肤</span>
-                        <i class="arrow-icon"></i>
-                    </div>
-                </div>
                 <ul class="setting-main ue-clear">
-                	<li><a href="javascript:;">桌面</a></li>
-                    <li><a href="javascript:;">设置</a></li>
-                    <li><a href="javascript:;">帮助</a></li>
                     <li><a href="javascript:;" class="close-btn exit"></a></li>
                 </ul>
             </div>
@@ -41,21 +31,7 @@
         	<i class="home"><a href="javascript:;"></a></i>
         	<div class="nav-wrap">
                 <ul class="nav ue-clear">
-                    <li><a href="javascript:;">平台管理</a></li>
-                    <li><a href="javascript:;">系统管理</a></li>
-                    <li><a href="javascript:;">安全管理</a></li>
-                    <li><a href="javascript:;">数据中心</a></li>
-                    <li><a href="javascript:;">表单管理</a></li>
-                    <li><a href="javascript:;">流程管理</a></li>
-                    <li><a href="javascript:;">交流中心</a></li>
-                    <li><a href="javascript:;">企业邮箱</a></li>
-                    <li><a href="javascript:;">个人设置</a></li>
-                     <li><a href="javascript:;">交流中心</a></li>
-                    <li><a href="javascript:;">企业邮箱</a></li>
-                    <li><a href="javascript:;">个人设置</a></li>
-                     <li><a href="javascript:;">交流中心</a></li>
-                    <li><a href="javascript:;">企业邮箱</a></li>
-                    <li><a href="javascript:;">个人设置</a></li>
+
                 </ul>
             </div>
             <div class="nav-btn">
@@ -70,7 +46,7 @@
     
     <div id="ft" class="ue-clear">
     	<div class="ft1 ue-clear">
-        	<i class="ft-icon1"></i> <span>数字管理系统 More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
+        	<i class="ft-icon1"></i> <span>企业 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
             <em>Digital Pertal</em>
         </div>
         <div class="ft2 ue-clear">
@@ -135,33 +111,11 @@
     <div class="opt-panel-br"></div>
 </div>
 
-<div class="system-switch">
-	<ul>
-    	<li>
-            <span class="system-name"><i></i>数字管理系统</span>
-        </li>
-        <li>
-            <span class="system-name"><i></i>网络信息管理系统</span>
-        </li>
-        <li>
-            <span class="system-name"><i></i>后台管理系统</span>
-        </li>
-        <li>
-            <span class="system-name"><i></i>信息科技ERP系统</span>
-        </li>
-        <li>
-            <span class="system-name"><i></i>网络管理系统</span>
-        </li>
-    </ul>
-    <div class="opt-panel-mr"></div>
-    <div class="opt-panel-bc"></div>
-    <div class="opt-panel-br"></div>
-</div>
 
 </body>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" >
 $("#bd").height($(window).height()-$("#hd").outerHeight()-26);
 
 $(window).resize(function(e) {

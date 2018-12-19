@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -126,14 +127,32 @@ public class CompanyController {
     }
 
     @RequestMapping("/clogin")
-    public ModelAndView CompanyLogin(Company company) {
+    public ModelAndView CompanyLogin(Company company, HttpServletRequest request){
+        System.out.println(company.toString());
         System.out.println("公司进入了");
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
-        modelAndView.addObject("company", company1);
-        modelAndView.setViewName("main");
+        System.out.println(company1.toString());
+      if(company1!=null){
+          request.getSession().setAttribute("company",company1);
+          modelAndView.addObject("name",company1.getC_name());
+          modelAndView.setViewName("main");
+      }else {
+          modelAndView.setViewName("error");
+      }
         return modelAndView;
     }
+    @RequestMapping("/creg")
+    public ModelAndView Reg(Company company){
+        ModelAndView modelAndView=new ModelAndView();
+        Company company1=companyService.addcompany(company);
+        if (company1!=null){
+            modelAndView.setViewName("login");
+        }else {
+            modelAndView.setViewName("error");
+        }return modelAndView;
+    }
+
 }
 
 
