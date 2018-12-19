@@ -106,6 +106,20 @@ public Message addcompany(Company company){
                 }
 return message;
     }
+    @RequestMapping("/showcompmess")
+    @ResponseBody
+    public List<Company> show(int page){
+        PageRequest pageRequest=PageRequest.of(page,5);
+        Page<Company> companies=companyService.findall(pageRequest);
+        List<Company> companies1=null;
+        if (companies.getContent()!=null){
+            companies1=companies.getContent();
+        }
+
+
+        return companies1;
+    }
+
 }
 
 

@@ -39,5 +39,6 @@ public List<Position> QueryByInput(int page,String input){
             positions=positionpage.getContent();
         }
         return positions;
+
 }
 }

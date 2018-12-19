@@ -52,6 +52,14 @@ private String logopath;
 @Column
     private String c_addr;
 
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
     public String getLogopath() {
         return logopath;
     }

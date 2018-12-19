@@ -4,6 +4,7 @@ import com.example.main.model.Company;
 import com.example.main.model.Delivery;
 import com.example.main.model.Message;
 import com.example.main.model.User;
+import com.example.main.service.CompanyService;
 import com.example.main.service.DeliveryService;
 import com.example.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,13 @@ import java.util.List;
  */
 @RestController
 public class SubmitResumeController {
+    @Autowired
+    private UserService userService;
+@Autowired
+    private CompanyService companyService;
 @Autowired
     private DeliveryService deliveryService;
-@Autowired
-private UserService userService;
+
 
 @RequestMapping("/submitresume")
 @ResponseBody
@@ -40,6 +44,9 @@ Delivery delivery1=deliveryService.SubmitRuseme(delivery);
     List<Delivery> deliveryList=null;
     deliveryList.add(delivery1);
     user.setDeliveries(deliveryList);
+company.setDeliveries(deliveryList);
+userService.save(user);
+companyService.addcompany(company);
 if (delivery1!=null){
     message.setB(true);
     message.setDes("投递成功");

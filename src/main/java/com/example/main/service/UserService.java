@@ -9,4 +9,5 @@ public interface UserService {
     User Login(User user);
     User WxLogin(String phone_number);
     User AddUser(User user);
+    User save(User user);
 }
