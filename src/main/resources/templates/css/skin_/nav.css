@@ -1,4 +1,4 @@
-#bd{ padding-left: 100px;}
+#bd{ padding-left:203px;}
 /*左侧栏*/
 .sidebar{ position:relative; float:left; width:203px; height:100%; margin-left:-203px;width:203px;}
 .sidebar a:hover{ text-decoration:none;}

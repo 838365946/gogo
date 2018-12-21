@@ -27,10 +27,22 @@
                 </ul>
             </div>
         </div>
+        <div class="hd-bottom">
+        	<i class="home"><a href="javascript:;"></a></i>
+        	<div class="nav-wrap">
+                <ul class="nav ue-clear">
+
+                </ul>
+            </div>
+            <div class="nav-btn">
+            	<a href="javascript:;" class="nav-prev-btn"></a>
+                <a href="javascript:;" class="nav-next-btn"></a>
+            </div>
+        </div>
     </div>
     <div id="bd">
 
-        <div width="100%" height="100%" id="mainIframe"  style="border: 0"></div>
+        <iframe width="100%" height="100%" id="mainIframe"  src="nav.html" frameborder="0"></iframe>>
     </div>
     
     <div id="ft" class="ue-clear">
@@ -104,15 +116,9 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
 <script type="text/javascript" >
-    $(function () {
-        $.ajax({
-            url:"listiframe",
-            type:"post",
-            success:function (data) {
-                $("#bd").html(data)
-            }
-        })
-    })
+
+
+
 
 
 $("#bd").height($(window).height()-$("#hd").outerHeight()-26);
