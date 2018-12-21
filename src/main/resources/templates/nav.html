@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,7 +34,7 @@
                     	<li class="subnav-li current" href="index.html" data-id="1"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">我的公司</span></a></li>
                         <li class="subnav-li" href="form.html" data-id="2"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">发布职位</span></a></li>
                         <li class="subnav-li" href="table.html" data-id="3"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">简历库</span></a></li>
-                        <li class="subnav-li" href="updateC.html" data-id="4" ><a href="updateC.html;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">修改公司资料</span></a></li>
+                        <li class="subnav-li" href="updateC.html" data-id="4" ><a href="updateC.html;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text" >修改公司资料</span></a></li>
                     </ul>
                 </li>
                 <li class="nav-li">
@@ -86,6 +86,7 @@
 <script type="text/javascript" src="js/Menu.js"></script>
 <script type="text/javascript" src="js/jquery.ztree.core-3.5.js"></script>
 <script type="text/javascript">
+
 	var menu = new Menu({
 		defaultSelect: $('.nav').find('li[data-id="1"]')	
 	});

@@ -17,8 +17,8 @@
     	<div class="hd-top">
             <h1 class="logo"><a href="javascript:;" class="logo-icon"></a></h1>
             <div class="user-info">
-                <a href="javascript:;" class="user-avatar"><span><i class="info-num">2</i></span></a>
-                <span class="user-name" th:text="${name}" >点击登录</span>
+                <a href="javascript:;" class="user-avatar"><span><i class="info-num"></i></span></a>
+                <span class="user-name" th:text="${name}">点击登录</span>
                 <a href="javascript:;" class="more-info"></a>
             </div>
             <div class="setting ue-clear">
@@ -27,27 +27,15 @@
                 </ul>
             </div>
         </div>
-        <div class="hd-bottom">
-        	<i class="home"><a href="javascript:;"></a></i>
-        	<div class="nav-wrap">
-                <ul class="nav ue-clear">
-
-                </ul>
-            </div>
-            <div class="nav-btn">
-            	<a href="javascript:;" class="nav-prev-btn"></a>
-                <a href="javascript:;" class="nav-next-btn"></a>
-            </div>
-        </div>
     </div>
     <div id="bd">
-        <iframe width="100%" height="100%" id="mainIframe" src="nav.html" frameborder="0"></iframe>
+
+        <div width="100%" height="100%" id="mainIframe"  style="border: 0"></div>
     </div>
     
     <div id="ft" class="ue-clear">
     	<div class="ft1 ue-clear">
-        	<i class="ft-icon1"></i> <span>企业 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
-            <em>Digital Pertal</em>
+
         </div>
         <div class="ft2 ue-clear">
         	<span>Call Center</span>
@@ -116,6 +104,17 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/jquery.dialog.js"></script>
 <script type="text/javascript" >
+    $(function () {
+        $.ajax({
+            url:"listiframe",
+            type:"post",
+            success:function (data) {
+                $("#bd").html(data)
+            }
+        })
+    })
+
+
 $("#bd").height($(window).height()-$("#hd").outerHeight()-26);
 
 $(window).resize(function(e) {

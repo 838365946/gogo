@@ -24,7 +24,6 @@ public class ShowMessController {
     List<Position> positions = null;
     if(positionspage.getContent()!=null){
         positions=positionspage.getContent();
-
     }
     return positions;
 }

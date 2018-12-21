@@ -1,14 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml " xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/company/updatecompany.js"></script>
 </head>
 <body>
 <div style="width: 100%;height: 100%">
     <div style="margin: 0 auto">
-        <div>
-            <span><p>公司名称</p><p th:text="${company.c_name}"></p></span>
+        <div >
+            <span><p>公司名称</p></span><span th:text="${session.company.getC_name()}">没获取到</span>
         </div>
 
     </div>

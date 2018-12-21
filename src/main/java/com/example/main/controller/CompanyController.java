@@ -121,14 +121,12 @@ public class CompanyController {
         if (companies.getContent() != null) {
             companies1 = companies.getContent();
         }
-
-
         return companies1;
     }
 
     @RequestMapping("/clogin")
     public ModelAndView CompanyLogin(Company company, HttpServletRequest request){
-        System.out.println(company.toString());
+
         System.out.println("公司进入了");
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
@@ -152,6 +150,7 @@ public class CompanyController {
             modelAndView.setViewName("error");
         }return modelAndView;
     }
+
 
 }
 

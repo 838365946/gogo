@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Administrator on 2018/12/7.
  */
@@ -21,8 +23,10 @@ public class UserController {
 
 
 @RequestMapping("/")
-public String ToIndex(){
-
+public String ToIndex(HttpServletRequest request){
+if(request.getSession().getAttribute("user")!=null||request.getSession().getAttribute("company")!=null){
+    return "main";
+}
     return "login";
 }
 
