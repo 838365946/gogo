@@ -1,10 +1,10 @@
 package com.example.main.controller;
 
 import com.example.main.model.Company;
+import com.example.main.model.Delivery;
 import com.example.main.model.Message;
+import com.example.main.model.Resume;
 import com.example.main.service.CompanyService;
-import com.example.main.service.DeliveryService;
-import com.example.main.service.impl.DeliveryServiceImpl;
 import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,15 +154,27 @@ public class CompanyController {
         }return modelAndView;
     }
 
-    @RequestMapping("readresume")
+//    @RequestMapping("readresume")
+//    @ResponseBody
+//    public void Read(HttpServletRequest request){
+//        Company company= (Company) request.getSession().getAttribute("company");
+//        System.out.println("ok"+company.toString());
+//        DeliveryService deliveryService=new DeliveryServiceImpl();
+//        deliveryService.selectByCompany(company.getC_id());
+//    }
+    @RequestMapping("/readresume")
     @ResponseBody
-    public void Read(HttpServletRequest request){
+    public List<Resume> test(HttpServletRequest request){
         Company company= (Company) request.getSession().getAttribute("company");
-        System.out.println("ok"+company.toString());
-        DeliveryService deliveryService=new DeliveryServiceImpl();
-        deliveryService.selectByCompany(company.getC_id());
+        List<Resume> resumes=new ArrayList<Resume>();
+        for (Delivery d:company.getDeliveries()){
+            for (Resume r:d.getUser().getResumes()){
+                System.out.println(r.getR_id());
+                resumes.add(r);
+            }
+        }
+        return resumes;
     }
-
 }
 
 

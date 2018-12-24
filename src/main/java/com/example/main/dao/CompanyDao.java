@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface CompanyDao extends JpaRepository<Company,Long>{
 @Query(value = "select * from company c where c.c_username=:c_username and c.c_password =:password",nativeQuery = true)
     Company CLogin(@Param("c_username") String c_username, @Param("password") String password);
+@Query(value = "select * from company c where c.c_id = :id",nativeQuery = true)
+    Company findById(@Param("id") int id);
 }

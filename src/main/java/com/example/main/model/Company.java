@@ -1,6 +1,9 @@
 package com.example.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +12,7 @@ import java.util.List;
 //公司表
     @Entity
     @Table
-public class Company {
+public class Company implements Serializable{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int c_id;
@@ -41,9 +44,11 @@ private String logopath;
     private String c_des;
 @Column
     private String c_check_status;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "company")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "company")
     private List<Position> positions;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "company")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "company")
     private List<Delivery> deliveries;
     @Column
     private String c_phone_number;

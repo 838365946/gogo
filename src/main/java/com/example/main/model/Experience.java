@@ -1,6 +1,7 @@
 package com.example.main.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2018/12/6.
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
     @Entity
     @Table
-public class Experience {
+public class Experience implements Serializable{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int e_id;
@@ -32,7 +33,7 @@ public class Experience {
     //当前月薪
     @Column
     private String e_sal;
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "r_id")
     private Resume resume;
 

@@ -1,6 +1,9 @@
 package com.example.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +13,7 @@ import java.util.List;
 
     @Entity
     @Table
-public class Resume {
+public class Resume implements Serializable{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int r_id;
@@ -32,6 +35,8 @@ private String r_name;
     //所在行业
     @Column
     private String r_work_industry;
+    @Column
+    private String phonenumber;
     //毕业学校
     @Column
     private  String r_edu_school;
@@ -48,11 +53,28 @@ private String r_name;
     @Column
     String r_edu_overdate;
     //工作经历
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "resume")
     private List<Experience> experiences;
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "u_id")
     private User user;
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getR_name() {
         return r_name;

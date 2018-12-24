@@ -1,13 +1,14 @@
 package com.example.main.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2018/12/6.
  */
 @Entity
 @Table
-public class Position {
+public class Position implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int p_id;
@@ -31,7 +32,7 @@ public class Position {
     private String p_addr;
     @Column
     private String p_des;
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "c_id")
     private Company company;
 
