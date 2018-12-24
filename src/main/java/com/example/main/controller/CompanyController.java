@@ -154,14 +154,6 @@ public class CompanyController {
         }return modelAndView;
     }
 
-//    @RequestMapping("readresume")
-//    @ResponseBody
-//    public void Read(HttpServletRequest request){
-//        Company company= (Company) request.getSession().getAttribute("company");
-//        System.out.println("ok"+company.toString());
-//        DeliveryService deliveryService=new DeliveryServiceImpl();
-//        deliveryService.selectByCompany(company.getC_id());
-//    }
     @RequestMapping("/readresume")
     @ResponseBody
     public List<Resume> test(HttpServletRequest request){

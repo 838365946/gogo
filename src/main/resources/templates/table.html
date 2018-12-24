@@ -101,11 +101,8 @@
             success:function(data) {
                 console.log("进来了")
                 for (var i=0;i<data.length;i++){
-                    tbody.push([data[i].r_id,data[i].r_name,data[i].r_work_nature,data[i].r_work_addr,data[i].r_hope_sal,data[i].r_work_category,data[i].r_work_industry,data[i].r_edu_school,data[i].r_edu_class,data[i].r_edu_education,data[i].r_edu_startdate,data[i].r_edu_overdate,oper]);
-                    console.log(tbody)
-
+                    tbody.push([data[i].r_id,data[i].r_name,data[i].r_work_nature,data[i].r_work_addr,data[i].r_hope_sal,data[i].r_work_category,data[i].r_work_industry,data[i].r_edu_school,data[i].r_edu_class,data[i].r_edu_education,data[i].r_edu_startdate,data[i].r_edu_overdate,data[i].r_exp_time,oper]);
                 }
-
             }
         })
     })

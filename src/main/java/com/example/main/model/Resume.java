@@ -29,6 +29,9 @@ private String r_name;
     //期望工资
     @Column
     private String r_hope_sal;
+    //工作经验
+    @Column
+    private String r_exp_time;
 //职业类别
     @Column
     private String r_work_category;
@@ -59,6 +62,14 @@ private String r_name;
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "u_id")
     private User user;
+
+    public String getR_exp_time() {
+        return r_exp_time;
+    }
+
+    public void setR_exp_time(String r_exp_time) {
+        this.r_exp_time = r_exp_time;
+    }
 
     public String getPhonenumber() {
         return phonenumber;
