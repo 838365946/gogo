@@ -85,85 +85,80 @@
 <script type="text/javascript" src="js/jquery.grid.js"></script>
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript">
+    var oper = [{label:'未通过',onclick:function(){
+        alert('未通过');
+    }},{label:'邀请面试',onclick: function(){
+        alert('邀请面试')
+    }}]
+    var tbody=[] ;
+
+
     $(function () {
         $.ajax({
             url:"/readresume",
             type:"post",
             dataType:"json",
-            success:function (data) {
-                console.log(data)
+            success:function(data) {
+                console.log("进来了")
+            for (var i=0;i<data.length;i++){
+                tbody.push([data[i].r_id,data[i].r_name,data[i].r_work_nature,data[i].r_work_addr,data[i].r_hope_sal,data[i].r_work_category,data[i].r_work_industry,data[i].r_edu_school,data[i].r_edu_class,data[i].r_edu_education,data[i].r_edu_startdate,data[i].r_edu_overdate,oper]);
+            console.log(tbody)
+
+                }
+
             }
         })
     })
     $('select').select();
     var head = [{
         label: 'ID',
-        width: 100,
+        width: 30,
         sortable: 'default',
         name: 'id'
     },{
         label:'姓名',
-        width: 150,
+        width: 80,
         sortable: 'default',
         name:'name'
     },{
         label:'工作性质',
-        width:150
+        width:80
     },{
         label: '工作地址',
-        width: 150
+        width: 80
     },{
         label: '期望工资',
-        minWidth: 200
+        maxWidth: 80
     },{
         label: '职业类别',
-        width: 120
+        width: 80
     },{
         label: '所在行业',
-        width:100
+        width:80
     },{
         label: '毕业学校',
-        width:100
+        width:80
     }
         ,{
             label: '所学专业',
-            width:100
+            width:80
         },{
             label: '最高学历',
-            width:100
+            width:80
         }
         ,{
             label: '学习开始时间',
-            width:100
+            width:80
         },{
             label: '学习结束时间',
-            width:100
+            width:80
         },{
             label: '工作经历',
-            width:100
+            width:80
         }];
 
-    var oper = [{label:'未通过',onclick:function(){
-            alert('未通过');
-        }},{label:'邀请面试',onclick: function(){
-            alert('邀请面试')
-        }}]
-    var tbody = [
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        ["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-        ["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper]]
+
+
 
 
     $('.grid').Grid({
