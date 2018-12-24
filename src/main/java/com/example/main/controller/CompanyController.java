@@ -85,7 +85,7 @@ public class CompanyController {
             message.setDes("审核通过");
         } else {
             message.setB(false);
-            message.setDes("审核未通过");
+            message.setDes("审核未通过.");
         }
         return message;
     }
