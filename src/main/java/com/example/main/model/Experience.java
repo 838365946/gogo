@@ -32,6 +32,9 @@ public class Experience {
     //当前月薪
     @Column
     private String e_sal;
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "r_id")
+    private Resume resume;
 
     public int getE_id() {
         return e_id;

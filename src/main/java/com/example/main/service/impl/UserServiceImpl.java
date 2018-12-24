@@ -6,6 +6,8 @@ import com.example.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/12/7.
  */
@@ -31,6 +33,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User save(User user) {
+
+
         return userDao.save(user);
+    }
+
+    @Override
+    public List<User> SelectById(int id) {
+        return   userDao.findbyid1(id);
     }
 }

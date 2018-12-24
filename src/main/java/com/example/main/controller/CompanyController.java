@@ -3,6 +3,8 @@ package com.example.main.controller;
 import com.example.main.model.Company;
 import com.example.main.model.Message;
 import com.example.main.service.CompanyService;
+import com.example.main.service.DeliveryService;
+import com.example.main.service.impl.DeliveryServiceImpl;
 import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -151,6 +153,14 @@ public class CompanyController {
         }return modelAndView;
     }
 
+    @RequestMapping("readresume")
+    @ResponseBody
+    public void Read(HttpServletRequest request){
+        Company company= (Company) request.getSession().getAttribute("company");
+        System.out.println("ok"+company.toString());
+        DeliveryService deliveryService=new DeliveryServiceImpl();
+        deliveryService.selectByCompany(company.getC_id());
+    }
 
 }
 

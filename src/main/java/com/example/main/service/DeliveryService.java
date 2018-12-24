@@ -7,4 +7,6 @@ import com.example.main.model.Delivery;
  */
 public interface DeliveryService {
     Delivery SubmitRuseme(Delivery delivery);
+
+    void selectByCompany(int id);
 }

@@ -31,6 +31,10 @@ public class Position {
     private String p_addr;
     @Column
     private String p_des;
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "c_id")
+    private Company company;
+
 
     public String getP_des() {
         return p_des;

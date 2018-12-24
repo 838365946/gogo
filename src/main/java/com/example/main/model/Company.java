@@ -41,15 +41,13 @@ private String logopath;
     private String c_des;
 @Column
     private String c_check_status;
-    @OneToMany
-    @JoinColumn(name = "c_id")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "company")
     private List<Position> positions;
-    @OneToMany
-    @JoinColumn(name = "c_id")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "company")
     private List<Delivery> deliveries;
-@Column
+    @Column
     private String c_phone_number;
-@Column
+    @Column
     private String c_addr;
 
     public List<Delivery> getDeliveries() {

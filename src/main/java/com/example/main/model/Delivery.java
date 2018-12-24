@@ -27,6 +27,28 @@ public class Delivery {
         //不合适ss
         @Column
         private boolean d_pass;
+        @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+        @JoinColumn(name = "u_id")
+        private User user;
+        @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+        @JoinColumn(name = "c_id")
+        private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public boolean isD_BeViewed() {
         return d_BeViewed;

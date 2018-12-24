@@ -48,10 +48,11 @@ private String r_name;
     @Column
     String r_edu_overdate;
     //工作经历
-    @OneToMany
-    @JoinColumn(name = "r_id")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "resume")
     private List<Experience> experiences;
-
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "u_id")
+    private User user;
 
     public String getR_name() {
         return r_name;

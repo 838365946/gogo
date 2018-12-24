@@ -32,11 +32,9 @@ public class User {
         private int age;
 @Column
 private String isadmin;
-@OneToMany
-@JoinColumn(name = "u_id")
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
         private List<Resume> resumes;
-@OneToMany
-@JoinColumn(name = "u_id")
+@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
 private List<Delivery> deliveries;
 
     public String getIsadmin() {
@@ -46,7 +44,6 @@ private List<Delivery> deliveries;
     public void setIsadmin(String isadmin) {
         this.isadmin = isadmin;
     }
-
     public List<Delivery> getDeliveries() {
         return deliveries;
     }
