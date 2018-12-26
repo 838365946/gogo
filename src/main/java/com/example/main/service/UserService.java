@@ -13,4 +13,5 @@ public interface UserService {
     User AddUser(User user);
     User save(User user);
    List<User> SelectById(int id);
+   User Check(String username);
 }

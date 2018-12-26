@@ -6,18 +6,20 @@ package com.example.main.model;
 
 public class Message {
 
-    private int m_id;
+
 
     private boolean b;
 
     private String des;
 
-    public int getM_id() {
-        return m_id;
+    private Object data;
+
+    public Object getData() {
+        return data;
     }
 
-    public void setM_id(int m_id) {
-        this.m_id = m_id;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public boolean isB() {

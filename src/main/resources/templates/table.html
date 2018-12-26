@@ -86,9 +86,17 @@
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript">
     var oper = [{label:'未通过',onclick:function(){
-        alert('未通过');
+        $(".__data")
+       var elt= $(this).parent().parent()
+var index=elt.index($(this).parent().parent().parent())
+console.log($(this).text())
+//        $.ajax(function () {
+//            url:"/pass",
+//                type:post,
+//                data:$(this)
+//        })
     }},{label:'邀请面试',onclick: function(){
-        alert('邀请面试')
+        console.log(this.val())
     }}]
     var tbody=[] ;
 
@@ -111,7 +119,8 @@
         label: 'ID',
         width: 30,
         sortable: 'default',
-        name: 'id'
+        name: 'id',
+        id:'cid',
     },{
         label:'姓名',
         width: 80,
@@ -167,7 +176,7 @@
         },
         operator: {
             type : "normal",
-            width : 100
+            width : 150
         },
         sortCallBack : function(name,index,type){
             alert(name+","+index+','+type);

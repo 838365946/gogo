@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,9 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 @Autowired
     private UserService userService;
-
-
-
 @RequestMapping("/")
 public String ToIndex(HttpServletRequest request){
 if(request.getSession().getAttribute("user")!=null||request.getSession().getAttribute("company")!=null){
@@ -34,40 +29,37 @@ if(request.getSession().getAttribute("user")!=null||request.getSession().getAttr
 
 @RequestMapping("/login")
 @ResponseBody
-    public ModelAndView Login(User user){
+    public Message Login(User user){
 
-    ModelAndView modelAndView=new ModelAndView();
+
     Message message=new Message();
     User user1=userService.Login(user);
 if (user1!=null){
-
-    if(user1.getIsadmin().equals("是")){
-        message.setB(true);
-        message.setDes("管理员登录成功");
-    modelAndView.addObject(user1);
-    modelAndView.addObject(message);
-    }else {
         message.setB(true);
         message.setDes("登录成功");
-        modelAndView.addObject(message);
-        modelAndView.addObject(user1);
-    }
+        message.setData(user1);
 }else {
     message.setB(false);
     message.setDes("登录失败");
-modelAndView.addObject(message);
 }
-modelAndView.setView(new MappingJackson2JsonView());
-return modelAndView;
+return message;
     }
 
 
-
-
-@RequestMapping("works_home/0wxlogin")
+@RequestMapping("/wxlogin")
 @ResponseBody
-    public User WxLogin(String phone_number){
-        return userService.WxLogin(phone_number);
+    public Message WxLogin(String phone_number){
+        Message message=new Message();
+    User user=userService.WxLogin(phone_number);
+    if (user!=null){
+        message.setB(true);
+        message.setDes("微信登录获取数据成功");
+        message.setData(user);
+    }else {
+        message.setB(false);
+        message.setDes("没有数据，请绑定您的智障号");
+    }
+        return message;
     }
     @RequestMapping("adduser")
     public Message AddUser(User user){
@@ -82,13 +74,13 @@ return modelAndView;
         return message;
     }
 
-@RequestMapping("works_home/addcheck")
-    public Message addcheck(String phonenumber){
+@RequestMapping("/check")
+    public Message addcheck(String username){
 
         Message message =new Message();
-if (userService.WxLogin(phonenumber)!=null){
+if (userService.Check(username)==null){
     message.setB(true);
-    message.setDes("该手机号可以使用");
+    message.setDes("该帐号可以使用");
 }else {
     message.setB(false);
     message.setDes("该账号已被注册");

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +33,8 @@ public class SubmitResumeController {
 
 @RequestMapping("/submitresume")
 @ResponseBody
-public Message Submit(User user, Company company){
+public Message Submit(HttpServletRequest request, Company company){
+    User user= (User) request.getSession().getAttribute("user");
     Message message=new Message();
     Date date=new Date();
     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -40,8 +43,10 @@ public Message Submit(User user, Company company){
     System.out.println(date);
     Delivery delivery =new Delivery();
     delivery.setD_date(date1);
+    delivery.setCompany(company);
+    delivery.setUser(user);
 Delivery delivery1=deliveryService.SubmitRuseme(delivery);
-    List<Delivery> deliveryList=null;
+    List<Delivery> deliveryList=new ArrayList<Delivery>();
     deliveryList.add(delivery1);
     user.setDeliveries(deliveryList);
 company.setDeliveries(deliveryList);

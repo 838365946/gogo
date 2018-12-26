@@ -35,10 +35,9 @@ public class CompanyController {
 
     private Message message = new Message();
 
-    @RequestMapping(value = "/companyRegistered", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addcompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message companyRegistered(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company) {
-        System.out.println("进入companycontroller");
         String des = company.getC_des();
         company.setC_des("上传中");
         Company company1 = companyService.registered(company);
@@ -59,7 +58,7 @@ public class CompanyController {
             e.printStackTrace();
         }
         message.setB(true);
-        message.setDes("注册成功，请等待审核");
+        message.setDes("完善资料成功，请等待审核");
         return message;
     }
 
@@ -156,7 +155,8 @@ public class CompanyController {
 
     @RequestMapping("/readresume")
     @ResponseBody
-    public List<Resume> test(HttpServletRequest request){
+    public Message test(HttpServletRequest request){
+
         Company company= (Company) request.getSession().getAttribute("company");
         List<Resume> resumes=new ArrayList<Resume>();
         for (Delivery d:company.getDeliveries()){
@@ -164,8 +164,10 @@ public class CompanyController {
                 System.out.println(r.getR_id());
                 resumes.add(r);
             }
-        }
-        return resumes;
+        }message.setB(true);
+        message.setDes("获取成功");
+        message.setData(resumes);
+        return message;
     }
 }
 

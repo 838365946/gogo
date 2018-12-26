@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService{
     public List<User> SelectById(int id) {
         return   userDao.findbyid1(id);
     }
+
+    @Override
+    public User Check(String username) {
+        return userDao.Check(username);
+    }
 }
