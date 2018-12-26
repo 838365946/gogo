@@ -2,10 +2,13 @@ package com.example.main.controller;
 
 import com.example.main.model.Message;
 import com.example.main.model.Resume;
+import com.example.main.model.User;
 import com.example.main.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2018/12/7.
@@ -53,8 +56,21 @@ if (b){
     message.setDes("删除失败");
 }return message;
 }
-
-
+@RequestMapping("/showresume")
+public Message ShowResume(HttpServletRequest request){
+User user= (User) request.getSession().getAttribute("user");
+Resume resume=resumeService.QueryByUid(user.getId());
+Message message=new Message();
+if ((resume!=null)){
+    message.setB(true);
+    message.setDes("获取简历成功");
+    message.setData(resume);
+}else {
+    message.setB(false);
+    message.setDes("获取简历失败");
+}
+return message;
+}
 
 }
 

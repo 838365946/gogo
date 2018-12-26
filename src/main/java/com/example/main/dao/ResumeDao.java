@@ -13,5 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface ResumeDao  extends JpaRepository<Resume,Long>{
     @Query(value = "select * from resume r where r.phone_number = :phone",nativeQuery = true)
     Resume QueryResumeByPhoneNumber(@Param("phone")String phone);
-
+    @Query(value = "select * from resume r where r.u_id=:uid",nativeQuery = true)
+    Resume QueryByUid(@Param("uid") int uid);
 }
