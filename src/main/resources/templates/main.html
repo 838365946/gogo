@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
-    <title>企业OA办公后台管理模板</title>
 </head>
 
 <body>
@@ -19,7 +18,7 @@
             <h1 class="logo"><a href="javascript:;" class="logo-icon"></a></h1>
             <div class="user-info">
                 <a href="javascript:;" class="user-avatar"><span><i class="info-num">2</i></span></a>
-                <span class="user-name">admin</span>
+                <span class="user-name" th:text="${session.company.getC_name()}"><a href="main.html">点击登陆</a></span>
                 <a href="javascript:;" class="more-info"></a>
             </div>
             <div class="setting ue-clear">
