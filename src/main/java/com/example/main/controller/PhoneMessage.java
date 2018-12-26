@@ -1,5 +1,6 @@
 package com.example.main.controller;
 
+import com.example.main.model.Message;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +48,8 @@ public class PhoneMessage {
     }
 
     //2.发送短信
-    @RequestMapping("works_home/phone")
-    public static void getRequest2(String phone){
+    @RequestMapping("/phone")
+    public static Message getRequest2(String phone){
        int code= (int) ((Math.random()*9+1)*100000);
         System.out.println(code);
         String result =null;
@@ -74,6 +75,11 @@ public class PhoneMessage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Message message=new Message();
+        message.setB(true);
+        message.setDes("获取成功");
+        message.setData(code);
+        return message;
     }
 
 

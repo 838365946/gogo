@@ -16,10 +16,9 @@ private PositionService positionService;
 @RequestMapping("/addPosition")
 public Message AddPosition(Position position){
 Message message=new Message();
-if(positionService.addposition(position)!=null){
+if(positionService.addposition(position)!=null&&position!=null){
     message.setB(true);
     message.setDes("发布职位成功");
-
 }else {
     message.setB(false);
     message.setDes("发布职位失败");

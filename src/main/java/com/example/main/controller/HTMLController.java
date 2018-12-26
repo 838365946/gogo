@@ -12,16 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class HTMLController {
-    @RequestMapping("/listiframe")
-    public String FirstIframe(){
-        System.out.println("返回");
-        return "nav";
-    }
 
-    @RequestMapping("/seciframe")
-    public String SecIframe(String value){
-        return value;
-    }
     @RequestMapping("/load")
     @ResponseBody
     public Company Load(HttpServletRequest request){

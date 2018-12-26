@@ -21,6 +21,7 @@ public Message AddEx(Experience experience){
     if (experience1!=null){
         message.setB(true);
         message.setDes("新增工作经验成功");
+        message.setData(experience1);
     }else {
         message.setB(false);
         message.setDes("新增工作经验失败");
@@ -35,6 +36,7 @@ return message;
         if (experience1!=null){
             message.setB(true);
             message.setDes("修改工作经验成功");
+            message.setData(experience1);
         }else {
             message.setB(false);
             message.setDes("修改工作经验失败");

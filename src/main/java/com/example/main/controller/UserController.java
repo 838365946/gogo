@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,6 +46,23 @@ if (user1!=null){
 return message;
     }
 
+    @RequestMapping("/adminlogin")
+    @ResponseBody
+    public ModelAndView Login(User user,HttpServletRequest request){
+ModelAndView modelAndView=new ModelAndView();
+        User user1=userService.Login(user);
+        if (user1!=null){
+            if (user1.getIsadmin().equals("是")){
+                modelAndView.setViewName("navht");
+                    request.getSession().setAttribute("user",user1);
+            }else {
+                modelAndView.setViewName("error");
+            }
+        }else {
+            modelAndView.setViewName("error");
+        }
+        return modelAndView;
+    }
 
 @RequestMapping("/wxlogin")
 @ResponseBody

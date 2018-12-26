@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
-    @RequestMapping("/saveresume")
+    @RequestMapping("/addresume")
 public Message SaveResume(Resume resume){
     Message message =new Message();
-if(resumeService.SaveResume(resume)!=null){
+    Resume resume1=resumeService.SaveResume(resume);
+if(resume1!=null){
 message.setB(true);
 message.setDes("新增简历成功");
+message.setData(resume1);
 }else {
     message.setB(false);
     message.setDes("新增简历失败");
@@ -29,9 +31,11 @@ return message;
 @RequestMapping("/updateresume")
 public Message UpdateResume(Resume resume){
     Message message =new Message();
-    if(resumeService.SaveResume(resume)!=null){
+    Resume resume1=resumeService.SaveResume(resume);
+    if(resume1!=null){
         message.setB(true);
         message.setDes("修改简历成功");
+        message.setData(resume1);
     }else {
         message.setB(false);
         message.setDes("修改简历失败");
