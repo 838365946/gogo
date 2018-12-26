@@ -14,7 +14,7 @@
 <div id="container">
     <div id="bd">
     	<div id="main">
-				<form action="localhost:8080/login"></form>
+				<form action="/adminlogin"></form>
         	<div class="login-box">
                 <div id="logo"></div>
                 <h1></h1>
@@ -67,7 +67,10 @@
 		$('#bd').css('padding-top', bdheight);
     });
 	$('select').select();
-	
+    $("#login").click(function () {
+        console.log(123);
+        $("#loginform").submit();
+    })
 
 </script>
 
