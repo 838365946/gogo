@@ -14,7 +14,7 @@
 <div id="container">
     <div id="bd">
     	<div id="main">
-				<form action="/adminlogin"></form>
+				<form  action="/adminlogin">
         	<div class="login-box">
                 <div id="logo"></div>
                 <h1></h1>
@@ -43,9 +43,10 @@
                     </div>
                 </div>
                 <div id="btn" class="loginButton">
-                    <input type="submit" class="button" value="登录"  />
+                    <input type="submit" class="button" value="登录" id="adminlogin"  />
                 </div>
             </div>
+                </form>
         </div>
 				
 				
@@ -67,7 +68,7 @@
 		$('#bd').css('padding-top', bdheight);
     });
 	$('select').select();
-    $("#login").click(function () {
+    $("#adminlogin").click(function () {
         console.log(123);
         $("#loginform").submit();
     })

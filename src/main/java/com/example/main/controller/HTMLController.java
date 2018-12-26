@@ -16,8 +16,10 @@ public class HTMLController {
     @RequestMapping("/load")
     @ResponseBody
     public Company Load(HttpServletRequest request){
-        System.out.println("you");
         System.out.println(request.getSession().getAttribute("company"));
 return (Company) request.getSession().getAttribute("company");
     }
+
+
 }
+

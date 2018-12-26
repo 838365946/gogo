@@ -132,6 +132,20 @@
 <script type="text/javascript" src="js/jquery.grid.js"></script>
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript">
+    var tbody = [];
+    $(function () {
+        $.ajax({
+            url:"/load",
+            type:"post",
+            dataType:"json",
+            success:function(data) {
+                console.log("进来了才怪")
+                for (var i=0;i<data.data.length;i++){
+                    tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,oper]);
+                }
+            }
+        })
+    })
 	$('select').select();
 	var head = [{
 				label: '公司地址',
@@ -154,28 +168,6 @@
 				minWidth: 200	
 
 			}];
-			
-	var oper = [{label:'删除',onclick:function(){
-						alert('删除');
-				}},{label:'编辑',onclick: function(){
-					alert('编辑')	
-				}}]
-
-	var tbody = [];
-    $(function () {
-        $.ajax({
-            url:"/load",
-            type:"post",
-            dataType:"json",
-            success:function(data) {
-                console.log("进来了才怪")
-                for (var i=0;i<data.data.length;i++){
-                    tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,oper]);
-                }
-            }
-        })
-    })
-
 
 					
 		$('.grid').Grid({
@@ -219,8 +211,6 @@
 			}
 		}
     });
-	$(function () {
-        if($(""));
-    })
+
 </script>
 </html>

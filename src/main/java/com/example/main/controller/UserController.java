@@ -49,14 +49,16 @@ return message;
     @RequestMapping("/adminlogin")
     @ResponseBody
     public ModelAndView Login(User user,HttpServletRequest request){
+
 ModelAndView modelAndView=new ModelAndView();
         User user1=userService.Login(user);
+      
         if (user1!=null){
             if (user1.getIsadmin().equals("是")){
                 modelAndView.setViewName("navht");
                     request.getSession().setAttribute("user",user1);
             }else {
-                modelAndView.setViewName("error");
+                modelAndView.setViewName("error1");
             }
         }else {
             modelAndView.setViewName("error");
