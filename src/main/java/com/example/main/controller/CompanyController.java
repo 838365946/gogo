@@ -228,3 +228,5 @@ company1.setC_img(imgpath);
 
 
 
+
+

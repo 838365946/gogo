@@ -132,56 +132,43 @@
 <script type="text/javascript" src="js/jquery.grid.js"></script>
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript">
+    var tbody = [];
+    $(function () {
+        $.ajax({
+            url:"/load",
+            type:"post",
+            dataType:"json",
+            success:function(data) {
+                console.log("进来了才怪")
+                for (var i=0;i<data.data.length;i++){
+                    tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,oper]);
+                }
+            }
+        })
+    })
 	$('select').select();
 	var head = [{
-				label: 'ID',
+				label: '公司地址2',
 				width: 100,
 				sortable: 'default',
 				name: 'id'	
 			},{
-				label:'用户名',
+				label:'公司所在行业',
 				width: 150,
 				sortable: 'default',
 				name:'name'	
 			},{
-				label:'昵称',
+				label:'企业性质',
 				width:150	
 			},{
-				label: '籍贯',
+				label: '公司介绍',
 				width: 150	
 			},{
-				label: '毕业院校',
+				label: '公司名称',
 				minWidth: 200	
-			},{
-				label: '出生日期',
-				width: 120	
-			},{
-				label: '是否审核',
-				width:100	
+
 			}];
-			
-	var oper = [{label:'删除',onclick:function(){
-						alert('删除');
-				}},{label:'编辑',onclick: function(){
-					alert('编辑')	
-				}}]
-	var tbody = [
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-					["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-					["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-					["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-        	["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-					["201302","uimaker","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-					["201301","admin","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper]]
-					
+
 					
 		$('.grid').Grid({
 			thead: head,
@@ -224,8 +211,6 @@
 			}
 		}
     });
-	$(function () {
-        if($(""));
-    })
+
 </script>
 </html>
