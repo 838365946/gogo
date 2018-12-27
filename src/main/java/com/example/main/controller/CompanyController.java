@@ -49,6 +49,7 @@ public class CompanyController {
             company1.setC_des(despath);
             company1.setC_img(imgpath);
             company1.setLogopath(logopath);
+            company1.setC_check_status("未审核");
             companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +80,6 @@ public class CompanyController {
             }
             imgpath = companyIO.UploadImg(files, company1.getC_id());
 company1.setC_img(imgpath);
-
         }
         try {
             despath=companyIO.WriteDes(des,company1.getC_id());
@@ -102,6 +102,7 @@ company1.setC_img(imgpath);
         company1.setC_welfare(company.getC_welfare());
         company1.setC_industry(company.getC_industry());
         company1.setC_scale(company.getC_scale());
+        company1.setC_check_status("未审核");
         Company company2=companyService.addcompany(company1);
         if (company2==null){
         message.setB(false);
@@ -154,18 +155,6 @@ company1.setC_img(imgpath);
         return companies1;
     }
 
-    @RequestMapping("/addcompany")
-    public Message addcompany(Company company) {
-        Message message = new Message();
-        if (companyService.addcompany(company) != null) {
-            message.setB(true);
-            message.setDes("修改信息成功");
-        } else {
-            message.setB(false);
-            message.setDes("修改信息成功");
-        }
-        return message;
-    }
 
     @RequestMapping("/showcompmess")
     @ResponseBody
