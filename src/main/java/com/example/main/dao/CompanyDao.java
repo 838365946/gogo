@@ -15,4 +15,6 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     Company CLogin(@Param("c_username") String c_username, @Param("password") String password);
 @Query(value = "select * from company c where c.c_id = :id",nativeQuery = true)
     Company findById(@Param("id") int id);
+@Query
+
 }

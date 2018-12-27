@@ -5,14 +5,9 @@ package com.example.main.model;
  */
 
 public class Message {
-
-
     private boolean b;
-
     private String des;
-
-
-private Object data;
+    private Object data;
 
     public Object getData() {
         return data;

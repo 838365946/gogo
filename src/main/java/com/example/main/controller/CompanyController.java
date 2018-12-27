@@ -129,18 +129,9 @@ company1.setC_img(imgpath);
     }
 
     @RequestMapping("/Audit_company")
-    public Message audit(Company company, String str) {
-
+    public Message audit(Company company) {
         Message message = new Message();
-        company.setC_check_status(str);
-        Company company1 = companyService.registered(company);
-        if (company1.getC_check_status().equals("已通过")) {
-            message.setB(true);
-            message.setDes("审核通过");
-        } else {
-            message.setB(false);
-            message.setDes("审核未通过.");
-        }
+
         return message;
     }
 
@@ -211,6 +202,10 @@ company1.setC_img(imgpath);
         message.setData(resumes);
         return message;
     }
+    @RequestMapping("")
+
+
+
 }
 
 

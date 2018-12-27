@@ -55,7 +55,7 @@ ModelAndView modelAndView=new ModelAndView();
       
         if (user1!=null){
             if (user1.getIsadmin().equals("是")){
-                modelAndView.setViewName("navht");
+                modelAndView.setViewName("mainht");
                     request.getSession().setAttribute("user",user1);
             }else {
                 modelAndView.setViewName("error1");
