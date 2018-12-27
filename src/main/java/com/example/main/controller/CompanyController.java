@@ -166,6 +166,7 @@ company1.setC_img(imgpath);
         List<Company> companies1 = null;
         if (companies.getContent() != null) {
             companies1 = companies.getContent();
+
         }
         if(companies1.size()>0){
             message.setB(true);
