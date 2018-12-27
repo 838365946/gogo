@@ -166,7 +166,7 @@ company1.setC_img(imgpath);
         }
         if(companies1.size()>0){
             message.setB(true);
-            message.setDes("获取成功");
+            message.setDes("获取成功l");
             message.setData(companies1);
         }else {
             message.setB(false);
