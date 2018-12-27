@@ -3,6 +3,7 @@ package com.example.main.controller;
 import com.example.main.model.Message;
 import com.example.main.model.Position;
 import com.example.main.service.FindPositionService;
+import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,13 +22,17 @@ public class ShowMessController {
 @RequestMapping("/showmess")
     public Message ShowMess(Integer page){
     Message message=new Message();
-    PageRequest pageRequest=PageRequest.of(page,5);
+    PageRequest pageRequest=PageRequest.of(page,10);
     Page<Position> positionspage=  fp.ShowMess(pageRequest);
     List<Position> positions = null;
     if(positionspage.getContent()!=null){
         positions=positionspage.getContent();
         message.setB(true);
         message.setDes("获取职位成功");
+        CompanyIO companyIO=new CompanyIO();
+        for (Position p:positions){
+            p.getCompany().setC_des(String.valueOf(companyIO.ReadDes(p.getCompany().getC_des())));
+        }
         message.setData(positions);
     }
     return message;
@@ -44,6 +49,10 @@ public Message QueryByInput(int page,String input){
             positions=positionpage.getContent();
             message.setB(true);
             message.setDes("搜索职位成功");
+            CompanyIO companyIO=new CompanyIO();
+            for (Position p:positions){
+                p.getCompany().setC_des(String.valueOf(companyIO.ReadDes(p.getCompany().getC_des())));
+            }
             message.setData(positions);
         }
         return message;
