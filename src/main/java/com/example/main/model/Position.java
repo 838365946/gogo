@@ -27,8 +27,6 @@ public class Position implements Serializable{
     //发布日期
     @Column
     private String p_date;
-    //公司名字
-    private String enterprise_name;
     //工作地址
     @Column
     private String p_addr;
@@ -38,20 +36,19 @@ public class Position implements Serializable{
     @JoinColumn(name = "c_id")
     private Company company;
 
-    public String getEnterprise_name() {
-        return enterprise_name;
-    }
-
-    public void setEnterprise_name(String enterprise_name) {
-        this.enterprise_name = enterprise_name;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
+    @Override
+    public String toString() {
+        return "Position{" +
+                "p_id=" + p_id +
+                ", p_posi_name='" + p_posi_name + '\'' +
+                ", p_sal='" + p_sal + '\'' +
+                ", p_education='" + p_education + '\'' +
+                ", P_exp_time='" + P_exp_time + '\'' +
+                ", p_date='" + p_date + '\'' +
+                ", p_addr='" + p_addr + '\'' +
+                ", p_des='" + p_des + '\'' +
+                ", company=" + company +
+                '}';
     }
 
     public String getP_des() {
