@@ -4,6 +4,8 @@ import com.example.main.model.Company;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface CompanyService {
 
     Company registered(Company company);
@@ -11,4 +13,5 @@ public interface CompanyService {
     Company addcompany(Company company);
     Company CLogin(Company company);
     void test(int id);
+    List<Company> CheckCompany(String status);
 }

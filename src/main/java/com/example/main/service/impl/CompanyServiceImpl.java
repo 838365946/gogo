@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("companyService")
 public class CompanyServiceImpl  implements CompanyService {
 @Autowired
@@ -39,6 +41,11 @@ public class CompanyServiceImpl  implements CompanyService {
     @Override
     public void test(int id) {
         System.out.println(companyDao.findById(id).getDeliveries());
+    }
+
+    @Override
+    public List<Company> CheckCompany(String status) {
+        return companyDao.chenckcompany(status);
     }
 
 

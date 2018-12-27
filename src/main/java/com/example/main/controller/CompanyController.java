@@ -131,7 +131,15 @@ company1.setC_img(imgpath);
     @RequestMapping("/Audit_company")
     public Message audit(Company company) {
         Message message = new Message();
-
+        List<Company> companies=companyService.CheckCompany("未审核");
+        if (companies.size()>0){
+            message.setB(true);
+            message.setDes("获取未审核公司成功");
+            message.setData(companies);
+        }else {
+            message.setB(false);
+            message.setDes("获取未审核公司失败");
+        }
         return message;
     }
 
@@ -149,14 +157,22 @@ company1.setC_img(imgpath);
 
     @RequestMapping("/showcompmess")
     @ResponseBody
-    public List<Company> show(int page) {
+    public Message show(int page) {
         PageRequest pageRequest = PageRequest.of(page, 5);
         Page<Company> companies = companyService.findall(pageRequest);
         List<Company> companies1 = null;
         if (companies.getContent() != null) {
             companies1 = companies.getContent();
         }
-        return companies1;
+        if(companies1.size()>0){
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(companies1);
+        }else {
+            message.setB(false);
+            message.setDes("获取失败");
+        }
+        return message;
     }
 
     @RequestMapping("/clogin")
@@ -202,7 +218,7 @@ company1.setC_img(imgpath);
         message.setData(resumes);
         return message;
     }
-    @RequestMapping("")
+
 
 
 
