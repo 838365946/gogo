@@ -225,6 +225,37 @@ company1.setC_img(imgpath);
         message.setData(resumes);
         return message;
     }
+    @RequestMapping("/passcheck")
+    @ResponseBody
+    public Message PassCheck(Company company){
+    Company company1=companyService.PassCheck(company,"审核通过");
+    if (company1!=null){
+        message.setB(true);
+        message.setDes("成功通过审核");
+        company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
+        message.setData(company1);
+    }else {
+        message.setB(false);
+        message.setDes("通过审核失败");
+    }
+    return  message;
+    }
+
+    @RequestMapping("/losecheck")
+    @ResponseBody
+    public Message LoseCheck(Company company){
+        Company company1=companyService.PassCheck(company,"审核失败");
+        if (company1!=null){
+            message.setB(true);
+            message.setDes("审核失败了，返回成功");
+            company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
+            message.setData(company1);
+        }else {
+            message.setB(false);
+            message.setDes("出现未知错误，请联系管理员");
+        }
+        return  message;
+    }
 }
 
 
