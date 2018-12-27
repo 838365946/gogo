@@ -44,13 +44,14 @@ public class CompanyController {
         Company company1 = companyService.registered(company);
         String imgpath = companyIO.UploadImg(files, company1.getC_id());
         String logopath = companyIO.LogoUpload(logo, company1.getC_id());
+        Company c=null;
         try {
             String despath = companyIO.WriteDes(des, company1.getC_id());
             company1.setC_des(despath);
             company1.setC_img(imgpath);
             company1.setLogopath(logopath);
             company1.setC_check_status("未审核");
-            companyService.registered(company1);
+          c=   companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,9 +60,16 @@ public class CompanyController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        message.setB(true);
-        message.setDes("完善资料成功，请等待审核");
-        return message;
+       if (c!=null){
+           message.setB(true);
+           message.setDes("完善资料成功，请等待审核");
+           c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+           return message;
+       }else {
+           message.setB(false);
+           message.setDes("完善资料失败，请等待审核");
+       }
+       return message;
     }
 
     @RequestMapping(value = "/updatecompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -111,6 +119,7 @@ company1.setC_img(imgpath);
         }else {
             message.setB(true);
             message.setDes("修改成功");
+            company2.setC_des(String.valueOf(companyIO.ReadDes(company2.getC_des())));
             message.setData(company2);
         }
         return message;
@@ -129,12 +138,15 @@ company1.setC_img(imgpath);
     }
 
     @RequestMapping("/Audit_company")
-    public Message audit(Company company) {
+    public Message audit() {
         Message message = new Message();
         List<Company> companies=companyService.CheckCompany("未审核");
         if (companies.size()>0){
             message.setB(true);
             message.setDes("获取未审核公司成功");
+            for(Company c:companies){
+                c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+            }
             message.setData(companies);
         }else {
             message.setB(false);
@@ -143,16 +155,6 @@ company1.setC_img(imgpath);
         return message;
     }
 
-    @RequestMapping("/Audit_record")
-    public List<Company> record(int page) {
-        PageRequest pageRequest = PageRequest.of(page, 10);
-        Page<Company> companies = companyService.findall(pageRequest);
-        List<Company> companies1 = null;
-        if (companies.getContent() != null) {
-            companies1 = companies.getContent();
-        }
-        return companies1;
-    }
 
 
     @RequestMapping("/showcompmess")
@@ -167,6 +169,9 @@ company1.setC_img(imgpath);
         if(companies1.size()>0){
             message.setB(true);
             message.setDes("获取成功l");
+            for (Company c:companies1){
+                c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+            }
             message.setData(companies1);
         }else {
             message.setB(false);
@@ -183,6 +188,7 @@ company1.setC_img(imgpath);
         Company company1 = companyService.CLogin(company);
         System.out.println(company1.toString());
       if(company1!=null){
+          company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
           request.getSession().setAttribute("company",company1);
           modelAndView.addObject("name",company1.getC_name());
           modelAndView.setViewName("main");
