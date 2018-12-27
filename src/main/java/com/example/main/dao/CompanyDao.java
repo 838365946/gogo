@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2018/12/6.
  */
@@ -17,7 +15,6 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     Company CLogin(@Param("c_username") String c_username, @Param("password") String password);
 @Query(value = "select * from company c where c.c_id = :id",nativeQuery = true)
     Company findById(@Param("id") int id);
-@Query(value = "select * from company c where c.c_check_status =c:status",nativeQuery = true)
-    List<Company> chenckcompany(@Param("status")String status);
+
 
 }
