@@ -78,6 +78,7 @@ public class CompanyController {
         String des=company.getC_des();
         company.setC_des("修改中");
         Company company1= (Company) request.getSession().getAttribute("company");
+        System.out.println(company1.getC_id());
         String imgpath,despath,logopath;
         if (files!=null){
             File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id());

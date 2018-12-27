@@ -30,9 +30,6 @@ public class CompanyIO {
     //读取公司介绍
     public StringBuffer ReadDes(String filepath){
         File file=new File(filepath);
-        if(file.getParentFile().exists()){
-            file.mkdir();
-        }
         Reader reader=null;
         StringBuffer sb=new StringBuffer();
         String str=null;
