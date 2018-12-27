@@ -95,7 +95,7 @@ company1.setC_img(imgpath);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!logo.isEmpty()){
+        if (logo!=null){
             File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id());
             if (file.exists()){
                 if (file.isDirectory()){
@@ -105,6 +105,7 @@ company1.setC_img(imgpath);
             logopath=companyIO.LogoUpload(logo,company1.getC_id());
             company1.setLogopath(logopath);
         }
+
         company1.setC_addr(company.getC_addr());
         company1.setC_name(company.getC_name());
         company1.setC_welfare(company.getC_welfare());
