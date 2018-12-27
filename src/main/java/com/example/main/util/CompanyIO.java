@@ -29,12 +29,10 @@ public class CompanyIO {
     }
     //读取公司介绍
     public StringBuffer ReadDes(String filepath){
-        File file=new File(filepath);
-        Reader reader=null;
         StringBuffer sb=new StringBuffer();
         String str=null;
         try {
-            reader= new InputStreamReader(new FileInputStream(filepath));
+           Reader reader= new InputStreamReader(new FileInputStream(filepath));
             BufferedReader bf = new BufferedReader(reader);
             while ((str=bf.readLine())!=null){
                 sb.append(str);
