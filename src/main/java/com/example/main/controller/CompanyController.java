@@ -218,10 +218,6 @@ company1.setC_img(imgpath);
         message.setData(resumes);
         return message;
     }
-
-
-
-
 }
 
 
