@@ -17,105 +17,148 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
 <script type="text/javascript" src="js/umeditor.config.js"></script>
 <script type="text/javascript" src="js/editor_api.js"></script>
 <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
-<title>基础信息</title>
+<title>发布招聘</title>
 </head>
 
 <body>
+
 <div id="container">
 	<div id="hd">
     </div>
+	     <form id="form1">
     <div id="bd">
     	<div id="main">
             <h2 class="subfild">
             	<span>基本信息</span>
             </h2>
             <div class="subfild-content base-info">
-            	<div class="kv-item ue-clear">
-                	<label><span class="impInfo">*</span>文章标题</label>
-                	<div class="kv-item-content">
-                    	<input type="text" placeholder="文章标题" />
+                <div class="kv-item ue-clear">
+                    <label><span class="impInfo">*</span>职位名称</label>
+                    <div class="kv-item-content">
+                        <input name="p_posi_name"type="text" placeholder="请输入您要招聘的职位" />
                     </div>
-                    <span class="kv-item-tip">标题字数限制在35个字符</span>
+                </div>
+            </div>
+                <div class="subfild-content base-info">
+                    <div class="kv-item ue-clear" name="#">
+                        <label><span class="impInfo">*</span>学历要求</label>
+                        <!--<div class="kv-item-content">-->
+                            <!--<input name="p_education"type="text" placeholder="请输入招聘职位学历要求" />-->
+                        <!--</div>-->
+                        <input type="radio" name="p_education" value="不限" />不限
+                        <input type="radio" name="p_education" value="大专" />大专
+                        <input type="radio" name="p_education" value="本科" />本科
+                        <input type="radio" name="p_education" value="本科以上" />本科以上
+                        <!--<input type="button" value="确认选择学历" id="btnSubmit" />-->
+                    </div>
+                </div>
+                    <div class="subfild-content base-info">
+                        <div class="kv-item ue-clear">
+                            <label><span class="impInfo">*</span>职位薪资</label>
+                            <!--<div class="kv-item-content">-->
+                                <!--<input name="p_sal"type="text" placeholder="请输入招聘职位工资范围" />-->
+                            <!--</div>-->
+                            <input type="radio" name="p_sal" value="面议" />面议
+                            <input type="radio" name="p_sal" value="4K-6K" />4K-6K
+                            <input type="radio" name="p_sal" value="6K-8K" />6K-8K
+                            <input type="radio" name="p_sal" value="8K-10K" />8K-10K
+                            <input type="radio" name="p_sal" value="10K以上" />10K以上
+                        </div>
+				<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>经验要求</label>
+                	<div class="kv-item-content">
+                    	<input type="text" name="p_exp_time" placeholder="请输入经验，例：三年以上" />
+                    </div>
+                </div>
+				<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>工作地点</label>
+                	<div class="kv-item-content">
+                    	<input type="text" name="p_addr" placeholder="请输入工作地点，例：北京" />
+                    </div>
                 </div>
                 <div class="kv-item ue-clear time">
-                	<label><span class="impInfo">*</span>发布时间</label>
+                	<label><span class="impInfo"> </span>发布时间</label>
                 	<div class="kv-item-content">
-                    	<input type="text" placeholder="文章标题" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-                        <i class="time-icon"></i>
-                    </div>
-                    <span class="kv-item-tip error">这是一个错误信息</span>
-                </div>
-                
-                <div class="kv-item ue-clear">
-                	<label>所在栏目</label>
-                	<div class="kv-item-content">
-                    	<select>
-                        	<option>新闻资讯</option>
-                            <option>新闻资讯</option>
-                            <option>新闻资讯</option>
-                        </select>
-                    </div>
-                    <span class="kv-item-tip success">成功信息</span>
-                </div>
-                
-                <div class="kv-item ue-clear">
-                	<label>是否审核</label>
-                	<div class="kv-item-content">
-                    	<span class="choose">
-                            <span class="checkboxouter">
-                                <input type="radio" name="need" />
-                                <span class="radio"></span>
-                            </span>
-                            <span class="text">是</span>
-                        </span>
-                    	<span class="choose">
-                            <span class="checkboxouter">
-                                <input type="radio" name="need" />
-                                <span class="radio"></span>
-                            </span>
-                            <span class="text">否</span>
-                        </span>
-                        
-                    </div>
-                    <span class="kv-item-tip">标题字数限制在35个字符</span>
-                </div>
-                
-                
-                <div class="kv-item ue-clear">
-                	<label><span class="impInfo">*</span>缩略图</label>
-                	<div class="kv-item-content file">
-						<span class="text"></span>
-                        <input type="file" />
-                        <input type="button" class="button normal long2" value="浏览.." />
-                    </div>
-                    <span class="kv-item-tip">标题字数限制在35个字符</span>
-                </div>
+                    	<input type="text" name="p_date" id="字段" readonly unselectable="on">
+                    </div>                    
+                </div>                
             </div>
             
             <h2 class="subfild">
-            	<span>备注资料</span>
+            	<span>职位描述</span>
             </h2>
             
             <div class="subfild-content remarkes-info">
             	<div class="kv-item ue-clear">
-                	<label><span class="impInfo">*</span>文章内容</label>
+                	<label><span class="impInfo">*</span>岗位要求</label>
                 	<div class="kv-item-content">
-                    	<textarea placeholder="文章内容" id="content" style="width:800px;height:240px;"></textarea>
+                    	<textarea placeholder="岗位职责" name="p_des" id="content" style="width:800px;height:240px;"></textarea>
                     </div>
                 </div>
             </div>
-            
-            <div class="buttons">
-                <input class="button" type="button" value="确认修改" />
+            <"确认 class="buttons">
+                <input class="button" onclick="addPo()" value="确认修改" />
             </div>
         </div>
     </div>
+	</form>
 </div>
+
+
 </body>
 
 <script type="text/javascript">
 	$('select').select();
 	showRemind('input[type=text],textarea','color5');
 	UM.getEditor('content');
+	//获取发布日期
+	var d = new Date();
+    var timenow=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    document.getElementById('字段').value=timenow;
+    //获取学历要求
+    $(function(){
+        $("#btnSubmit").click(function(){
+            var list= $('input:radio[name="p_education"]:checked').val();
+            console.log(list)
+            // if(list==null){
+            //     alert("请选中一个!");
+            //     return false;
+            // }
+            // else{
+            //     alert(list);
+            // }
+        });
+    });
+    //获取薪资范围
+    $(function(){
+        $("#btnSubmit").click(function(){
+            var list= $('input:radio[name="p_sal"]:checked').val();
+            console.log(list)
+            // if(list==null){
+            //     alert("请选中一个!");
+            //     return false;
+            // }
+            // else{
+            //     alert(list);
+            // }
+        });
+    });
+
+    function addPo() {
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            url: "/addPosition" ,//url
+            data: $('#form1').serialize(),
+            success:function(data) {
+                console.log(data.des+"qqq");//打印服务端返回的数据(调试用)
+                if (data.b == true) {
+                    alert("SUCCESS");
+                    location.reload(true);
+                };
+            },
+
+        });
+    }
 </script>
 </html>
