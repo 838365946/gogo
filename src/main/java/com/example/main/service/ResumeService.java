@@ -10,5 +10,5 @@ public interface ResumeService {
      Resume SaveResume(Resume resume);
     Resume QueryByPhone(String phone);
     boolean DelResume(Resume resume);
-Resume QueryByUid(int uid);
+    Resume QueryByUid(int uid);
 }

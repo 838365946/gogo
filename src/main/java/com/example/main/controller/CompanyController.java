@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/addcompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Message companyRegistered(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company) {
+    public Message companyRegistered(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company,HttpServletRequest request) {
         String des = company.getC_des();
         company.setC_des("上传中");
         Company company1 = companyService.registered(company);
@@ -59,6 +60,58 @@ public class CompanyController {
         }
         message.setB(true);
         message.setDes("完善资料成功，请等待审核");
+        return message;
+    }
+
+    @RequestMapping(value = "/updatecompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Message Updatecompanydata(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company,HttpServletRequest request) throws IOException {
+        String des=company.getC_des();
+        company.setC_des("修改中");
+        Company company1= (Company) request.getSession().getAttribute("company");
+        String imgpath,despath,logopath;
+        if (files!=null){
+            File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id());
+            if (file.exists()){
+                if (file.isDirectory()){
+                    file.delete();
+                }
+            }
+            imgpath = companyIO.UploadImg(files, company1.getC_id());
+company1.setC_img(imgpath);
+
+        }
+        try {
+            despath=companyIO.WriteDes(des,company1.getC_id());
+            company1.setC_des(despath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!logo.isEmpty()){
+            File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id());
+            if (file.exists()){
+                if (file.isDirectory()){
+                    file.delete();
+                }
+            }
+            logopath=companyIO.LogoUpload(logo,company1.getC_id());
+            company1.setLogopath(logopath);
+        }
+        company1.setC_addr(company.getC_addr());
+        company1.setC_name(company.getC_name());
+        company1.setC_welfare(company.getC_welfare());
+        company1.setC_industry(company.getC_industry());
+        company1.setC_scale(company.getC_scale());
+        Company company2=companyService.addcompany(company1);
+        if (company2==null){
+        message.setB(false);
+        message.setDes("修改失败");
+
+        }else {
+            message.setB(true);
+            message.setDes("修改成功");
+            message.setData(company2);
+        }
         return message;
     }
 
