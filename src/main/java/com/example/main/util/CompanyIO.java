@@ -25,7 +25,7 @@ public class CompanyIO {
         osw.write(des);
         osw.close();
         fileOutputStream.close();
-        return propath+"/src/main/resources/static/companydes"+c_id+".txt";
+        return propath+"/src/main/resources/static/companydes/"+c_id+".txt";
     }
     //读取公司介绍
     public StringBuffer ReadDes(String filepath){
@@ -35,11 +35,13 @@ public class CompanyIO {
         }
         Reader reader=null;
         StringBuffer sb=new StringBuffer();
+        String str=null;
         try {
-            int count=0;
             reader= new InputStreamReader(new FileInputStream(filepath));
-            while ((count=reader.read())!=-1){
-                sb.append(count);
+            BufferedReader bf = new BufferedReader(reader);
+            while ((str=bf.readLine())!=null){
+                sb.append(str);
+                System.out.println(str);
             }
             reader.close();
         } catch (FileNotFoundException e) {

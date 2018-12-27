@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+</head>
+<script>
+    $(function () {
+        $.ajax({
+            url:"/dx",
+            type:"post",
+            dataType:"json",
+            success:function(data) {
+                console.log(data)
+                $("#c_name").val( data.c_name)
+                $("#c_addr").val(data.c_addr)
+                $("#c_welfare").val(data.c_welfare)
+                $("#c_industry").val(data.c_industry)
+                $("#c_nature").val(data.c_nature)
+                $("#c_scale").val(data.c_scale)
+                $("#c_des").val(data.c_des)
+                data.c_name
+
+            }
+        })
+    })
+
+
+
+</script>
+
+
+<body style="margin: 0 auto;padding: 0; border: 0">
+
+<div style="width: 100%;height: 100%" >
+
+    <div style="margin: 0 auto">
+        </br>
+
+
+
+        <div class="container" id="box">
+            <form role="form" action="/updatecompanydata" method="post" enctype=multipart/from-data">
+                <div class="form-group">
+                    <label for="c_name">公司名称:</label>
+                    <input type="text" name="c_name"  id="c_name" class="form-control" placeholder=th v-model="c_name" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="c_welfare">公司福利:</label>
+                    <input type="text"  name="c_welfare"  id="c_welfare" class="form-control" placeholder="输入公司福利" v-model="c_welfare" value="">
+                </div>
+                <div class="form-group">
+                    <label for="c_industry">公司行业:</label>
+                    <input type="text" name="c_industry" id="c_industry" class="form-control" placeholder="输入公司行业" v-model="c_industry" value="">
+                </div>
+                <div class="form-group">
+                    <label for="c_addr">公司地址:</label>
+                    <input type="text" name="c_addr" id="c_addr" class="form-control" placeholder="输入公司地址" v-model="c_addr" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="c_nature">公司性质:</label>
+                    <input type="text"  name="c_nature"  id="c_nature" class="form-control" placeholder="输入公司福利" v-model="c_nature" value="" readonly unselectable="on">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="c_scale">公司规模:</label>
+                    <input type="text" name="c_scale" id="c_scale" class="form-control" placeholder="输入公司规模" v-model="c_scale" value="">
+                </div>
+                <div class="form-group">
+                    <label for="c_des">公司介绍:</label>
+                    <input type="text" name="c_des" id="c_des" class="form-control" placeholder="输入公司介绍" v-model="c_des" value="">
+                </div>
+                <input type="submit" text="修改">
+                <div class="form-group">
+
+                    <input type="reset" value="重置" class="btn btn-danger">
+                </div>
+            </form>
+            <form action="/upqwe"  method="post" enctype="multipart/form-data">
+                文件：<input type="file" name="files"/>
+                <input type="file" name="logo">
+                <input type="submit" value="上传"/>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>

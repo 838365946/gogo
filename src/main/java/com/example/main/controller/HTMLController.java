@@ -19,6 +19,15 @@ public class HTMLController {
         System.out.println(request.getSession().getAttribute("company"));
 return (Company) request.getSession().getAttribute("company");
     }
+    //修改页面的ajax请求
+    @RequestMapping("/dx")
+    @ResponseBody
+    public Company Loa(HttpServletRequest request){
+
+        return (Company)request.getSession().getAttribute("company");
+    }
+
+
 
 
 }
