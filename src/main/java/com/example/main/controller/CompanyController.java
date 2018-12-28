@@ -75,21 +75,15 @@ public class CompanyController {
     @RequestMapping(value = "/updatecompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message Updatecompanydata(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company,HttpServletRequest request) throws IOException {
-        System.out.println("文件1"+files[0].isEmpty());
-        System.out.println("文件2"+logo.getName());
         String des=company.getC_des();
         company.setC_des("修改中");
         Company company1= (Company) request.getSession().getAttribute("company");
         String imgpath,despath,logopath;
         if (files!=null){
-            File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id());
-            if (file.exists()){
-                if (file.isDirectory()){
-                    file.delete();
-                }
-            }
+            String path=System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id();
+            delFolder(path);
             imgpath = companyIO.UploadImg(files, company1.getC_id());
-company1.setC_img(imgpath);
+            company1.setC_img(imgpath);
         }
         try {
             despath=companyIO.WriteDes(des,company1.getC_id());
@@ -98,12 +92,8 @@ company1.setC_img(imgpath);
             e.printStackTrace();
         }
         if (logo!=null){
-            File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id());
-            if (file.exists()){
-                if (file.isDirectory()){
-                    file.delete();
-                }
-            }
+            String path=System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id();
+            delFolder(path);
             logopath=companyIO.LogoUpload(logo,company1.getC_id());
             company1.setLogopath(logopath);
         }
@@ -258,6 +248,52 @@ company1.setC_img(imgpath);
             message.setDes("出现未知错误，请联系管理员");
         }
         return  message;
+    }
+
+    //删除文件夹
+//param folderPath 文件夹完整绝对路径
+
+    public static void delFolder(String folderPath) {
+        try {
+            delAllFile(folderPath); //删除完里面所有内容
+            String filePath = folderPath;
+            filePath = filePath.toString();
+            java.io.File myFilePath = new java.io.File(filePath);
+            myFilePath.delete(); //删除空文件夹
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //删除指定文件夹下所有文件
+//param path 文件夹完整绝对路径
+    public static boolean delAllFile(String path) {
+        boolean flag = false;
+        File file = new File(path);
+        if (!file.exists()) {
+            return flag;
+        }
+        if (!file.isDirectory()) {
+            return flag;
+        }
+        String[] tempList = file.list();
+        File temp = null;
+        for (int i = 0; i < tempList.length; i++) {
+            if (path.endsWith(File.separator)) {
+                temp = new File(path + tempList[i]);
+            } else {
+                temp = new File(path + File.separator + tempList[i]);
+            }
+            if (temp.isFile()) {
+                temp.delete();
+            }
+            if (temp.isDirectory()) {
+                delAllFile(path + "/" + tempList[i]);//先删除文件夹里面的文件
+                delFolder(path + "/" + tempList[i]);//再删除空文件夹
+                flag = true;
+            }
+        }
+        return flag;
     }
 }
 

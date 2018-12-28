@@ -32,7 +32,7 @@ public class CompanyIO {
         StringBuffer sb=new StringBuffer();
         String str=null;
         try {
-           Reader reader= new InputStreamReader(new FileInputStream(filepath));
+            Reader reader= new InputStreamReader(new FileInputStream(filepath));
             BufferedReader bf = new BufferedReader(reader);
             while ((str=bf.readLine())!=null){
                 sb.append(str);
@@ -66,9 +66,8 @@ public class CompanyIO {
                 }
                 //文件写入指定路径
                 Files.write(path, bytes);
-                System.out.println("存进去的path"+path);
-                String paths=String.valueOf(path);
-                return paths;
+
+                return "/img/"+id+"/"+allName;
             } catch (IOException e) {
                 return "文件上传失败";
             }
@@ -83,21 +82,21 @@ public class CompanyIO {
         String str="";
         int  count=0;
 
-    for (int i=0;i<files.length;i++){
-        count++;
+        for (int i=0;i<files.length;i++){
+            count++;
             System.out.println("有文件"+i);
             msg=singleFileUpload(files[i],c_id);
             System.out.println(msg);
             str+=msg;
             str+=",";
             if((files.length-count)<0){
-               str+=msg;
+                str+=msg;
             }
 
+        }
+        return str;
     }
-return str;
-    }
-//公司logo上传
+    //公司logo上传
     public String LogoUpload(MultipartFile logo,int id) {
         if (Objects.isNull(logo) || logo.isEmpty()) {
             return "文件为空!";
@@ -117,9 +116,8 @@ return str;
                 }
                 //文件写入指定路径
                 Files.write(path, bytes);
-                System.out.println("存进去的path"+path);
-                String paths=String.valueOf(path);
-                return paths;
+
+                return "/logo/"+id+"/"+allName;
             } catch (IOException e) {
                 return "文件上传失败";
             }
@@ -128,4 +126,6 @@ return str;
         }
 
     }
+
+
 }
