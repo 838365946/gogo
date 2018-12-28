@@ -132,13 +132,48 @@
 <script type="text/javascript" src="js/jquery.grid.js"></script>
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript">
+
     var oper = [{label:'允许通过',onclick:function(){
+
+        $.ajax({
+            url:"/passcheck",
+            type:"post",
+            data:"",
+            dataType:"json",
+            success:function(data) {
+             console.log("进来了怪")
+                for (var i=0;i<data.data.length;i++){
+                    tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,data.data[i].c_check_status,oper]);
+
+
+                    alert("审核通过");
+                    location.reload(true);
+                }
+
+            }
+        })
         var elt= $(this).parent().parent()
         var index=elt.index($(this).parent().parent().parent())
         console.log($(this).text())
     }
     },{label:'不允许',onclick: function(){
-        console.log("不允许")
+        $.ajax({
+            url:"/losecheck",
+            type:"post",
+            data:"c_id=1",
+            dataType:"json",
+            success:function(data) {
+                console.log("进来了怪")
+                for (var i=0;i<data.data.length;i++){
+                    tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,data.data[i].c_check_status,oper]);
+                    alert("审核不允许通过");
+                    location.reload(true);
+                }
+
+            }
+        })
+
+
     }}]
     var tbody = [];
     $(function () {
@@ -151,6 +186,8 @@
                 console.log("进来了才怪")
                 for (var i=0;i<data.data.length;i++){
                     tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,data.data[i].c_check_status,oper]);
+
+
                 }
             }
         })
