@@ -140,6 +140,7 @@ company1.setC_img(imgpath);
     }
 
     @RequestMapping("/Audit_company")
+    @ResponseBody
     public Message audit() {
         Message message = new Message();
         List<Company> companies=companyService.CheckCompany("未审核");
