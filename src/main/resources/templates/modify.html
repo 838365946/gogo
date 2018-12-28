@@ -42,7 +42,7 @@
 
 
         <div class="container" id="box">
-            <form role="form" action="/updatecompanydata" method="post" enctype=multipart/from-data">
+            <form  action="/updatecompanydata" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="c_name">公司名称:</label>
                     <input type="text" name="c_name"  id="c_name" class="form-control" placeholder=th v-model="c_name" value="">
@@ -76,17 +76,14 @@
                     <label for="c_des">公司介绍:</label>
                     <input type="text" name="c_des" id="c_des" class="form-control" placeholder="输入公司介绍" v-model="c_des" value="">
                 </div>
-                <input type="submit" text="修改">
-                <div class="form-group">
+                    文件：<input type="file" name="files"/>
+                        <input type="file" name="files"/>
+                        <input type="file" name="logo">
+                        <input type="submit" value="上传"/>
+                            <div class="form-group">
 
                     <input type="reset" value="重置" class="btn btn-danger">
                 </div>
-            </form>
-            <form action="/upqwe"  method="post" enctype="multipart/form-data">
-                文件：<input type="file" name="files"/>
-                <input type="file" name="logo">
-                <input type="submit" value="上传"/>
-
             </form>
         </div>
 

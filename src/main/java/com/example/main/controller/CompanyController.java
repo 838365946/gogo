@@ -75,10 +75,11 @@ public class CompanyController {
     @RequestMapping(value = "/updatecompanydata", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message Updatecompanydata(@Param("files") MultipartFile[] files, @Param("logo") MultipartFile logo, Company company,HttpServletRequest request) throws IOException {
+        System.out.println("文件1"+files[0].isEmpty());
+        System.out.println("文件2"+logo.getName());
         String des=company.getC_des();
         company.setC_des("修改中");
         Company company1= (Company) request.getSession().getAttribute("company");
-        System.out.println(company1.getC_id());
         String imgpath,despath,logopath;
         if (files!=null){
             File file=new File(System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id());
@@ -206,6 +207,7 @@ company1.setC_img(imgpath);
     @RequestMapping("/creg")
     public ModelAndView Reg(Company company){
         ModelAndView modelAndView=new ModelAndView();
+        System.out.println(company.toString());
         Company company1=companyService.addcompany(company);
         if (company1!=null){
             modelAndView.setViewName("login");
