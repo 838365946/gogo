@@ -193,7 +193,6 @@ company1.setC_img(imgpath);
         System.out.println("公司进入了");
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
-        System.out.println(company1.toString());
       if(company1!=null){
           company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
           request.getSession().setAttribute("company",company1);
