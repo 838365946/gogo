@@ -23,7 +23,8 @@ return (Company) request.getSession().getAttribute("company");
     @RequestMapping("/dx")
     @ResponseBody
     public Company Loa(HttpServletRequest request){
-
+        System.out.println("页面");
+        System.out.println(request.getSession().getAttribute("company").toString());
         return (Company)request.getSession().getAttribute("company");
     }
 

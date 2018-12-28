@@ -108,8 +108,8 @@ console.log($(this).text())
             dataType:"json",
             success:function(data) {
                 console.log("进来了")
-                for (var i=0;i<data.length;i++){
-                    tbody.push([data.data[i].r_id,data[i].r_name,data[i].r_work_nature,data[i].r_work_addr,data[i].r_hope_sal,data[i].r_work_category,data[i].r_work_industry,data[i].r_edu_school,data[i].r_edu_class,data[i].r_edu_education,data[i].r_edu_startdate,data[i].r_edu_overdate,data[i].r_exp_time,oper]);
+                for (var i=0;i<data.data.length;i++){
+                    tbody.push([data.data[i].r_id,data.data[i].r_name,data.data[i].r_work_nature,data.data[i].r_work_addr,data.data[i].r_hope_sal,data.data[i].r_work_category,data.data[i].r_work_industry,data.data[i].r_edu_school,data.data[i].r_edu_class,data.data[i].r_edu_education,data.data[i].r_edu_startdate,data.data[i].r_edu_overdate,data.data[i].r_exp_time,oper]);
                 }
             }
         })

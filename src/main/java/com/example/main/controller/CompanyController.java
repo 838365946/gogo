@@ -115,15 +115,16 @@ company1.setC_img(imgpath);
         company1.setC_check_status("未审核");
         Company company2=companyService.addcompany(company1);
         if (company2==null){
-            request.getSession().removeAttribute("company");
-            request.getSession().setAttribute("company",company2);
+
         message.setB(false);
         message.setDes("修改失败");
 
         }else {
+            company2.setC_des(des);
+            request.getSession().removeAttribute("company");
+            request.getSession().setAttribute("company",company2);
             message.setB(true);
             message.setDes("修改成功");
-            company2.setC_des(String.valueOf(companyIO.ReadDes(company2.getC_des())));
             message.setData(company2);
         }
         return message;
