@@ -8,6 +8,7 @@ import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,21 +22,23 @@ import java.util.List;
 public class ShowMessController {
 @Autowired
     private FindPositionService fp;
-@RequestMapping("/showmess")
-    public Message ShowMess(Integer page){
+    @RequestMapping("/showmess")
+    public Message ShowMess(@Param("page")Integer page){
+    System.out.println("当前页码" +page);
     Message message=new Message();
     PageRequest pageRequest=PageRequest.of(page,10);
     Page<Position> positionspage=  fp.ShowMess(pageRequest);
     List<Position> positions = new ArrayList<Position>();
     List<Company> companies = new ArrayList<Company>();
     CompanyIO companyIO=new CompanyIO();
-    int count=0;
     if(positionspage.getContent()!=null){
         positions=positionspage.getContent();
         for(int i=0;i<positions.size();i++){
+            System.out.println("第"+i);
             if(companies.size()>0){
             for (Company company:companies){
                 if (positions.get(i).getCompany()!=company){
+                    System.out.println(positions.toString());
                     String des=positions.get(i).getCompany().getC_des();
                     String str= String.valueOf(companyIO.ReadDes(des));
                     positions.get(i).getCompany().setC_des(str);
@@ -44,8 +47,6 @@ public class ShowMessController {
             }}else {
                 String des=positions.get(i).getCompany().getC_des();
                 String str= String.valueOf(companyIO.ReadDes(des));
-                System.out.println(des+"aiyo");
-                System.out.println("jap"+str);
                 positions.get(i).getCompany().setC_des(str);
                 companies.add(positions.get(i).getCompany());
             }
@@ -58,24 +59,38 @@ public class ShowMessController {
 }
 
 @RequestMapping("/querybyinput")
-public Message QueryByInput(int page,String input){
-        Message message=new Message();
-        PageRequest pageRequest=PageRequest.of(page,5);
-        Page<Position> positionpage=fp.QueryByInput(input,pageRequest);
-    System.out.println(positionpage.getContent());
-        List<Position> positions=null;
-        if (positionpage.getContent()!=null){
-            positions=positionpage.getContent();
-            message.setB(true);
-            message.setDes("搜索职位成功");
-            CompanyIO companyIO=new CompanyIO();
-            for (Position p:positions){
-                p.getCompany().setC_des(String.valueOf(companyIO.ReadDes(p.getCompany().getC_des())));
-                System.out.println(companyIO.ReadDes(p.getCompany().getC_des()));
+public Message QueryByInput(@Param("page")Integer page,@Param("input") String input){
+    System.out.println("当前页码" +page);
+    System.out.println(input);
+    Message message=new Message();
+    PageRequest pageRequest=PageRequest.of(page,10);
+    Page<Position> positionspage=  fp.QueryByInput(input,pageRequest);
+    List<Position> positions = new ArrayList<Position>();
+    List<Company> companies = new ArrayList<Company>();
+    CompanyIO companyIO=new CompanyIO();
+    if(positionspage.getContent()!=null){
+        positions=positionspage.getContent();
+        for(int i=0;i<positions.size();i++){
+            if(companies.size()>0){
+                for (Company company:companies){
+                    if (positions.get(i).getCompany()!=company){
+                        String des=positions.get(i).getCompany().getC_des();
+                        String str= String.valueOf(companyIO.ReadDes(des));
+                        positions.get(i).getCompany().setC_des(str);
+                        companies.add(positions.get(i).getCompany());
+                    }
+                }}else {
+                String des=positions.get(i).getCompany().getC_des();
+                String str= String.valueOf(companyIO.ReadDes(des));
+                positions.get(i).getCompany().setC_des(str);
+                companies.add(positions.get(i).getCompany());
             }
-            message.setData(positions);
         }
-        return message;
+    }
+    message.setB(true);
+    message.setDes("获取职位成功");
+    message.setData(positions);
+    return message;
 
 }
 }

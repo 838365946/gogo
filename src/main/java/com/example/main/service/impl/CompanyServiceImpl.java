@@ -49,7 +49,7 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Company PassCheck(Company company,String str) {
+    public int PassCheck(Company company,String str) {
 
         return companyDao.PassCheck(company.getC_id(),str);
     }

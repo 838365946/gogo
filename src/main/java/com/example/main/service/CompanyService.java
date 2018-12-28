@@ -14,5 +14,5 @@ public interface CompanyService {
     Company CLogin(Company company);
     void test(int id);
     List<Company> CheckCompany(String status);
-    Company PassCheck(Company compan,String str);
+    int PassCheck(Company compan,String str);
 }

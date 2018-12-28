@@ -2,9 +2,11 @@ package com.example.main.dao;
 
 import com.example.main.model.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +21,8 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     Company findById(@Param("id") int id);
 @Query(value = "select * from company c where c.c_check_status =:status",nativeQuery = true)
     List<Company> chenckcompany(@Param("status")String status);
+@Modifying
+@Transactional
 @Query(value = "update company c set c.c_check_status =:status where c_id=:cid",nativeQuery = true)
-    Company PassCheck(@Param("cid") int cid,@Param("status") String status);
+    int PassCheck(@Param("cid") int cid,@Param("status") String status);
 }
