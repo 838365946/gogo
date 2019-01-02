@@ -134,11 +134,14 @@
 <script type="text/javascript">
 
     var oper = [{label:'允许通过',onclick:function(){
-
+        var id = $(obj).attr("c_id")
         $.ajax({
             url:"/passcheck",
             type:"post",
-            data:"",
+            data: {
+                "id" : jueseid
+            },
+
             dataType:"json",
             success:function(data) {
              console.log("进来了怪")
