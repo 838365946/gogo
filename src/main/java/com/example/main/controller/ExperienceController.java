@@ -114,4 +114,41 @@ return message;
 return message;
     }
 
+
+    @RequestMapping("/userupdate3")
+    @ResponseBody
+    public Message UserUpdateE (User user,Experience experience){
+        System.out.println(user.toString());
+        Message message=new Message();
+        List<Experience> experiences= exService.QueryByUser(user.getId());
+        if(experiences.size()>0){
+            Experience experience1=experiences.get(experience.getE_id());
+            if (experience1!=null){
+                try {
+                    experience1.setE_comp_name(experience.getE_comp_name());
+                    experience1.setE_comp_position(experience.getE_comp_position());
+                    experience1.setE_date(experience.getE_date());
+                    experience1.setE_industry(experience.getE_industry());
+                    experience1.setE_word_des(experience.getE_word_des());
+                    experience1.setE_sal(experience.getE_sal());
+                }catch (NullPointerException e){
+                    message.setB(false);
+                    message.setDes("传值失败");
+                }
+            }
+            Experience e=exService.UpdateEcperience(experience1);
+            if (e!=null){
+                message.setB(true);
+                message.setDes("修改成功");
+                message.setData(e);
+            }else {
+                message.setB(false);
+                message.setDes("修改失败");
+            }
+        }else {
+            message.setB(false);
+            message.setDes("出现未知错误");
+        }
+        return message;
+    }
 }
