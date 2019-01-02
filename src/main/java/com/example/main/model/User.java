@@ -28,6 +28,9 @@ public class User implements Serializable{
 @Column
         private String email;
 @Column
+private String birthday;
+
+@Column
         private String city;
 @Column
         private String sex;
@@ -75,6 +78,14 @@ private List<Delivery> deliveries;
 
     public String getPassword() {
         return password;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public void setPassword(String password) {

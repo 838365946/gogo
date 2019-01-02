@@ -2,9 +2,12 @@ package com.example.main.service.impl;
 
 import com.example.main.dao.ExperienceDao;
 import com.example.main.model.Experience;
+import com.example.main.model.User;
 import com.example.main.service.ExService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/12/14.
@@ -32,5 +35,10 @@ public class ExServiceImpl implements ExService{
     public Experience UpdateEcperience(Experience experience) {
 
         return experienceDao.save(experience);
+    }
+
+    @Override
+    public List<Experience> QueryByUser(User user) {
+        return experienceDao.QueryByUser(user.getId());
     }
 }

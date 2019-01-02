@@ -6,6 +6,7 @@ import com.example.main.model.User;
 import com.example.main.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +72,13 @@ if ((resume!=null)){
 }
 return message;
 }
+@RequestMapping("/tt")
+@ResponseBody
+public Resume QueryByUser(User user){
+    System.out.println(user.getId());
+   return resumeService.QueryByUid(user.getId());
+}
+
 
 }
 

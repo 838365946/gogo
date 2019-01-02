@@ -92,4 +92,12 @@ public class Experience implements Serializable{
     public void setE_sal(String e_sal) {
         this.e_sal = e_sal;
     }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
 }
