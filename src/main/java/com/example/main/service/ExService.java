@@ -1,7 +1,6 @@
 package com.example.main.service;
 
 import com.example.main.model.Experience;
-import com.example.main.model.User;
 
 import java.util.List;
 
@@ -12,5 +11,5 @@ public interface ExService {
     Experience AddExperience(Experience experience);
     boolean delEX(Experience experience);
     Experience UpdateEcperience(Experience experience);
-    List<Experience> QueryByUser(User user);
+    List<Experience> QueryByUser(int id);
 }

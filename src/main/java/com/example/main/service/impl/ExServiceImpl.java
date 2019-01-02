@@ -2,7 +2,6 @@ package com.example.main.service.impl;
 
 import com.example.main.dao.ExperienceDao;
 import com.example.main.model.Experience;
-import com.example.main.model.User;
 import com.example.main.service.ExService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class ExServiceImpl implements ExService{
     }
 
     @Override
-    public List<Experience> QueryByUser(User user) {
-        return experienceDao.QueryByUser(user.getId());
+    public List<Experience> QueryByUser(int id) {
+        return experienceDao.QueryByUser(id);
     }
 }

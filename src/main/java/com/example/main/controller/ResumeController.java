@@ -80,5 +80,40 @@ public Resume QueryByUser(User user){
 }
 
 
+    @RequestMapping("/userupdate2")
+    @ResponseBody
+    public Message UserUpdateR (User user, Resume resume){
+        System.out.println(user.getId());
+        Message message=new Message();
+        Resume resume1=resumeService.QueryByUid(user.getId());
+            if (resume1!=null){
+                try {
+                    resume1.setR_work_nature(resume.getR_work_nature());
+                    resume1.setR_hope_sal(resume.getR_hope_sal());
+                    resume1.setR_work_addr(resume.getR_work_addr());
+                    resume1.setR_work_industry(resume.getR_work_industry());
+                    resume1.setR_work_category(resume.getR_work_category());
+                    Resume resume2=resumeService.SaveResume(resume1);
+                  if(resume2!=null){
+                      message.setB(true);
+                      message.setDes("修改成功");
+                      message.setData(resume2);
+                  }else {
+                      message.setB(false);
+                      message.setDes("修改失败");
+                  }
+                }catch (NullPointerException e){
+                    message.setB(false);
+                    message.setDes("传值失败");
+                }
+
+
+            }else {
+                message.setB(false);
+                message.setDes("你还没有简历");
+            }
+
+        return message;
+    }
 }
 

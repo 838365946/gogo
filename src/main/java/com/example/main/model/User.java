@@ -20,6 +20,9 @@ public class User implements Serializable{
 @Column
         private String nickname;
 @Column
+private String name;
+
+@Column
         private String password;
 @Column
         private String wx_number;
@@ -29,7 +32,6 @@ public class User implements Serializable{
         private String email;
 @Column
 private String birthday;
-
 @Column
         private String city;
 @Column
@@ -38,6 +40,8 @@ private String birthday;
         private int age;
 @Column
 private String isadmin;
+@Column
+private String exp_time;
     @JsonIgnore
 @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
         private List<Resume> resumes;
@@ -120,6 +124,22 @@ private List<Delivery> deliveries;
         return city;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getExp_time() {
+        return exp_time;
+    }
+
+    public void setExp_time(String exp_time) {
+        this.exp_time = exp_time;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -146,5 +166,26 @@ private List<Delivery> deliveries;
 
     public void setResumes(List<Resume> resumes) {
         this.resumes = resumes;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", wx_number='" + wx_number + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", city='" + city + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", isadmin='" + isadmin + '\'' +
+                ", exp_time='" + exp_time + '\'' +
+                ", resumes=" + resumes +
+                ", deliveries=" + deliveries +
+                '}';
     }
 }

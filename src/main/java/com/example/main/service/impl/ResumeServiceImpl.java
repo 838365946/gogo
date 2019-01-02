@@ -38,7 +38,7 @@ public class ResumeServiceImpl implements ResumeService{
 
     @Override
     public Resume QueryByUid(int uid) {
-        System.out.println("好吧"+uid);
+
         return resumeDao.QueryByUid(uid);
     }
 
