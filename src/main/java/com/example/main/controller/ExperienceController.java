@@ -19,47 +19,35 @@ public class ExperienceController {
     @Autowired
     private ExService exService;
 @RequestMapping("/addex")
-public Message AddEx(Experience experience){
+public Message AddEx(User user,Experience experience){
     Message message=new Message();
-    Experience experience1=exService.AddExperience(experience);
-    if (experience1!=null){
-        message.setB(true);
-        message.setDes("新增工作经验成功");
-        message.setData(experience1);
+    List<Experience> experienceList=exService.QueryByUser(user.getId());
+    if(experienceList.size()>2){
+message.setB(false);
+message.setDes("最多只能填写三次工作经验");
     }else {
-        message.setB(false);
-        message.setDes("新增工作经验失败");
+        Experience experience2=new Experience();
+        int count=experience.getCount()+1;
+        experience2.setE_comp_name(experience.getE_comp_name());
+        experience2.setE_comp_position(experience.getE_comp_position());
+        experience2.setE_industry(experience.getE_industry());
+        experience2.setE_word_des(experience.getE_word_des());
+        experience2.setE_sal(experience.getE_sal());
+        experience2.setE_date(experience.getE_date());
+        experience2.setCount(count);
+        Experience experience1=exService.AddExperience(experience2);
+        if (experience1!=null){
+            message.setB(true);
+            message.setDes("新增工作经验成功");
+            message.setData(experience1);
+        }else {
+            message.setB(false);
+            message.setDes("新增工作经验失败");
+        }
     }
 return message;
 }
 
-    @RequestMapping("/updateex")
-    public Message DelEx(Experience experience){
-        Message message=new Message();
-        Experience experience1=exService.UpdateEcperience(experience);
-        if (experience1!=null){
-            message.setB(true);
-            message.setDes("修改工作经验成功");
-            message.setData(experience1);
-        }else {
-            message.setB(false);
-            message.setDes("修改工作经验失败");
-        }
-        return message;
-    }
-
-    @RequestMapping("/delex")
-    public Message UpdateEx(Experience experience){
-        Message message=new Message();
-        boolean b=exService.delEX(experience);
-        message.setB(b);
-        if (b){
-            message.setDes("删除工作经验成功");
-        }else {
-            message.setDes("删除工作经验失败");
-        }
-        return message;
-    }
 @RequestMapping("/getuserresume")
 @ResponseBody
     public Message QueryByUser(User user) {
