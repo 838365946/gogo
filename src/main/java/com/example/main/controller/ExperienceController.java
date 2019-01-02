@@ -122,7 +122,7 @@ return message;
         Message message=new Message();
         List<Experience> experiences= exService.QueryByUser(user.getId());
         if(experiences.size()>0){
-            Experience experience1=experiences.get(experience.getE_id());
+            Experience experience1=experiences.get(experience.getCount());
             if (experience1!=null){
                 try {
                     experience1.setE_comp_name(experience.getE_comp_name());

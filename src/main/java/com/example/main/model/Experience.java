@@ -32,6 +32,8 @@ public class Experience implements Serializable{
     private String e_word_des;
     //当前月薪
     @Column
+    private int count;
+    @Column
     private String e_sal;
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "r_id")
@@ -71,6 +73,14 @@ public class Experience implements Serializable{
 
     public String getE_industry() {
         return e_industry;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setE_industry(String e_industry) {

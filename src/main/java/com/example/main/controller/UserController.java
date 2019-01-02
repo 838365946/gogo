@@ -41,7 +41,7 @@ if (user1!=null){
         message.setData(user1);
 }else {
     message.setB(false);
-    message.setDes("登录失败");
+    message.setDes("账号或密码错误");
 }
 return message;
     }
