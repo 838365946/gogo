@@ -2,9 +2,11 @@ package com.example.main.dao;
 
 import com.example.main.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,5 +23,8 @@ public interface UserDao extends JpaRepository<User,Long> {
        List<User> findbyid1(@Param("c_id") int id);
        @Query(value = "select * from user u where u.username = :username",nativeQuery = true)
     User Check(String username);
-
+    @Transactional
+    @Modifying
+    @Query(value = "update user u set u.password =:password where u.phone_number=:phonenumber",nativeQuery = true)
+    int UpdatePsw(@Param("password")String password,@Param("phonenumber")String phonenumber);
 }

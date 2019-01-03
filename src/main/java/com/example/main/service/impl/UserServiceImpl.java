@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService{
     public User Check(String username) {
         return userDao.Check(username);
     }
+
+    @Override
+    public int UpdatePsw(User user) {
+        return userDao.UpdatePsw(user.getPassword(),user.getPhone_number());
+    }
 }

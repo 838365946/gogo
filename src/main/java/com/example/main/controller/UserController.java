@@ -107,4 +107,17 @@ if (userService.Check(username)==null){
 }
 return message;
 }
+@RequestMapping("/updatepassword")
+    public Message updatepassword(User user){
+        Message message=new Message();
+        User u=userService.save(user);
+    if (u!=null){
+    message.setB(true);
+    message.setDes("修改成功");
+    }else {
+    message.setB(false);
+    message.setDes("修改失败");
+    }
+    return message;
+}
 }
