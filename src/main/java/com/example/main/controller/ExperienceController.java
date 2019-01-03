@@ -2,8 +2,10 @@ package com.example.main.controller;
 
 import com.example.main.model.Experience;
 import com.example.main.model.Message;
+import com.example.main.model.Resume;
 import com.example.main.model.User;
 import com.example.main.service.ExService;
+import com.example.main.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,16 +20,22 @@ import java.util.List;
 public class ExperienceController {
     @Autowired
     private ExService exService;
+    @Autowired
+    private ResumeService resumeService;
+
 @RequestMapping("/addex")
 public Message AddEx(User user,Experience experience){
+    System.out.println(user.getId());
     Message message=new Message();
     List<Experience> experienceList=exService.QueryByUser(user.getId());
-    if(experienceList.size()>2){
+
+    Resume resume=resumeService.QueryByUid(user.getId());
+    if(experienceList.size()>=3){
 message.setB(false);
 message.setDes("最多只能填写三次工作经验");
     }else {
         Experience experience2=new Experience();
-        int count=experience.getCount()+1;
+        int count=experienceList.size()+1;
         experience2.setE_comp_name(experience.getE_comp_name());
         experience2.setE_comp_position(experience.getE_comp_position());
         experience2.setE_industry(experience.getE_industry());
@@ -35,11 +43,11 @@ message.setDes("最多只能填写三次工作经验");
         experience2.setE_sal(experience.getE_sal());
         experience2.setE_date(experience.getE_date());
         experience2.setCount(count);
-        Experience experience1=exService.AddExperience(experience2);
+   experience2.setResume(resume);
+   Experience experience1=exService.AddExperience(experience2);
         if (experience1!=null){
             message.setB(true);
             message.setDes("新增工作经验成功");
-            message.setData(experience1);
         }else {
             message.setB(false);
             message.setDes("新增工作经验失败");
@@ -52,6 +60,7 @@ return message;
 @ResponseBody
     public Message QueryByUser(User user) {
     List<Experience> experiences=exService.QueryByUser(user.getId());
+    System.out.println(experiences);
     Message message=new Message();
         if (experiences.size()>0){
         message.setB(true);
@@ -139,4 +148,19 @@ return message;
         }
         return message;
     }
+@RequestMapping("/checkex")
+    @ResponseBody
+    public Message CheckEx(User user){
+        Message message=new Message();
+List<Experience> experiences=exService.QueryByUser(user.getId());
+if (experiences.size()>3){
+message.setB(true);
+message.setDes("可以添加");
+}else {
+    message.setB(false);
+    message.setDes("最多只能添加三条工作经验");
+}
+return message;
+}
+
 }

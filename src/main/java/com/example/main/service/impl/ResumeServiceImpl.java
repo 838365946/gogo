@@ -38,7 +38,6 @@ public class ResumeServiceImpl implements ResumeService{
 
     @Override
     public Resume QueryByUid(int uid) {
-
         return resumeDao.QueryByUid(uid);
     }
 
