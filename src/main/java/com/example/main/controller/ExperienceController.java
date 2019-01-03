@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -44,7 +45,13 @@ message.setDes("最多只能填写三次工作经验");
         experience2.setE_date(experience.getE_date());
         experience2.setCount(count);
    experience2.setResume(resume);
-   Experience experience1=exService.AddExperience(experience2);
+        Experience experience1= null;
+        try {
+            experience1 = exService.AddExperience(experience2);
+        } catch (IOException e) {
+            message.setB(false);
+            message.setDes("新增工作经验失败");
+        }
         if (experience1!=null){
             message.setB(true);
             message.setDes("新增工作经验成功");
@@ -74,7 +81,7 @@ return message;
     }
     @RequestMapping("/userupdate1")
     @ResponseBody
-    public Message UserUpdate (User user){
+    public Message UserUpdate (User user) throws IOException {
         System.out.println(user.toString());
         Message message=new Message();
        List<Experience> experiences= exService.QueryByUser(user.getId());
@@ -114,7 +121,7 @@ return message;
 
     @RequestMapping("/userupdate3")
     @ResponseBody
-    public Message UserUpdateE (User user,Experience experience){
+    public Message UserUpdateE (User user,Experience experience) throws IOException {
         System.out.println(user.toString());
         Message message=new Message();
         List<Experience> experiences= exService.QueryByUser(user.getId());

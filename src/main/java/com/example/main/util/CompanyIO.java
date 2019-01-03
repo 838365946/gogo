@@ -59,7 +59,7 @@ public class CompanyIO {
         if(allName.substring(allName.lastIndexOf(".")).equals(".png")||b|b1|b2){
             try {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(propath+"/src/main/resources/static/img/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
+                Path path = Paths.get(propath+"/src/main/resources/static/img/"+id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
                 //如果没有files文件夹，则创建
                 if (!Files.isWritable(path)) {
                     Files.createDirectories(Paths.get(propath+"/src/main/resources/static/img/" + id));
@@ -127,5 +127,73 @@ public class CompanyIO {
 
     }
 
+    //写入职位介绍
+    public String WritePositionDes(String des,int p_id) throws IOException {
 
+        File file=new File(propath+"\\src\\main\\resources\\static\\positiondes");
+        if(file.getParentFile().exists()){
+            file.mkdir();
+        }
+        FileOutputStream fileOutputStream=new FileOutputStream(file.getPath()+"/"+p_id+".txt");
+        OutputStreamWriter osw=new OutputStreamWriter(fileOutputStream);
+        osw.flush();
+        osw.write(des);
+        osw.close();
+        fileOutputStream.close();
+        return propath+"/src/main/resources/static/positiondes/"+p_id+".txt";
+    }
+
+    //读取职位介绍
+    public StringBuffer ReadPositionDes(String filepath){
+        StringBuffer sb=new StringBuffer();
+        String str=null;
+        try {
+            Reader reader= new InputStreamReader(new FileInputStream(filepath));
+            BufferedReader bf = new BufferedReader(reader);
+            while ((str=bf.readLine())!=null){
+                sb.append(str);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb;
+    }
+
+    //写入工作经历简介
+    public String WriteExDes(String des,int e_id) throws IOException {
+
+        File file=new File(propath+"\\src\\main\\resources\\static\\experience\\");
+        if(file.getParentFile().exists()){
+            file.mkdir();
+        }
+        FileOutputStream fileOutputStream=new FileOutputStream(file.getPath()+"/"+e_id+".txt");
+        OutputStreamWriter osw=new OutputStreamWriter(fileOutputStream);
+        osw.flush();
+        osw.write(des);
+        osw.close();
+        fileOutputStream.close();
+        return propath+"/src/main/resources/static/positiondes/"+e_id+".txt";
+    }
+
+    //读取工作经验介绍
+    public StringBuffer ReadExDes(String filepath){
+        StringBuffer sb=new StringBuffer();
+        String str=null;
+        try {
+            Reader reader= new InputStreamReader(new FileInputStream(filepath));
+            BufferedReader bf = new BufferedReader(reader);
+            while ((str=bf.readLine())!=null){
+                sb.append(str);
+            }System.out.println(sb);
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb;
+    }
 }
