@@ -82,6 +82,7 @@ ModelAndView modelAndView=new ModelAndView();
         return message;
     }
     @RequestMapping("adduser")
+    @ResponseBody
     public Message AddUser(User user){
         Message message=new Message();
         if (userService.AddUser(user)!=null){
@@ -95,10 +96,10 @@ ModelAndView modelAndView=new ModelAndView();
     }
 
 @RequestMapping("/check")
-    public Message addcheck(String username){
-
+@ResponseBody
+    public Message addcheck(String phone_number){
         Message message =new Message();
-if (userService.Check(username)==null){
+if (userService.Check(phone_number)==null){
     message.setB(true);
     message.setDes("该帐号可以使用");
 }else {
@@ -108,6 +109,7 @@ if (userService.Check(username)==null){
 return message;
 }
 @RequestMapping("/updatepassword")
+@ResponseBody
     public Message updatepassword(User user){
         Message message=new Message();
         User u=userService.save(user);
