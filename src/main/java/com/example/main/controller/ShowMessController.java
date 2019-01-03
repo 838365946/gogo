@@ -34,7 +34,6 @@ public class ShowMessController {
     if(positionspage.getContent()!=null){
         positions=positionspage.getContent();
         for(int i=0;i<positions.size();i++){
-            System.out.println("第"+i);
             if(companies.size()>0){
             for (Company company:companies){
                 if (positions.get(i).getCompany()!=company){

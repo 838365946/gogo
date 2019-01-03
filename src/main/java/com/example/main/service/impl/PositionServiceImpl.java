@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,9 +38,9 @@ public class PositionServiceImpl implements PositionService{
     }
 
     @Override
-    public List<Position> QueryByCompany(int cid) {
+    public List<Position> QueryByCompany (int cid) throws NullPointerException{
         List<Position> positions=positionDao.QueryByCompany(cid);
-        List<Company> companies=null;
+        List<Company> companies=new ArrayList<Company>();
         for(int i=0;i<positions.size();i++){
             if(companies.size()>0){
                 for (Company company:companies){

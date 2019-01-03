@@ -112,8 +112,8 @@ return message;
 @ResponseBody
     public Message updatepassword(User user){
         Message message=new Message();
-        User u=userService.save(user);
-    if (u!=null){
+        int i=userService.UpdatePsw(user);
+    if (i>0){
     message.setB(true);
     message.setDes("修改成功");
     }else {
