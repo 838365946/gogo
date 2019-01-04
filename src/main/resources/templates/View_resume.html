@@ -3,8 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>查看简历</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
 </head>
+<style type="text/css">
+
+    li{
+        width: 600px;
+        margin: auto;
+        margin-left:10px;
+        margin-top: 20px;
+    }
+    p{
+        width: 600px;
+        margin: auto;
+    }
+    table{
+        width: 1200px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .table-1{
+        border: 1px solid #ccc;
+        border-collapse: collapse;/*合并相邻表格的间距*/
+    }
+    .table-1 tr,.table-1 td{
+        border: 1px solid #ccc;
+    }
+    #container{
+        float:left;
+    }
+
+
+</style>
+
+
+
+
+
+
+
+<script>
+    var str="<table class= table-1> <tr><td>ID</td> <td>姓名</td> <td>工作性质</td><td>工作地址</td> <td>期望薪资</td><td>职业类别</td>   <td>所在行业</td><td>毕业院校</td><td>所学专业</td><td>最高学历</td><td>在校时间</td>  <td>毕业时间</td>  <td>毕业时间</td>  <td>工作经历</td> <td>操作</td> </tr>"
+    var ss=""
+    $(function () {
+        $.ajax({
+            url:"resume",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                console.log(data[0].r_name)
+                for (var i = 0; i < data.length; i++) {
+                    ss = "<tr><td class='ids'>"+data[i].r_id+"</td><td>"+data[i].r_name+"</td><td>"+data[i].r_work_nature+"</td><td>"+data[i].r_work_addr+"</td><td>"+data[i].r_hope_sal+"</td><td>"+data[i].r_work_category+"</td><td>"+data[i].r_work_industry+"</td><td>"+data[i].r_edu_school+"</td><td>"+data[i].r_edu_class+"</td><td>"+data[i].r_edu_education+"</td><td>"+data[i].r_edu_startdate+"</td><td>"+data[i].r_edu_overdate+"</td><td>"+data[i].r_exp_time+"</td><td>"+data[i].r_work_nature+"</td><td><button onclick='non()'>未通过</button><button class='yes'>邀请面试</button></td></tr>"
+                    str+=ss
+                }
+                str += "</table>"
+
+                $("#container").html(str)
+
+
+            }
+        })
+    })
+
+    function non(ob) {
+
+    }
+
+
+
+
+
+
+</script>
+
+
+
 <body>
-打多久啊该地块
+<div id="container">
+
+</div>
+
+
+
 </body>
 </html>
