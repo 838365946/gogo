@@ -176,10 +176,10 @@ return message;
         try {
             exService.DelEx(experience.getE_id());
             message.setB(true);
-            message.setDes("修改成功");
+            message.setDes("删除成功");
         }catch (Exception e){
             message.setB(false);
-            message.setDes("修改失败");
+            message.setDes("删除失败");
         }
 return message;
 }

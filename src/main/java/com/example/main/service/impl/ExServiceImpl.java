@@ -62,7 +62,7 @@ Experience experience2=experienceDao.save(experience1);
 
     @Override
     public void DelEx(int eid) {
-        experienceDao.deleteById((long) eid);
+        experienceDao.deleteById(eid);
 
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2018/12/6.
  */
 @Repository
-public interface ExperienceDao extends JpaRepository<Experience,Long> {
+public interface ExperienceDao extends JpaRepository<Experience,Integer> {
 @Query(value = "select * from experience e left join resume r on e.r_id=r.r_id where u_id=:uid",nativeQuery = true)
     List<Experience> QueryByUser(@Param("uid") int uid);
 }
