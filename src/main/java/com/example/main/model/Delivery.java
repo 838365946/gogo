@@ -19,9 +19,7 @@ public class Delivery implements Serializable{
         //被查看
         @Column
         private String d_BeViewed;
-        //有意向
-        @Column
-        private String d_intent;
+
         //邀请面试
         @Column
         private String d_offer;
@@ -58,13 +56,7 @@ public class Delivery implements Serializable{
         this.d_BeViewed = d_BeViewed;
     }
 
-    public String getD_intent() {
-        return d_intent;
-    }
 
-    public void setD_intent(String d_intent) {
-        this.d_intent = d_intent;
-    }
 
     public String getD_offer() {
         return d_offer;

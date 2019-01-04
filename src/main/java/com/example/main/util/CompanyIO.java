@@ -86,11 +86,13 @@ public class CompanyIO {
             count++;
             System.out.println("有文件"+i);
             msg=singleFileUpload(files[i],c_id);
-            System.out.println(msg);
-            str+=msg;
-            str+=",";
-            if((files.length-count)<0){
+
+
+            if((files.length-count)<=0){
                 str+=msg;
+            }else{
+                str+=msg;
+                str+=",";
             }
 
         }

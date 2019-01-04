@@ -13,4 +13,5 @@ public interface ExService {
     boolean delEX(Experience experience);
     Experience UpdateEcperience(Experience experience) throws IOException;
     List<Experience> QueryByUser(int id);
+    void DelEx(int eid);
 }

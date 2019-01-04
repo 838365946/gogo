@@ -169,5 +169,19 @@ message.setDes("可以添加");
 }
 return message;
 }
+@RequestMapping("/delex")
+    @ResponseBody
+    public Message DelEx(Experience experience){
+        Message message=new Message();
+        try {
+            exService.DelEx(experience.getE_id());
+            message.setB(true);
+            message.setDes("修改成功");
+        }catch (Exception e){
+            message.setB(false);
+            message.setDes("修改失败");
+        }
+return message;
+}
 
 }

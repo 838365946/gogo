@@ -60,7 +60,6 @@ public class PhoneMessage {
         params.put("tpl_value","#code#="+code+"");//变量名和变量值对。如果你的变量名或者变量值中带有#&=中的任意一个特殊符号，请先分别进行urlencode编码后再传递，<a href="http://www.juhe.cn/news/index/id/50" target="_blank">详细说明></a>
         params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
         params.put("dtype","json");//返回数据的格式,xml或json，默认json
-
         try {
             System.out.println("maa");
             result =net(url, params, "GET");
