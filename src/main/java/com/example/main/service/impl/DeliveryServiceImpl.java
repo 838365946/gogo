@@ -6,6 +6,8 @@ import com.example.main.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/12/10.
  */
@@ -22,8 +24,7 @@ public class DeliveryServiceImpl implements DeliveryService{
 
 
     @Override
-    public void selectByCompany(int id) {
-        System.out.println(id);
-        System.out.println(deliveryDao.findAll().toString());
+    public List<Delivery> selectByCompany(int id) {
+        return deliveryDao.QueryByCid(id);
     }
 }

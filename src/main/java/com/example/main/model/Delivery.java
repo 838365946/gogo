@@ -26,12 +26,17 @@ public class Delivery implements Serializable{
         //不合适ss
         @Column
         private String d_pass;
+
         @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
         @JoinColumn(name = "u_id")
         private User user;
+
         @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
         @JoinColumn(name = "c_id")
         private Company company;
+
+
+
     public Company getCompany() {
         return company;
     }

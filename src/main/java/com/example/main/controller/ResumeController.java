@@ -1,9 +1,7 @@
 package com.example.main.controller;
 
 import com.example.main.dao.ResumeDao;
-import com.example.main.model.Message;
-import com.example.main.model.Resume;
-import com.example.main.model.User;
+import com.example.main.model.*;
 import com.example.main.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -153,11 +151,11 @@ public Resume QueryByUser(User user){
         }
         return message;
     }
-    @RequestMapping("resume")
-    public List<Resume>aa(){
+  /*  @RequestMapping("resume")
+    public List<Resume>aa(Delivery delivery, Company company){
 
         return resumeDao.findAll();
-    }
+    }*/
 
 
 

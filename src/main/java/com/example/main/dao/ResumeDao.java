@@ -15,4 +15,6 @@ public interface ResumeDao  extends JpaRepository<Resume,Long>{
     Resume QueryResumeByPhoneNumber(@Param("phone")String phone);
     @Query(value = "select * from resume r where r.u_id=:uid",nativeQuery = true)
     Resume QueryByUid(@Param("uid") int uid);
+
+
 }
