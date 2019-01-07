@@ -47,21 +47,12 @@ private String logopath;
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "company")
     private List<Position> positions;
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "company")
-    private List<Delivery> deliveries;
+
     @Column
     private String c_phone_number;
     @Column
     private String c_addr;
 
-    public List<Delivery> getDeliveries() {
-        return deliveries;
-    }
-
-    public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries = deliveries;
-    }
 
     public String getLogopath() {
         return logopath;

@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface DeliveryDao extends JpaRepository<Delivery,Integer> {
-@Query(value = "select * from delivery d where d.c_id=:cid",nativeQuery = true)
-    List<Delivery> QueryByCid(@Param("cid") int cid);
+@Query(value = "select * from delivery d where p_id=:pid",nativeQuery = true)
+    List<Delivery> QueryByPID(@Param("pid")int pid);
 }

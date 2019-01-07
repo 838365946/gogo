@@ -177,7 +177,7 @@ public class CompanyIO {
         osw.write(des);
         osw.close();
         fileOutputStream.close();
-        return propath+"/src/main/resources/static/positiondes/"+e_id+".txt";
+        return propath+"/src/main/resources/static/experience/"+e_id+".txt";
     }
 
     //读取工作经验介绍

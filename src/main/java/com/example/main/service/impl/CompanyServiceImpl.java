@@ -43,10 +43,7 @@ public class CompanyServiceImpl  implements CompanyService {
         return companyDao.CLogin(company.getC_username(),company.getC_password());
     }
 
-    @Override
-    public void test(int id) {
-        System.out.println(companyDao.findById(id).getDeliveries());
-    }
+
 
     @Override
     public List<Company> CheckCompany(String status) {

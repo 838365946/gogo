@@ -12,7 +12,7 @@ public interface CompanyService {
     Page<Company> findall(Pageable pageable);
     Company addcompany(Company company);
     Company CLogin(Company company);
-    void test(int id);
+
     List<Company> CheckCompany(String status);
     int PassCheck(Company compan,String str);
 }

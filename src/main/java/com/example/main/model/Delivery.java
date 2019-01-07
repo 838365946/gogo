@@ -19,30 +19,25 @@ public class Delivery implements Serializable{
         //被查看
         @Column
         private String d_BeViewed;
-
         //邀请面试
         @Column
         private String d_offer;
         //不合适ss
         @Column
         private String d_pass;
-
         @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
         @JoinColumn(name = "u_id")
         private User user;
-
         @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
-        @JoinColumn(name = "c_id")
-        private Company company;
+        @JoinColumn(name = "p_id")
+ private Position position;
 
-
-
-    public Company getCompany() {
-        return company;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public User getUser() {

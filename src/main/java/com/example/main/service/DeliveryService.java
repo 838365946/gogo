@@ -10,5 +10,5 @@ import java.util.List;
 public interface DeliveryService {
     Delivery SubmitRuseme(Delivery delivery);
 
-    List<Delivery>  selectByCompany(int id);
+    List<Delivery> selectByPid(int id);
 }

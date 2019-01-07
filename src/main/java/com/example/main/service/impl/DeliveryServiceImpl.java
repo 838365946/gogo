@@ -24,7 +24,7 @@ public class DeliveryServiceImpl implements DeliveryService{
 
 
     @Override
-    public List<Delivery> selectByCompany(int id) {
-        return deliveryDao.QueryByCid(id);
+    public List<Delivery> selectByPid(int id) {
+        return deliveryDao.QueryByPID(id);
     }
 }

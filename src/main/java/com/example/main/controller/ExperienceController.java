@@ -161,12 +161,13 @@ return message;
     public Message CheckEx(User user){
         Message message=new Message();
 List<Experience> experiences=exService.QueryByUser(user.getId());
-if (experiences.size()>3){
+    System.out.println(experiences.size());
+if (experiences.size()<=3){
 message.setB(true);
 message.setDes("可以添加");
 }else {
     message.setB(false);
-    message.setDes("最多只能添加三条工作经验");
+    message.setDes("最多三条");
 }
 return message;
 }

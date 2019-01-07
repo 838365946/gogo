@@ -1,10 +1,9 @@
 package com.example.main.controller;
 
-import com.example.main.model.Company;
-import com.example.main.model.Delivery;
-import com.example.main.model.Message;
-import com.example.main.model.Resume;
+import com.example.main.model.*;
 import com.example.main.service.CompanyService;
+import com.example.main.service.DeliveryService;
+import com.example.main.service.PositionService;
 import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +30,10 @@ import java.util.Map;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
-
+@Autowired
+    private DeliveryService deliveryService;
+@Autowired
+private PositionService positionService;
     private CompanyIO companyIO = new CompanyIO();
 
     private Message message = new Message();
@@ -209,17 +211,24 @@ public class CompanyController {
     @RequestMapping("/readresume")
     @ResponseBody
     public Message test(HttpServletRequest request){
-
         Company company= (Company) request.getSession().getAttribute("company");
-        List<Resume> resumes=new ArrayList<Resume>();
-        for (Delivery d:company.getDeliveries()){
-            for (Resume r:d.getUser().getResumes()){
-                System.out.println(r.getR_id());
-                resumes.add(r);
+        List<Position> positions=positionService.QueryByCompany(company.getC_id());
+        List<Delivery>deliveries=new ArrayList<Delivery>();
+        for(Position p:positions){
+           List<Delivery> deliveryList= deliveryService.selectByPid(p.getP_id());
+            for(Delivery d:deliveryList){
+                deliveries.add(d);
             }
-        }message.setB(true);
-        message.setDes("获取成功");
-        message.setData(resumes);
+        }
+        if(deliveries.size()>0){
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(deliveries);
+        }else {
+            message.setB(false);
+            message.setDes("获取失败");
+        }
+
         return message;
     }
     @RequestMapping("/passcheck")

@@ -1,7 +1,10 @@
 package com.example.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/12/6.
@@ -35,7 +38,9 @@ public class Position implements Serializable{
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "c_id")
     private Company company;
-
+    @JsonIgnore
+@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "position")
+private List<Delivery> deliveries;
     public Company getCompany() {
         return company;
     }
