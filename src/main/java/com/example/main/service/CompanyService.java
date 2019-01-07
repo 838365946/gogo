@@ -15,4 +15,6 @@ public interface CompanyService {
 
     List<Company> CheckCompany(String status);
     int PassCheck(Company compan,String str);
+    int PassChecka(Company company,String str);
+
 }

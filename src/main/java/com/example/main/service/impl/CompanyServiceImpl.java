@@ -55,6 +55,10 @@ public class CompanyServiceImpl  implements CompanyService {
 
         return companyDao.PassCheck(company.getC_id(),str);
     }
+    @Override
+    public int PassChecka(Company company,String str){
+        return companyDao.PassChecka(company.getC_id(),str);
+    }
 
 
 }

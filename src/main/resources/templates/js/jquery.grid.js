@@ -196,9 +196,9 @@
 			}
 			if(options.operator){
 				if(options.headCount == 2){
-					var $tbodyFinal = $('<div class="__tbodyFinal table-finale-fixed"><table><thead><tr><th>1</th></tr><tr><th style="height:34px;">1</th></tr></thead><tbody class="__bodyfinal"></tbody></table></div>');
+					var $tbodyFinal = $('<div class="__tbodyFinal table-finale-fixed"><table><thead><tr><th>1</th></tr> <tr><th style="height:34px;">1</th></tr></thead><tbody class="__bodyfinal"></tbody></table></div>');
 				}else{
-					var $tbodyFinal = $('<div class="__tbodyFinal table-finale-fixed"><table><thead><tr><th>1</th></tr></thead><tbody class="__bodyfinal"></tbody></table></div>');
+					var $tbodyFinal = $('<div class="__tbodyFinal table-finale-fixed"><table><thead><tr><th>1</th></tr> </thead><tbody class="__bodyfinal"></tbody></table></div>');
 				}
 				$tableTbody.append($tbodyFinal);
 				//存储操作行节点对象
@@ -293,7 +293,7 @@
 				'<h6>'+
 					'选择我要定制的列'+
 					'<span class="ue-text-level3">(共<span class="impInfo"></span>列，已选<span class="impInfo ui-dialog-selected">0</span>列，最佳显示6-8列)</span>'+
-					'<a href="javascript:;" class="ue-state-default defaultSequence">'+
+					'<a href="javascript:;" c2lass="ue-state-default defaultSequence">'+
 						'<span class="ui-icon ui-icon-circle-arrow-west"></span>还原至系统默认'+
 					'</a>'+
 				'</h6></div></div>');

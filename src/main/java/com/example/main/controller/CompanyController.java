@@ -244,6 +244,20 @@ private PositionService positionService;
     }
     return  message;
     }
+    @RequestMapping("/banned")
+    @ResponseBody
+    public Message PassChecka(Company company){
+        int i=companyService.PassChecka(company,"被封禁");
+        if (i>0){
+            message.setB(true);
+            message.setDes("被封禁");
+        }else {
+            message.setB(false);
+            message.setDes("封禁失败");
+        }
+        return  message;
+    }
+
 
     @RequestMapping("/losecheck")
     @ResponseBody

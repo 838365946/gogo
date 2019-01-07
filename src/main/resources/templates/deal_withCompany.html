@@ -141,8 +141,6 @@
             data:"page=0",
             dataType:"json",
             success:function(data) {
-
-
                 for (var i=0;i<data.data.length;i++){
                     tbody.push([data.data[i].c_addr,data.data[i].c_industry,data.data[i].c_nature,data.data[i].c_des,data.data[i].c_name,data.data[i].c_check_status]);
                 }
