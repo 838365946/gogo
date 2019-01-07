@@ -30,7 +30,7 @@ public class Delivery implements Serializable{
         private User user;
         @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
         @JoinColumn(name = "p_id")
- private Position position;
+        private Position position;
 
     public Position getPosition() {
         return position;

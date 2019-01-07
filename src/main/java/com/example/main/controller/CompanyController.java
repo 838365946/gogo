@@ -182,8 +182,6 @@ private PositionService positionService;
 
     @RequestMapping("/clogin")
     public ModelAndView CompanyLogin(Company company, HttpServletRequest request){
-
-        System.out.println("公司进入了");
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
       if(company1!=null){

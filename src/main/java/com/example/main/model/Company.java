@@ -47,7 +47,6 @@ private String logopath;
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "company")
     private List<Position> positions;
-
     @Column
     private String c_phone_number;
     @Column

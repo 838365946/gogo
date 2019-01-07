@@ -99,7 +99,7 @@ ModelAndView modelAndView=new ModelAndView();
     }
 @RequestMapping("/adduserdata")
 @ResponseBody
-    public Message AddUserData(User user){
+    public Message AddUserData(User user) throws NullPointerException{
         List<User> users=userService.SelectById(user.getId());
         Message message=new Message();
             if(users.size()>0){
@@ -107,6 +107,10 @@ ModelAndView modelAndView=new ModelAndView();
                 u.setBirthday(user.getBirthday());
                 u.setCity(user.getCity());
                 u.setEmail(user.getEmail());
+                u.setExp_time(user.getExp_time());
+                u.setName(user.getName());
+                u.setSex(user.getSex());
+
                   User user1=  userService.save(u);
                   if (user1!=null){
                       message.setB(true);

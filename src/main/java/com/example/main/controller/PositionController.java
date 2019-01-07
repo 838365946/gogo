@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,8 +19,9 @@ public class PositionController {
 private PositionService positionService;
 @RequestMapping("/addPosition")
 @ResponseBody
-public Message AddPosition(Position position){
-    System.out.println(position.toString()+"444");
+public Message AddPosition(Position position, HttpServletRequest request){
+Company company= (Company) request.getSession().getAttribute("company");
+position.setCompany(company);
 Message message=new Message();
 if(positionService.addposition(position)!=null){
     message.setB(true);
