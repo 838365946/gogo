@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService{
     public int UpdatePsw(User user) {
         return userDao.UpdatePsw(user.getPassword(),user.getPhone_number());
     }
+
+    @Override
+    public List<User> SelcectByuser(int id) {
+        return userDao.findbyuser(id);
+    }
 }

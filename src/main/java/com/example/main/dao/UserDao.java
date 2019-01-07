@@ -27,4 +27,6 @@ public interface UserDao extends JpaRepository<User,Long> {
     @Modifying
     @Query(value = "update user u set u.password =:password where u.phone_number=:phonenumber",nativeQuery = true)
     int UpdatePsw(@Param("password")String password,@Param("phonenumber")String phonenumber);
+    @Query(value = "select * from user u where u.id=:uid ",nativeQuery = true)
+    List<User> findbyuser(@Param("uid") int id);
 }

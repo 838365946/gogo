@@ -15,4 +15,5 @@ public interface UserService {
    List<User> SelectById(int id);
    User Check(String username);
    int UpdatePsw(User user);
+   List<User> SelcectByuser(int id);
 }
