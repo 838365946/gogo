@@ -150,12 +150,10 @@ public Resume QueryByUser(User user){
             message.setDes("你还没有简历");
         }
         return message;
-    }
-  /*  @RequestMapping("resume")
-    public List<Resume>aa(Delivery delivery, Company company){
-
+    }@RequestMapping("getallresume")
+    public List<Resume> FetAllResume(){
         return resumeDao.findAll();
-    }*/
+    }
 
 
 

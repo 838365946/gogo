@@ -6,6 +6,8 @@ import com.example.main.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/12/7.
  */
@@ -39,6 +41,11 @@ public class ResumeServiceImpl implements ResumeService{
     @Override
     public Resume QueryByUid(int uid) {
         return resumeDao.QueryByUid(uid);
+    }
+
+    @Override
+    public List<Resume> ShowAllResume() {
+        return resumeDao.findAll();
     }
 
 
