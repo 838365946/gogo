@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/12/7.
@@ -85,14 +86,41 @@ ModelAndView modelAndView=new ModelAndView();
     @ResponseBody
     public Message AddUser(User user){
         Message message=new Message();
-        if (userService.AddUser(user)!=null){
+        User user1=userService.AddUser(user);
+        if (user1!=null){
             message.setB(true);
             message.setDes("注册成功");
+        message.setData(user1);
         }else{
             message.setB(false);
             message.setDes("注册失败");
         }
         return message;
+    }
+@RequestMapping("/adduserdata")
+@ResponseBody
+    public Message AddUserData(User user){
+        List<User> users=userService.SelectById(user.getId());
+        Message message=new Message();
+            if(users.size()>0){
+                User u= users.get(0);
+                u.setBirthday(user.getBirthday());
+                u.setCity(user.getCity());
+                u.setEmail(user.getEmail());
+                  User user1=  userService.save(u);
+                  if (user1!=null){
+                      message.setB(true);
+                      message.setDes("成功");
+                      message.setData(user1);
+                  }else {
+                      message.setB(false);
+                      message.setDes("失败");
+                  }
+            }else {
+                message.setB(false);
+                message.setDes("请先注册");
+            }
+            return message;
     }
 
 @RequestMapping("/check")
