@@ -152,7 +152,7 @@ ModelAndView modelAndView=new ModelAndView();
                   User user1=  userService.save(u);
                   if (user1!=null){
                       message.setB(true);
-                      message.setDes("成功");
+                      message.setDes("fanhui成功");
                       message.setData(user1);
                   }else {
                       message.setB(false);
