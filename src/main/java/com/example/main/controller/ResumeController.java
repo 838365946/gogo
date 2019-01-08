@@ -74,11 +74,20 @@ if ((resume!=null)){
 }
 return message;
 }
-@RequestMapping("/tt")
+@RequestMapping("/getresume")
 @ResponseBody
-public Resume QueryByUser(User user){
-    System.out.println(user.getId());
-   return resumeService.QueryByUid(user.getId());
+public Message QueryByUser(User user){
+    Message message=new Message();
+    Resume resume=resumeService.QueryByUid(user.getId());
+if(resume!=null){
+    message.setB(true);
+    message.setDes("获取成功");
+    message.setData(resume);
+}else {
+    message.setB(false);
+    message.setDes("获取失败");
+}
+    return message;
 }
 
 

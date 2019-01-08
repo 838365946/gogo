@@ -198,4 +198,34 @@ public class CompanyIO {
         }
         return sb;
     }
+    //用户头像上传
+    public String Updatehead(MultipartFile head,int id) {
+        if (Objects.isNull(head) || head.isEmpty()) {
+            return "文件为空!";
+        }
+        String allName = head.getOriginalFilename();
+
+        boolean b=allName.substring(allName.lastIndexOf(".")).equals(".jpeg");
+        boolean b1=allName.substring(allName.lastIndexOf(".")).equals(".jpg");
+        boolean b2=allName.substring(allName.lastIndexOf(".")).equals(".gif");
+        if(allName.substring(allName.lastIndexOf(".")).equals(".png")||b|b1|b2){
+            try {
+                byte[] bytes = head.getBytes();
+                Path path = Paths.get(propath+"/src/main/resources/static/userlogo/" + id+"/"+allName);  //    文件夹 +/+ 文件完整名称  a.txt
+                //如果没有files文件夹，则创建
+                if (!Files.isWritable(path)) {
+                    Files.createDirectories(Paths.get(propath+"/src/main/resources/static/userlogo/" + id));
+                }
+                //文件写入指定路径
+                Files.write(path, bytes);
+
+                return "/userlogo/"+id+"/"+allName;
+            } catch (IOException e) {
+                return "文件上传失败";
+            }
+        }else {
+            return "文件格式不正确";
+        }
+
+    }
 }

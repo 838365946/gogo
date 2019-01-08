@@ -3,10 +3,14 @@ package com.example.main.controller;
 import com.example.main.model.Message;
 import com.example.main.model.User;
 import com.example.main.service.UserService;
+import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +30,34 @@ if(request.getSession().getAttribute("user")!=null||request.getSession().getAttr
 }
     return "login";
 }
-
-
+@RequestMapping(value = "/updatehead", method = RequestMethod.POST)
+public Message UpdateHead(HttpServletRequest request,User user){
+    MultipartHttpServletRequest req= (MultipartHttpServletRequest) request;
+    MultipartFile head=req.getFile("file");
+Message message=new Message();
+    CompanyIO companyIO=new CompanyIO();
+if (head!=null){
+String path=companyIO.Updatehead(head,user.getId());
+List<User> users=userService.SelcectByuser(user.getId());
+if (users.size()>0){
+    User u=users.get(0);
+    u.setHeadicon(path);
+    User user1=userService.save(u);
+    if(user1!=null){
+        message.setB(true);
+        message.setDes("修改成功");
+        message.setData(user1);
+    }else {
+        message.setB(false);
+        message.setDes("修改失败");
+    }
+}
+}else {
+    message.setB(false);
+    message.setDes("请先注册");
+}
+return message;
+}
 
 @RequestMapping("/login")
 @ResponseBody
@@ -86,6 +116,7 @@ ModelAndView modelAndView=new ModelAndView();
     @ResponseBody
     public Message AddUser(User user){
         Message message=new Message();
+        user.setHeadicon("userlogo/1/head.png");
         User user1=userService.AddUser(user);
         if (user1!=null){
             message.setB(true);
@@ -100,7 +131,9 @@ ModelAndView modelAndView=new ModelAndView();
 @RequestMapping("/adduserdata")
 @ResponseBody
     public Message AddUserData(User user) throws NullPointerException{
+    System.out.println(user.toString());
         List<User> users=userService.SelcectByuser(user.getId());
+    System.out.println(users.toString());
         Message message=new Message();
             if(users.size()>0){
                 User u= users.get(0);

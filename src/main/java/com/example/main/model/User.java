@@ -20,6 +20,8 @@ public class User implements Serializable{
 @Column
         private String nickname;
 @Column
+        private String headicon;
+@Column
 private String name;
 
 @Column
@@ -51,6 +53,14 @@ private List<Delivery> deliveries;
 
     public String getIsadmin() {
         return isadmin;
+    }
+
+    public String getHeadicon() {
+        return headicon;
+    }
+
+    public void setHeadicon(String headicon) {
+        this.headicon = headicon;
     }
 
     public void setIsadmin(String isadmin) {

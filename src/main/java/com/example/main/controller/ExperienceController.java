@@ -162,7 +162,7 @@ return message;
         Message message=new Message();
 List<Experience> experiences=exService.QueryByUser(user.getId());
     System.out.println(experiences.size());
-if (experiences.size()<=3){
+if (experiences.size()<3){
 message.setB(true);
 message.setDes("可以添加");
 }else {
