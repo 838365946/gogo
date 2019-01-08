@@ -30,13 +30,19 @@ if(request.getSession().getAttribute("user")!=null||request.getSession().getAttr
 }
     return "login";
 }
-@RequestMapping(value = "/updatehead", method = RequestMethod.POST)
+@RequestMapping(value = "/updatehead", method = { RequestMethod.POST,RequestMethod.GET})
+@ResponseBody
 public Message UpdateHead(HttpServletRequest request,User user){
     MultipartHttpServletRequest req= (MultipartHttpServletRequest) request;
     MultipartFile head=req.getFile("file");
 Message message=new Message();
     CompanyIO companyIO=new CompanyIO();
 if (head!=null){
+    try {
+        companyIO.delFolder("C:\\Users\\Administrator\\Desktop\\apache-tomcat-8.0.45\\bin\\src\\main\\resources\\static\\userlogo\\"+user.getId()+"\\");
+    }catch (NullPointerException e){
+
+    }
 String path=companyIO.Updatehead(head,user.getId());
 List<User> users=userService.SelcectByuser(user.getId());
 if (users.size()>0){
@@ -185,5 +191,14 @@ return message;
     message.setDes("修改失败");
     }
     return message;
+}
+@RequestMapping("/getalluser")
+@ResponseBody
+    public Message Getalluser(){
+        Message message=new Message();
+        message.setB(true);
+        message.setDes("修改成功");
+        message.setData(userService.FindAll());
+        return message;
 }
 }

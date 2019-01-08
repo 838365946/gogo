@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService{
     public List<User> SelcectByuser(int id) {
         return userDao.findbyuser(id);
     }
+
+    @Override
+    public List<User> FindAll() {
+        return userDao.findAll();
+    }
 }
