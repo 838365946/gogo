@@ -20,10 +20,10 @@ public class Resume implements Serializable{
 //姓名
     @Column
 private String r_name;
-//工作性质
+    //工作性质
     @Column
     private String r_work_nature;
-//工作地址
+    //工作地址
     @Column
     private String r_work_addr;
     //期望工资
@@ -32,7 +32,7 @@ private String r_name;
     //工作经验
     @Column
     private String r_exp_time;
-//职业类别
+    //职业类别
     @Column
     private String r_work_category;
     //所在行业

@@ -2,9 +2,11 @@ package com.example.main.dao;
 
 import com.example.main.model.Delivery;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,4 +17,16 @@ import java.util.List;
 public interface DeliveryDao extends JpaRepository<Delivery,Integer> {
 @Query(value = "select * from delivery d where p_id=:pid",nativeQuery = true)
     List<Delivery> QueryByPID(@Param("pid")int pid);
+    @Transactional
+    @Modifying
+    @Query(value = "update deltvery d set d.d_BeViewed =:beview where d.d_id=:did",nativeQuery = true)
+    int Beviewed(@Param("beview") String beview,@Param("did") int did);
+    @Transactional
+    @Modifying
+    @Query(value = "update deltvery d set d.d_pass =:pass where d.d_id=:did",nativeQuery = true)
+    int Pass(@Param("pass") String pass,@Param("did") int did);
+    @Transactional
+    @Modifying
+    @Query(value = "update deltvery d set d.d_offer =:offer where d.d_id=:did",nativeQuery = true)
+    int Offer(@Param("offer") String offer,@Param("did") int did);
 }

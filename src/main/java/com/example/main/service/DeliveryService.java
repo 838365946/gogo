@@ -11,4 +11,5 @@ public interface DeliveryService {
     Delivery SubmitRuseme(Delivery delivery);
 
     List<Delivery> selectByPid(int id);
+    int Updatestate(String str,Delivery delivery);
 }

@@ -34,4 +34,19 @@ public Message CheckPost(User user, Position position){
     }
     return message;
 }
+@RequestMapping("/updatestate")
+@ResponseBody
+public Message CheckDelivery(Delivery delivery,String state){
+Message message=new Message();
+int i=deliveryService.Updatestate(state,delivery);
+if (i>0){
+    message.setB(true);
+    message.setDes("成功");
+}else {
+    message.setB(false);
+    message.setDes("失败");
+}
+return message;
+}
+
 }

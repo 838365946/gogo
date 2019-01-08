@@ -27,4 +27,17 @@ public class DeliveryServiceImpl implements DeliveryService{
     public List<Delivery> selectByPid(int id) {
         return deliveryDao.QueryByPID(id);
     }
+
+    @Override
+    public int Updatestate(String str, Delivery delivery) {
+        int i=0;
+        if (str.equals("被查看")){
+            i=deliveryDao.Beviewed("是",delivery.getD_id());
+        }else if (str.equals("不合适")){
+            i=deliveryDao.Pass("是",delivery.getD_id());
+        }else if (str.equals("邀请面试")){
+            i=deliveryDao.Offer("是",delivery.getD_id());
+        }
+        return i;
+    }
 }
