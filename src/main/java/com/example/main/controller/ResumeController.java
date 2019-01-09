@@ -6,7 +6,9 @@ import com.example.main.model.Resume;
 import com.example.main.model.User;
 import com.example.main.service.ExService;
 import com.example.main.service.ResumeService;
+import com.example.main.util.CompanyIO;
 import com.example.main.util.DocUtil;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,10 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2018/12/7.
@@ -174,29 +174,24 @@ if(resume!=null){
         return resumeDao.findAll();
     }
 @RequestMapping("/downloadresume")
-public void OutputResume(HttpServletRequest request,HttpServletResponse response,User user) throws UnsupportedEncodingException {
+public Message OutputResume(HttpServletRequest request,HttpServletResponse response,User user) throws IOException, XmlException {
     Resume resume=resumeService.QueryByUid(user.getId());
     resume.setExperiences(exService.QueryByUser(user.getId()));
-        Map<String, Object> dataMap = new HashMap<String, Object>();
-    dataMap.put("name", resume.getR_name());
-    dataMap.put("school", resume.getR_edu_school());
-    dataMap.put("class",resume.getR_edu_class() );
-    dataMap.put("addr", resume.getR_work_addr());
-    dataMap.put("hopesal", resume.getR_hope_sal());
-    dataMap.put("nature",resume.getR_work_nature());
-    dataMap.put("ename",resume.getExperiences().get(0).getE_comp_name());
-    dataMap.put("eposition",resume.getExperiences().get(0).getE_comp_position());
-    dataMap.put("enddate",resume.getExperiences().get(0).getE_date());
-    dataMap.put("eaddr",resume.getR_work_addr());
-    dataMap.put("edes",resume.getExperiences().get(0).getE_word_des());
-    String newWordName = resume.getR_name()+"的简历.doc";
-//调用打印word的函数
-    DocUtil.download(request, response, newWordName, dataMap);
+ String path=  DocUtil.download(resume);
+Message message=new Message();
+message.setB(true);
+message.setDes("获取成功");
+message.setData(path);
 
-
+return message;
 }
 
-
+    @RequestMapping("/deldocx")
+    public void Deldocs(User user){
+        Resume resume=resumeService.QueryByUid(user.getId());
+        String propath=System.getProperty("user.dir");
+        CompanyIO.delAllFile(propath+"\\src\\main\\resources\\static\\resume\\"+resume.getR_id());
+    }
 
 
 }

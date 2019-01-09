@@ -1,6 +1,7 @@
 package com.example.main.controller;
 
 import com.example.main.model.Message;
+import com.example.main.model.Resume;
 import com.example.main.model.User;
 import com.example.main.service.UserService;
 import com.example.main.util.CompanyIO;
@@ -211,4 +212,5 @@ return message;
         message.setData(userService.FindbyStatus(status));
         return message;
     }
+
 }
