@@ -17,4 +17,5 @@ public interface UserService {
    int UpdatePsw(User user);
    List<User> SelcectByuser(int id);
    List<User> FindAll();
+   List<User> FindbyStatus(String staus);
 }

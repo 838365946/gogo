@@ -194,11 +194,21 @@ return message;
 }
 @RequestMapping("/getalluser")
 @ResponseBody
-    public Message Getalluser(){
+    public Message Getalluser(String state){
         Message message=new Message();
         message.setB(true);
-        message.setDes("修改成功");
+        message.setDes("获取成功");
         message.setData(userService.FindAll());
         return message;
 }
+
+    @RequestMapping("/getuserbystatus")
+    @ResponseBody
+    public Message GetuserByStatus(String status){
+        Message message=new Message();
+        message.setB(true);
+        message.setDes("获取成功");
+        message.setData(userService.FindbyStatus(status));
+        return message;
+    }
 }
