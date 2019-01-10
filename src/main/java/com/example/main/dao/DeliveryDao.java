@@ -29,4 +29,11 @@ public interface DeliveryDao extends JpaRepository<Delivery,Integer> {
     @Modifying
     @Query(value = "update deltvery d set d.d_offer =:offer where d.d_id=:did",nativeQuery = true)
     int Offer(@Param("offer") String offer,@Param("did") int did);
+
+    @Query(value = "select * from delivery d where d.d_BeViewed =:state and d.u_id=:uid",nativeQuery = true)
+    List<Delivery> QueryBeviewd(@Param("state")String state,@Param("uid")int uid);
+    @Query(value = "select * from delivery d where d.d_Pass =:state and d.u_id=:uid",nativeQuery = true)
+    List<Delivery> QueryPass(@Param("state")String state,@Param("uid")int uid);
+    @Query(value = "select * from delivery d where d.d_Offer =:state and d.u_id=:uid",nativeQuery = true)
+    List<Delivery> QueryOffer(@Param("state")String state,@Param("uid")int uid);
 }

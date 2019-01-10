@@ -6,6 +6,7 @@ import com.example.main.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,5 +40,19 @@ public class DeliveryServiceImpl implements DeliveryService{
             i=deliveryDao.Offer("是",delivery.getD_id());
         }
         return i;
+    }
+
+    @Override
+    public List<Delivery> SelectByState(String str, int uid) {
+        int i=0;
+        List<Delivery> deliveries=new ArrayList<Delivery>();
+        if (str.equals("被查看")){
+            deliveries=deliveryDao.QueryBeviewd("是",uid);
+        }else if (str.equals("不合适")){
+            deliveries=deliveryDao.QueryPass("是",uid);
+        }else if (str.equals("邀请面试")){
+          deliveries=deliveryDao.QueryOffer("是",uid);
+        }
+        return deliveries;
     }
 }

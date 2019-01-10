@@ -12,4 +12,5 @@ public interface DeliveryService {
 
     List<Delivery> selectByPid(int id);
     int Updatestate(String str,Delivery delivery);
+    List<Delivery> SelectByState(String state,int uid);
 }

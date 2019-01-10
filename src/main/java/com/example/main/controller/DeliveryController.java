@@ -48,5 +48,20 @@ if (i>0){
 }
 return message;
 }
+@RequestMapping("/getdeliverystate")
+    @ResponseBody
+    public Message GetDeliveryState(String state,User user){
+Message message=new Message();
+List<Delivery> deliveries=deliveryService.SelectByState(state,user.getId());
+if(deliveries.size()>0){
+message.setB(true);
+message.setDes("成功");
+message.setData(deliveries);
 
+}else {
+    message.setB(false);
+    message.setDes("失败");
+}
+return message;
+}
 }
