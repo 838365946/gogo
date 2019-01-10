@@ -19,4 +19,6 @@ public interface PositionDao extends JpaRepository<Position,Long>{
     Page<Position> QueryByInput(@Param("name") String input, Pageable pageable);
     @Query(value = "select * from position p where p.c_id=:cid",nativeQuery = true)
     List<Position> QueryByCompany(@Param("cid")int cid);
+    @Query(value = "select * from position p where p_id=:pid",nativeQuery = true)
+    Position QueryById(@Param("pid")int pid);
 }

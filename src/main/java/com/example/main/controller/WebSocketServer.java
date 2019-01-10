@@ -38,7 +38,7 @@ public class WebSocketServer {
         addonlinecount();
         System.out.println("有新连接加入！在线人数为"+getOnlinecount());
         try {
-            sendMessage("连接成功");
+            sendMessage(username+"连接成功");
         } catch (IOException e) {
             System.out.println("websocket出问题了");
         }
@@ -61,16 +61,10 @@ public class WebSocketServer {
         String sf=new SimpleDateFormat().format(new Date());
         if (webSocketSet.get(tousername)!=null){
             try {
-                webSocketSet.get(tousername).sendMessage(sf+"'\n'"+username+":'\t'"+mess);
-                webSocketSet.get(username).sendMessage(sf+"\n"+username+":\t"+mess);
+                webSocketSet.get(tousername).sendMessage("{time:"+sf+",username:"+username+",mess:"+mess+"}");
+                webSocketSet.get(username).sendMessage("{time:"+sf+",username:"+username+",mess:"+mess+"}");
             } catch (IOException e) {
-                //    for (WebSocketServer item:webSocketServers){
-//        try {
-//            item.sendMessage(message);
-//        } catch (IOException e) {
-//            System.out.println("服务端接受消息出问题了");
-//        }
-//    }
+
             }
         }else{
             try {

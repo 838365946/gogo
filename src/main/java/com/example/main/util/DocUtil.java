@@ -24,8 +24,7 @@ public class DocUtil {
             file.mkdir();
         }
         //Write the Document in file system
-        FileOutputStream out = new FileOutputStream(file.getPath()+"\\"+resume.getR_name()+"的简历.docx");
-
+        FileOutputStream out = new FileOutputStream(file.getPath()+"\\"+resume.getR_name()+"的简历.doc");
 
         //添加标题
         XWPFParagraph titleParagraph = document.createParagraph();
@@ -181,7 +180,7 @@ for(Experience e:experiences){
 
         document.write(out);
         out.close();
-      return   "/src/main/resources/static/resume/"+resume.getR_id()+"/"+resume.getR_name()+"的简历.docx";
+      return   "/src/main/resources/static/resume/"+resume.getR_id()+"/"+resume.getR_name()+"的简历.doc";
 
 
 

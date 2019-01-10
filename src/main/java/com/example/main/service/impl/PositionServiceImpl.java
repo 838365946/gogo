@@ -59,4 +59,9 @@ public class PositionServiceImpl implements PositionService{
         }
         return positionDao.QueryByCompany(cid);
     }
+
+    @Override
+    public Position QueryById(int p_id) {
+        return positionDao.QueryById(p_id);
+    }
 }

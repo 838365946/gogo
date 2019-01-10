@@ -10,4 +10,5 @@ import java.util.List;
 public interface PositionService {
     Position addposition(Position position);
     List<Position> QueryByCompany(int cid);
+    Position QueryById(int p_id);
 }
