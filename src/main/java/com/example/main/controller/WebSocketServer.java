@@ -43,12 +43,12 @@ public class WebSocketServer {
             if(key.equals(username)){
                 try {
                     sendMessage(sendoutlinemess.get(key));
-                    sendoutlinemess.remove(key);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        }
+        }sendoutlinemess.remove(username);
         System.out.println("有新连接加入！在线人数为"+getOnlinecount());
 
     }

@@ -299,6 +299,21 @@ private PositionService positionService;
         }
         return message;
     }
+
+    @RequestMapping("/getcompbystate")
+    @ResponseBody
+    public  Message Getcompbystate(Company company){
+        List<Company> companies=companyService.QueryBystate(company.getC_check_status());
+        if (companies.size()<0){
+            message.setB(false);
+            message.setDes("获取失败");
+        }else {
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(companies);
+        }
+        return message;
+    }
 }
 
 

@@ -18,4 +18,5 @@ public interface CompanyService {
     int PassChecka(Company company,String str);
     List<Company> CheckCname(String cname);
     List<Company> CheckCusername(String cusername);
+    List<Company> QueryBystate(String state);
 }
