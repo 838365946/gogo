@@ -279,14 +279,33 @@ private PositionService positionService;
         return  message;
     }
 
-    @RequestMapping("/name")
+    @RequestMapping("/eckcname")
     @ResponseBody
-    public List<Company> fiandeall(){
-
-
-     return companyDao.findAll() ;
+    public  Message CheckCname(Company company){
+        List<Company> companies=companyService.CheckCname(company.getC_name());
+        if (companies.size()>0){
+            message.setB(false);
+            message.setDes("公司名已存在");
+        }else {
+            message.setB(true);
+            message.setDes("可以使用");
+        }
+        return message;
     }
 
+    @RequestMapping("/eckcusername")
+    @ResponseBody
+    public  Message CheckCusername(Company company){
+        List<Company> companies=companyService.CheckCusername(company.getC_username());
+        if (companies.size()>0){
+            message.setB(false);
+            message.setDes("账户已存在");
+        }else {
+            message.setB(true);
+            message.setDes("账号可以使用");
+        }
+        return message;
+    }
 
 
 }

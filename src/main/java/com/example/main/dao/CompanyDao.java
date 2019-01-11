@@ -32,6 +32,7 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
 
     @Query(value = "select * from company c where c.c_name=:cname",nativeQuery = true)
     List<Company> checkcname(@Param("cname")String cname);
+
     @Query(value = "select * from company c where c.c_username=:cusername",nativeQuery = true)
     List<Company> checkcusername(@Param("cusername")String cusername);
 }
