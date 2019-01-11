@@ -31,8 +31,9 @@ public class ResumeController {
 @Autowired
     private ExService exService;
     @RequestMapping("/addresume")
-public Message SaveResume(Resume resume){
+public Message SaveResume(Resume resume,User user){
     Message message =new Message();
+    resume.setUser(user);
     Resume resume1=resumeService.SaveResume(resume);
 if(resume1!=null){
 message.setB(true);
@@ -44,20 +45,7 @@ message.setData(resume1);
 }
 return message;
 }
-@RequestMapping("/updateresume")
-public Message UpdateResume(Resume resume){
-    Message message =new Message();
-    Resume resume1=resumeService.SaveResume(resume);
-    if(resume1!=null){
-        message.setB(true);
-        message.setDes("修改简历成功");
-        message.setData(resume1);
-    }else {
-        message.setB(false);
-        message.setDes("修改简历失败");
-    }
-    return message;
-}
+
 @RequestMapping("/delresume")
 public Message DelResume(Resume resume) {
     Message message = new Message();

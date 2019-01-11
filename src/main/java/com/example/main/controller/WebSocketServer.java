@@ -10,6 +10,8 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.IdentityHashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -21,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketServer {
     //记录在线用户
     private static int onlinecount=0;
+    private static Map<String,String> sendoutlinemess=new IdentityHashMap<String,String>();
     //存放客户端对应的websocket
     private static ConcurrentHashMap<String, WebSocketServer> webSocketSet = new ConcurrentHashMap<String, WebSocketServer>(); //与客户端的连接session，用他主动给客户端发消息
     private Session session;
@@ -36,12 +39,17 @@ public class WebSocketServer {
         System.out.println(username);
         System.out.println(webSocketSet.get(param)+"这个人");
         addonlinecount();
-        System.out.println("有新连接加入！在线人数为"+getOnlinecount());
-        try {
-            sendMessage("{\"mess\":\"连接成功\"}");
-        } catch (IOException e) {
-            System.out.println("websocket出问题了");
+        for(String key:sendoutlinemess.keySet()){
+            if(key.equals(username)){
+                try {
+                    sendMessage(sendoutlinemess.get(key));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        System.out.println("有新连接加入！在线人数为"+getOnlinecount());
+
     }
     //连接关闭的方法
     @OnClose
@@ -69,7 +77,9 @@ public class WebSocketServer {
             }
         }else{
             try {
-                sendMessage("{\"mess\":\"该用户不在线\"}");
+                String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
+                sendoutlinemess.put(new String(tousername),mess);
+                webSocketSet.get(username).sendMessage(str);
             } catch (IOException e) {
                 e.printStackTrace();
             }
