@@ -31,4 +31,10 @@ public interface UserDao extends JpaRepository<User,Long> {
     List<User> findbyuser(@Param("uid") int id);
     @Query(value = "select * from user u where u.status=:status",nativeQuery = true)
     List<User> findbystatus(@Param("status") String status);
+    @Transactional
+    @Modifying
+    @Query(value = "update user u set u.status=:status where id=:cid",nativeQuery = true)
+    int GaiZt(@Param("cid") int cid,@Param("status") String status);
+
+
 }

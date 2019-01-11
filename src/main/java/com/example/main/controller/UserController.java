@@ -242,5 +242,33 @@ return message;
         message.setData(userService.FindbyStatus(status));
         return message;
     }
+    @RequestMapping("/jcstatus")
+    @ResponseBody
+    public  Message GaiZt(User user){
+        Message message=new Message();
+        int i = userService.GaiZt(user,"普通用户");
+        if(i>0){
+            message.setB(true);
+            message.setDes("解除");
 
+        }else {
+            message.setB(false);
+            message.setDes("解除失败");
+        }
+        return message;
+    }
+
+    @RequestMapping("/ggstatus")
+    @ResponseBody
+    public  Message JcFy(User user){
+        Message message=new Message();
+        int i=userService.GaiZt(user,"被封禁");
+        if(i>0){
+            message.setB(true);
+            message.setDes("被封禁");
+        }else {
+            message.setB(false);
+            message.setDes("封失败");
+        }return  message;
+    }
 }

@@ -67,4 +67,9 @@ public class UserServiceImpl implements UserService{
     public List<User> FindbyStatus(String staus) {
     return userDao.findbystatus(staus);
     }
+
+    @Override
+    public int GaiZt(User user, String strt) {
+        return userDao.GaiZt(user.getId(),strt);
+    }
 }

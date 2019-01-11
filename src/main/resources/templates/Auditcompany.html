@@ -5,7 +5,7 @@
 <title>可编辑表格</title>
 <link rel="stylesheet"href="/css/backstage/bootstrap.css">
 <script src="/js/backstage/table.js"></script>
-<script src="../js/backstage/modify.js"></script>
+<script src="js/backstage/modify.js"></script>
 <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
 <style media="screen">
     .table {
@@ -15,16 +15,16 @@
 </head>
 <script>
     var str = "<table class=table table-bordered table-hover> <tr><td>ID</td><td>公司名称</td><td>公司所在行业</td><td>企业性质</td><td>公司介绍</td><td>公司地址</td><td>状态</td><td>操作</td></tr>"
-    var ss = ""
+    var ss = "";
     $(function () {
     $.ajax({
-        url:"/showcompmess",
+        url:"/Audit_company",
         type:"post",
         data:"page=0",
         dataType:"json",
         success:function(data) {
             for (var i=0;i<data.data.length;i++){
-                ss="<tr class='modifyss'><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_des+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx' >允许通过</button></td><td><button class='byx'>不允许</button></td></td></tr>"
+                ss="<tr class='modifyss'><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_des+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx' >允许通过</button></td><td><button class='byx'>不允许</button></td></tr>"
                 str+=ss
             }
             str+="</table>"
@@ -58,6 +58,50 @@
                     var qs=ii.children[0].innerHTML;
                     $.ajax({
                         url:"/losecheck",
+                        data:"c_id="+qs,
+                        type:"post",
+                        dataType:"json",
+                        success:function (){
+                            window.location.reload();
+                        }
+
+
+                    })
+
+
+
+                }
+            }
+            var en=document.getElementsByClassName("fj");
+            for (var i=0;i<en.length;i++) {
+                en[i].onclick = function () {
+
+                    var ii= this.parentElement.parentElement
+                    var qs=ii.children[0].innerHTML;
+                    $.ajax({
+                        url:"/banned",
+                        data:"c_id="+qs,
+                        type:"post",
+                        dataType:"json",
+                        success:function (data){
+                            window.location.reload();
+                        }
+
+
+                    })
+
+
+
+                }
+            }
+            var en=document.getElementsByClassName("jf");
+            for (var i=0;i<en.length;i++) {
+                en[i].onclick = function () {
+
+                    var ii= this.parentElement.parentElement
+                    var qs=ii.children[0].innerHTML;
+                    $.ajax({
+                        url:"/unblocking",
                         data:"c_id="+qs,
                         type:"post",
                         dataType:"json",
