@@ -18,7 +18,7 @@ public class Delivery implements Serializable{
     private String d_date;
         //被查看
         @Column
-        private String d_BeViewed;
+        private String d_beviewed;
         //邀请面试
         @Column
         private String d_offer;
@@ -48,15 +48,13 @@ public class Delivery implements Serializable{
         this.user = user;
     }
 
-    public String getD_BeViewed() {
-        return d_BeViewed;
+    public String getD_beviewed() {
+        return d_beviewed;
     }
 
-    public void setD_BeViewed(String d_BeViewed) {
-        this.d_BeViewed = d_BeViewed;
+    public void setD_beviewed(String d_beviewed) {
+        this.d_beviewed = d_beviewed;
     }
-
-
 
     public String getD_offer() {
         return d_offer;

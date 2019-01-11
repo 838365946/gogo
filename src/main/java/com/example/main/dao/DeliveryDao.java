@@ -19,20 +19,20 @@ public interface DeliveryDao extends JpaRepository<Delivery,Integer> {
     List<Delivery> QueryByPID(@Param("pid")int pid);
     @Transactional
     @Modifying
-    @Query(value = "update deltvery d set d.d_BeViewed =:beview where d.d_id=:did",nativeQuery = true)
+    @Query(value = "update delivery d set d.d_beviewed =:beview where d.d_id=:did",nativeQuery = true)
     int Beviewed(@Param("beview") String beview,@Param("did") int did);
     @Transactional
     @Modifying
-    @Query(value = "update deltvery d set d.d_pass =:pass where d.d_id=:did",nativeQuery = true)
+    @Query(value = "update delivery d set d.d_pass =:pass where d.d_id=:did",nativeQuery = true)
     int Pass(@Param("pass") String pass,@Param("did") int did);
     @Transactional
     @Modifying
-    @Query(value = "update deltvery d set d.d_offer =:offer where d.d_id=:did",nativeQuery = true)
+    @Query(value = "update delivery d set d.d_offer =:offer where d.d_id=:did",nativeQuery = true)
     int Offer(@Param("offer") String offer,@Param("did") int did);
 
-    @Query(value = "select * from delivery d where d.d_BeViewed =:state and d.u_id=:uid",nativeQuery = true)
+    @Query(value = "select * from delivery d where d.d_beviewed =:state and d.u_id=:uid",nativeQuery = true)
     List<Delivery> QueryBeviewd(@Param("state")String state,@Param("uid")int uid);
-    @Query(value = "select * from delivery d where d.d_Pass =:state and d.u_id=:uid",nativeQuery = true)
+    @Query(value = "select * from delivery d where d.d_pass =:state and d.u_id=:uid",nativeQuery = true)
     List<Delivery> QueryPass(@Param("state")String state,@Param("uid")int uid);
     @Query(value = "select * from delivery d where d.d_Offer =:state and d.u_id=:uid",nativeQuery = true)
     List<Delivery> QueryOffer(@Param("state")String state,@Param("uid")int uid);

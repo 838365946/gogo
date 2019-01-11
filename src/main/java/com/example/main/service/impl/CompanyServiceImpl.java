@@ -60,5 +60,15 @@ public class CompanyServiceImpl  implements CompanyService {
         return companyDao.PassChecka(company.getC_id(),str);
     }
 
+    @Override
+    public List<Company> CheckCname(String cname) {
+        return companyDao.checkcname(cname);
+    }
+
+    @Override
+    public List<Company> CheckCusername(String cusername) {
+        return companyDao.checkcusername(cusername);
+    }
+
 
 }

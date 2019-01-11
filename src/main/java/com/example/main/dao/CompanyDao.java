@@ -29,4 +29,9 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     @Transactional
 @Query(value = "update company c set c.c_check_status =:status where c_id=:cid",nativeQuery = true)
     int PassChecka(@Param("cid") int cid,@Param("status") String status);
+
+    @Query(value = "select * from company c where c.c_name=:cname",nativeQuery = true)
+    List<Company> checkcname(@Param("cname")String cname);
+    @Query(value = "select * from company c where c.c_username=:cusername",nativeQuery = true)
+    List<Company> checkcusername(@Param("cusername")String cusername);
 }

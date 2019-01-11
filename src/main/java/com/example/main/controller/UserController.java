@@ -1,7 +1,6 @@
 package com.example.main.controller;
 
 import com.example.main.model.Message;
-import com.example.main.model.Resume;
 import com.example.main.model.User;
 import com.example.main.service.UserService;
 import com.example.main.util.CompanyIO;
@@ -31,6 +30,37 @@ if(request.getSession().getAttribute("user")!=null||request.getSession().getAttr
 }
     return "login";
 }
+@RequestMapping("/updateuser")
+@ResponseBody
+public Message UpdateUser(User user) throws NullPointerException{
+Message message=new Message();
+List<User> users=userService.SelcectByuser(user.getId());
+if (users.size()>0){
+    User user1=users.get(0);
+    user1.setNickname(user.getNickname());
+    user1.setEmail(user.getEmail());
+    user1.setBirthday(user.getBirthday());
+    user1.setCity(user.getCity());
+    user1.setSex(user.getSex());
+    User u=userService.save(user1);
+    if(u!=null){
+        message.setB(true);
+        message.setDes("修改成功");
+        message.setData(u);
+    }else {
+        message.setB(false);
+        message.setDes("修改失败");
+    }
+}else {
+    message.setB(false);
+    message.setDes("你还没有个人资料");
+}
+
+return message;
+
+}
+
+
 @RequestMapping(value = "/updatehead", method = { RequestMethod.POST,RequestMethod.GET})
 @ResponseBody
 public Message UpdateHead(HttpServletRequest request,User user){
@@ -123,7 +153,7 @@ ModelAndView modelAndView=new ModelAndView();
     @ResponseBody
     public Message AddUser(User user){
         Message message=new Message();
-        user.setHeadicon("userlogo/1/head.png");
+        user.setHeadicon("/userlogo/1/head.png");
         User user1=userService.AddUser(user);
         if (user1!=null){
             message.setB(true);

@@ -43,6 +43,7 @@ public class WebSocketServer {
             if(key.equals(username)){
                 try {
                     sendMessage(sendoutlinemess.get(key));
+                    sendoutlinemess.remove(key);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -72,6 +73,7 @@ public class WebSocketServer {
                 String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
                 webSocketSet.get(tousername).sendMessage(str);
                 webSocketSet.get(username).sendMessage(str);
+
             } catch (IOException e) {
 
             }
