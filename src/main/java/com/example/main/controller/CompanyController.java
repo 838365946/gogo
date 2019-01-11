@@ -257,6 +257,16 @@ private PositionService positionService;
         }
         return  message;
     }
+    @RequestMapping("/nobanned")
+    @ResponseBody
+    public Message Passccc(Company company){
+    int i=companyService.PassChecka(company,"未审核");
+    if(i>0){
+        message.setB(true);
+    }else {
+        message.setB(false);
+    }return message;
+    }
 
 
     @RequestMapping("/losecheck")

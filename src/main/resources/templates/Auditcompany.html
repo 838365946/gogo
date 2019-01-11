@@ -72,51 +72,6 @@
 
                 }
             }
-            var en=document.getElementsByClassName("fj");
-            for (var i=0;i<en.length;i++) {
-                en[i].onclick = function () {
-
-                    var ii= this.parentElement.parentElement
-                    var qs=ii.children[0].innerHTML;
-                    $.ajax({
-                        url:"/banned",
-                        data:"c_id="+qs,
-                        type:"post",
-                        dataType:"json",
-                        success:function (data){
-                            window.location.reload();
-                        }
-
-
-                    })
-
-
-
-                }
-            }
-            var en=document.getElementsByClassName("jf");
-            for (var i=0;i<en.length;i++) {
-                en[i].onclick = function () {
-
-                    var ii= this.parentElement.parentElement
-                    var qs=ii.children[0].innerHTML;
-                    $.ajax({
-                        url:"/unblocking",
-                        data:"c_id="+qs,
-                        type:"post",
-                        dataType:"json",
-                        success:function (data){
-                            window.location.reload();
-                        }
-
-
-                    })
-
-
-
-                }
-            }
-
 
 
 

@@ -20,11 +20,11 @@
         $.ajax({
             url:"/getcompbystate",
             type:"post",
-            data:"status=被封禁",
+            data:"c_check_status=被封禁",
             dataType:"json",
             success:function(data) {
                 for (var i=0;i<data.data.length;i++){
-                    ss="<tr class='modifyss'><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_des+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx'>解封</button></td></tr>"
+                    ss="<td>"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_welfare+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx'>解封</button></td></tr>"
                     str+=ss
                 }
                 str+="</table>"
@@ -35,7 +35,7 @@
                         var ii= this.parentElement.parentElement
                         var qs=ii.children[0].innerHTML;
                         $.ajax({
-                            url:"/unblocking",
+                            url:"/nobanned",
                             data:"c_id="+qs,
                             type:"post",
                             dataType:"json",
