@@ -1,6 +1,7 @@
 package com.example.main.controller;
 
 import com.example.main.dao.ResumeDao;
+import com.example.main.model.Experience;
 import com.example.main.model.Message;
 import com.example.main.model.Resume;
 import com.example.main.model.User;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,9 +33,12 @@ public class ResumeController {
 @Autowired
     private ExService exService;
     @RequestMapping("/addresume")
-public Message SaveResume(Resume resume,User user){
+public Message SaveResume(Resume resume, User user, Experience experience){
     Message message =new Message();
+    List<Experience>experiences=new ArrayList<Experience>();
+    experiences.add(experience);
     resume.setUser(user);
+    resume.setExperiences(experiences);
     Resume resume1=resumeService.SaveResume(resume);
 if(resume1!=null){
 message.setB(true);
