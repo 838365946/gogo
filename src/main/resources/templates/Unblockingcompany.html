@@ -14,31 +14,29 @@
 </style>
 </head>
 <script>
-    var str = "<table class=table table-bordered table-hover> <tr><td>ID</td><td>姓名</td><td>年龄</td><td>性别</td><td>电话号码</td><td>昵称</td><td>住址</td><td>状态</td><td>操作</td></tr>"
+    var str = "<table class=table table-bordered table-hover> <tr><td>ID</td><td>公司名称</td><td>公司所在行业</td><td>企业性质</td><td>公司介绍</td><td>公司地址</td><td>状态</td><td>操作</td></tr>"
     var ss = ""
     $(function () {
         $.ajax({
-            url:"/getuserbystatus",
+            url:"/getcompbystate",
             type:"post",
-            data:"status=被封禁",
+            data:"c_check_status=被封禁",
             dataType:"json",
             success:function(data) {
                 for (var i=0;i<data.data.length;i++){
-                    ss="<tr><td >"+data.data[i].id+"</td><td>"+data.data[i].name+"</td><td>"+data.data[i].age+"</td><td>"+data.data[i].sex+"</td><td>"+data.data[i].phone_number+"</td><td>"+data.data[i].nickname+"</td><td>"+data.data[i].city+"</td><td>"+data.data[i].status+"</td><td><button class='ff'>解封</button></td></tr>"
+                    ss="<td>"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_welfare+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx'>解封</button></td></tr>"
                     str+=ss
-                    console.log(data.data[i].status)
                 }
                 str+="</table>"
                 $("#a").html(str)
-                var en=document.getElementsByClassName("ff");
+                var en=document.getElementsByClassName("yx");
                 for (var i=0;i<en.length;i++) {
-
                     en[i].onclick = function () {
                         var ii= this.parentElement.parentElement
                         var qs=ii.children[0].innerHTML;
                         $.ajax({
-                            url:"/jcstatus",
-                            data:"id="+qs,
+                            url:"/nobanned",
+                            data:"c_id="+qs,
                             type:"post",
                             dataType:"json",
                             success:function (){

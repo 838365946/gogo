@@ -71,5 +71,10 @@ public class CompanyServiceImpl  implements CompanyService {
         return companyDao.checkcusername(cusername);
     }
 
+    @Override
+    public List<Company> QueryBystate(String state) {
+        return companyDao.QueryBystate(state);
+    }
+
 
 }

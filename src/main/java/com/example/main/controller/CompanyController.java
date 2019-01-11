@@ -1,6 +1,5 @@
 package com.example.main.controller;
 
-import com.example.main.dao.CompanyDao;
 import com.example.main.model.Company;
 import com.example.main.model.Delivery;
 import com.example.main.model.Message;
@@ -35,9 +34,6 @@ public class CompanyController {
     private CompanyService companyService;
 @Autowired
     private DeliveryService deliveryService;
-   @Autowired
-    private CompanyDao companyDao;
-
 @Autowired
 private PositionService positionService;
     private CompanyIO companyIO = new CompanyIO();
@@ -59,7 +55,6 @@ private PositionService positionService;
             company1.setC_img(imgpath);
             company1.setLogopath(logopath);
             company1.setC_check_status("未审核");
-            company1.setC_des("等待上传");
           c=   companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -205,7 +200,6 @@ private PositionService positionService;
     public ModelAndView Reg(Company company){
         ModelAndView modelAndView=new ModelAndView();
         System.out.println(company.toString());
-        company.setC_des("等待上传");
         Company company1=companyService.addcompany(company);
         if (company1!=null){
             modelAndView.setViewName("login");
@@ -263,6 +257,16 @@ private PositionService positionService;
         }
         return  message;
     }
+    @RequestMapping("/nobanned")
+    @ResponseBody
+    public Message Passccc(Company company){
+    int i=companyService.PassChecka(company,"未审核");
+    if(i>0){
+        message.setB(true);
+    }else {
+        message.setB(false);
+    }return message;
+    }
 
 
     @RequestMapping("/losecheck")
@@ -278,14 +282,27 @@ private PositionService positionService;
         }
         return  message;
     }
-
-    @RequestMapping("/eckcname")
+@RequestMapping("/checkcname")
     @ResponseBody
     public  Message CheckCname(Company company){
-        List<Company> companies=companyService.CheckCname(company.getC_name());
+    List<Company> companies=companyService.CheckCname(company.getC_name());
+    if (companies.size()>0){
+        message.setB(false);
+        message.setDes("公司名已存在");
+    }else {
+        message.setB(true);
+        message.setDes("可以使用");
+    }
+    return message;
+}
+
+    @RequestMapping("/checkcusername")
+    @ResponseBody
+    public  Message CheckCusername(Company company){
+        List<Company> companies=companyService.CheckCname(company.getC_username());
         if (companies.size()>0){
             message.setB(false);
-            message.setDes("公司名已存在");
+            message.setDes("账户已存在");
         }else {
             message.setB(true);
             message.setDes("可以使用");
@@ -293,21 +310,20 @@ private PositionService positionService;
         return message;
     }
 
-    @RequestMapping("/eckcusername")
+    @RequestMapping("/getcompbystate")
     @ResponseBody
-    public  Message CheckCusername(Company company){
-        List<Company> companies=companyService.CheckCusername(company.getC_username());
-        if (companies.size()>0){
+    public  Message Getcompbystate(Company company){
+        List<Company> companies=companyService.QueryBystate(company.getC_check_status());
+        if (companies.size()<0){
             message.setB(false);
-            message.setDes("账户已存在");
+            message.setDes("获取失败");
         }else {
             message.setB(true);
-            message.setDes("账号可以使用");
+            message.setDes("获取成功");
+            message.setData(companies);
         }
         return message;
     }
-
-
 }
 
 

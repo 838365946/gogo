@@ -18,4 +18,5 @@ public interface UserService {
    List<User> SelcectByuser(int id);
    List<User> FindAll();
    List<User> FindbyStatus(String staus);
+   int GaiZt(User user,String strt);
 }

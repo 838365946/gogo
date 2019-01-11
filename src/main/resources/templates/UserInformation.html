@@ -1,68 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://java.sun.com/jsf/composite">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/skin_/index.css" />
-    <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/global.js"></script>
-    <script type="text/javascript" src="../js/jquery-ui-1.9.2.custom.min.js"></script>
-    <title>首页</title>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.w3.org/1999/html">
+<meta charset="UTF-8">
+<title>可编辑表格</title>
+<link rel="stylesheet"href="/css/backstage/bootstrap.css">
+<script src="/js/backstage/table.js"></script>
+<script src="../js/backstage/modify.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<style media="screen">
+    .table {
+        text-align: center;
+    }
+</style>
 </head>
+<script>
+    var str = "<table class=table table-bordered table-hover> <tr><td>ID</td><td>姓名</td><td>年龄</td><td>性别</td><td>电话号码</td><td>昵称</td><td>住址</td><td>状态</td></tr>"
+    var ss = ""
+    $(function () {
+        $.ajax({
+            url:"/getalluser",
+            type:"post",
+            data:"page=0",
+            dataType:"json",
+            success:function(data) {
+                for (var i=0;i<data.data.length;i++){
+                    ss="<tr><td >"+data.data[i].id+"</td><td>"+data.data[i].name+"</td><td>"+data.data[i].age+"</td><td>"+data.data[i].sex+"</td><td>"+data.data[i].phone_number+"</td><td>"+data.data[i].nickname+"</td><td>"+data.data[i].city+"</td><td>"+data.data[i].status+"</td></tr>"
+                    str+=ss
+                }
+                str+="</table>"
+                $("#a").html(str)
+
+
+
+
+
+
+
+            }
+        })
+    })
+</script>
 <body>
-<div id="container">
-    <div id="hd">
-    </div>
 
-    <ul class="content-list" th:each="user:${userslist}">
-<span th:text = "${user}"></span>
-        <li class="content-item dothings">
-            <h2 class="content-hd">
-                    	<span class="opt">
-                        	<span class="refresh" title="刷新"></span>
-                            <span class="setting" title="设置"></span>
-                            <span class="report" title="导出"></span>
-                            <span class="close" title="关闭"></span>
-                        </span>
-                <span class="title">融创蜀兴科技公司</span>
-            </h2>
-            <div class="content-bd">
-                <ul class="content-list things" >
-                    <li class="content-list-item">
-                        <i class="icon"></i>
-                        <a href="javascript:;" th:text="${user.name}"></a>
-                    </li>
-                    <li class="content-list-item">
-                        <i class="icon"></i>
-                        <a href="javascript:; " th:value="${user.home}">然后交2万元</a>
-                    </li>
-                    <li class="content-list-item">
-                        <i class="icon"></i>
-                        <a href="javascript:;" th:value="${user.name}">再培训你一年</a>
-                    </li>
-                    <li class="content-list-item">
-                        <i class="icon"></i>
-                        <a href="javascript:;" th:value="${user.name}">周末双休</a>
-                    </li>
-                    <li class="content-list-item">
-                        <i class="icon"></i>
-                        <a href="javascript:;" th:value="${user.name}">包吃包住</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-    </ul>
-</div>
+<div id="a">
 
 </div>
-</div>
-</div>
+
+
+
+
 </body>
+<script>
 
 
-
-
+</script>
 
 </html>

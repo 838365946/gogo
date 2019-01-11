@@ -37,6 +37,11 @@ private String birthday;
 @Column
         private String city;
 @Column
+private String status;
+
+
+    @Column
+
         private String sex;
 @Column
         private int age;
@@ -78,6 +83,14 @@ private List<Delivery> deliveries;
         return id;
     }
 
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public void setId(int id) {
         this.id = id;
     }

@@ -9,9 +9,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.IdentityHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -23,7 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketServer {
     //记录在线用户
     private static int onlinecount=0;
-    private static Map<String,String> sendoutlinemess=new IdentityHashMap<String,String>();
+    private static List<String> users=new ArrayList<String>();
+    private static List<String> messes=new ArrayList<String>();
     //存放客户端对应的websocket
     private static ConcurrentHashMap<String, WebSocketServer> webSocketSet = new ConcurrentHashMap<String, WebSocketServer>(); //与客户端的连接session，用他主动给客户端发消息
     private Session session;
@@ -39,16 +38,17 @@ public class WebSocketServer {
         System.out.println(username);
         System.out.println(webSocketSet.get(param)+"这个人");
         addonlinecount();
-        for(String key:sendoutlinemess.keySet()){
-            if(key.equals(username)){
-                try {
-                    sendMessage(sendoutlinemess.get(key));
-                    sendoutlinemess.remove(key);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+       for(int i=0;i<messes.size();i++){
+           if(users.get(i).equals(username)){
+               try {
+                   webSocketSet.get(username).sendMessage(messes.get(i));
+                   users.remove(i);
+                   messes.remove(i);
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+           }
+       }
         System.out.println("有新连接加入！在线人数为"+getOnlinecount());
 
     }
@@ -80,7 +80,8 @@ public class WebSocketServer {
         }else{
             try {
                 String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
-                sendoutlinemess.put(new String(tousername),str);
+                users.add(tousername);
+                messes.add(mess);
                 webSocketSet.get(username).sendMessage(str);
             } catch (IOException e) {
                 e.printStackTrace();
