@@ -6,6 +6,7 @@ import com.example.main.model.Position;
 import com.example.main.model.User;
 import com.example.main.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,8 @@ public Message CheckPost(User user, Position position){
 }
 @RequestMapping("/updatestate")
 @ResponseBody
-public Message CheckDelivery(Delivery delivery,String state){
+public Message CheckDelivery(Delivery delivery,@Param("state")String state){
+    System.out.println(state);
 Message message=new Message();
 int i=deliveryService.Updatestate(state,delivery);
 if (i>0){
