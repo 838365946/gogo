@@ -52,6 +52,7 @@ return message;
 @RequestMapping("/getbyid")
     @ResponseBody
     public Message QueryById(Position position){
+
         Message message=new Message();
         Position position1=positionService.QueryById(position.getP_id());
         if(position1!=null){
@@ -63,5 +64,17 @@ return message;
         }
         return message;
 }
-
+@RequestMapping("/delposition")
+    @ResponseBody
+public Message DelPosition(Position position){
+    Message message=new Message();
+    int i=positionService.DelPOsition(position.getP_id());
+    if(i>0){
+        message.setB(true);
+        message.setDes("删除成功");
+    }else {
+        message.setB(false);
+    }
+    return message;
+}
 }

@@ -81,7 +81,7 @@ public class WebSocketServer {
             try {
                 String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
                 users.add(tousername);
-                messes.add(mess);
+                messes.add(str);
                 webSocketSet.get(username).sendMessage(str);
             } catch (IOException e) {
                 e.printStackTrace();

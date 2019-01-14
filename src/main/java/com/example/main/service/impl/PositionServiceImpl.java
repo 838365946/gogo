@@ -64,4 +64,9 @@ public class PositionServiceImpl implements PositionService{
     public Position QueryById(int p_id) {
         return positionDao.QueryById(p_id);
     }
+
+    @Override
+    public int DelPOsition(int pid) {
+        return positionDao.DelPosition(pid);
+    }
 }
