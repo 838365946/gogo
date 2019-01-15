@@ -24,7 +24,7 @@ public class FindPositionServiceImpl implements FindPositionService {
 
 
 
-        return positionDao.findAll(pageable);
+        return positionDao.findAllS(pageable);
     }
 
     @Override

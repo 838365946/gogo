@@ -324,6 +324,21 @@ private PositionService positionService;
         }
         return message;
     }
+    @RequestMapping("/querycompanybycname")
+    @ResponseBody
+    public Message QueryByCname(Company company){
+        Company company1=companyService.QueryByCname(company.getC_name());
+        if(company1!=null){
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(company1);
+        }else {
+            message.setB(false);
+            message.setDes("获取失败");
+        }
+        return message;
+    }
+
 }
 
 
