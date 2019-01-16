@@ -76,5 +76,10 @@ public class CompanyServiceImpl  implements CompanyService {
         return companyDao.QueryBystate(state);
     }
 
+    @Override
+    public Company QueryByCname(String cname) {
+        return companyDao.QueryByCname(cname);
+    }
+
 
 }

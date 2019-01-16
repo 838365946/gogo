@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Repository
 public interface CompanyDao extends JpaRepository<Company,Long>{
-@Query(value = "select * from company c where c.c_username=:c_username and c.c_password =:password",nativeQuery = true)
+@Query(value = "select * from company c where c.c_check_status='正常' and c.c_username=:c_username and c.c_password =:password",nativeQuery = true)
     Company CLogin(@Param("c_username") String c_username, @Param("password") String password);
 @Query(value = "select * from company c where c.c_id = :id",nativeQuery = true)
     Company findById(@Param("id") int id);
@@ -37,4 +37,6 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     List<Company> checkcusername(@Param("cusername")String cusername);
     @Query(value = "select * from company c where c.c_check_status=:state",nativeQuery = true)
     List<Company> QueryBystate(@Param("state")String state);
+    @Query(value = "select * from company c where c.c_check_status='正常' and c.c_name=:cname",nativeQuery = true)
+    Company QueryByCname(@Param("cname")String cname);
 }

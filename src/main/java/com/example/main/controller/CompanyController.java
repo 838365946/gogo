@@ -54,7 +54,7 @@ private PositionService positionService;
             company1.setC_des(despath);
             company1.setC_img(imgpath);
             company1.setLogopath(logopath);
-            company1.setC_check_status("未审核");
+
           c=   companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,12 +107,12 @@ private PositionService positionService;
         company1.setC_welfare(company.getC_welfare());
         company1.setC_industry(company.getC_industry());
         company1.setC_scale(company.getC_scale());
-        company1.setC_check_status("未审核");
+
         Company company2=companyService.addcompany(company1);
         if (company2==null){
 
         message.setB(false);
-        message.setDes("修改失败");
+        message.setDes("修改失败了");
 
         }else {
             company2.setC_des(des);
@@ -324,6 +324,21 @@ private PositionService positionService;
         }
         return message;
     }
+    @RequestMapping("/querycompanybycname")
+    @ResponseBody
+    public Message QueryByCname(Company company){
+        Company company1=companyService.QueryByCname(company.getC_name());
+        if(company1!=null){
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(company1);
+        }else {
+            message.setB(false);
+            message.setDes("获取失败");
+        }
+        return message;
+    }
+
 }
 
 

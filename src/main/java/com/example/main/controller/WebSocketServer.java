@@ -98,17 +98,27 @@ error.printStackTrace();
 
     //群发消息lll
 public static void sendInfo(String message){
-    System.out.println(message);
-   for (String str:webSocketSet.keySet()){
-       try {
-           webSocketSet.get(str).sendMessage(message);
-       } catch (IOException e) {
-       continue;
-       }
-   }
+        System.out.println(message);
+        for (String str:webSocketSet.keySet()){
+            try {
+                webSocketSet.get(str).sendMessage(message);
+            } catch (IOException e) {
+                continue;
+            }
+        }
 
-}
+    }
+    public static void sendtoone(String userid,String cname,String messes){
+        String sf=new SimpleDateFormat().format(new Date());
+        String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messes+"\"}";
+            try {
+                webSocketSet.get(userid).sendMessage(str);
+            } catch (IOException e) {
 
+            }
+
+
+    }
 
     public static synchronized void addonlinecount(){
         WebSocketServer.onlinecount++;

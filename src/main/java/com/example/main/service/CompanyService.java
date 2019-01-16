@@ -19,5 +19,5 @@ public interface CompanyService {
     List<Company> CheckCname(String cname);
     List<Company> CheckCusername(String cusername);
     List<Company> QueryBystate(String state);
-
+    Company QueryByCname(String cname);
 }
