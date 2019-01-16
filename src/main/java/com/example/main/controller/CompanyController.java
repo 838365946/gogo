@@ -112,7 +112,7 @@ private PositionService positionService;
         if (company2==null){
 
         message.setB(false);
-        message.setDes("修改失败");
+        message.setDes("修改失败了");
 
         }else {
             company2.setC_des(des);
