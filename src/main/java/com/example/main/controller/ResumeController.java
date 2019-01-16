@@ -82,6 +82,9 @@ return message;
 public Message QueryByUser(User user){
     Message message=new Message();
     Resume resume=resumeService.QueryByUid(user.getId());
+    List<Experience> experiences=exService.QueryByUser(user.getId());
+    resume.setExperiences(experiences);
+    System.out.println(resume.getExperiences());
 if(resume!=null){
     message.setB(true);
     message.setDes("获取成功");

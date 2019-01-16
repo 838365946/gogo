@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>查看简历</title>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
 </head>
 <style type="text/css">
 
@@ -48,121 +50,162 @@
         position:fixed;
         top: 0px;
     }
+   #qq{
+       width:400px;
+       height:500px;
+       background: #ff3a5f;
+       margin:0 auto;
+       z-index: 99;
+   }
+
+    #remoteVideos video {
+        height: 150px;
+    }
+
+    #localVideo {
+        height: 150px;
+    }
+
+    #messages{
+        resize:none;
+        height: 300px;
+        width: 200px;
+        position: absolute;
+        top: 0px;
+
+    }
 
 </style>
 
 
-
-
-
-
-
 <script>
+
+
+
+
     var str="<table class= table-1> <tr><td>id</td><td>序号</td><td>姓名</td> <td>年龄</td> <td>性别</td><td>城市</td> <td>email</td><td>工作经验</td><td>面试岗位</td><td>操作</td> </tr>"
     var ss=""
-    $(function () {
-        $.ajax({
-            url:"/readresume",
-            type:"post",
-            dataType:"json",
-            success:function (data) {
-               console.log(data)
-
-                for (var i = 0; i < data.data.length; i++) {
-                   if (data.data[i].d_pass!="是"){
-                       ss = "<tr><td>"+data.data[i].user.id+"</td><td>"+i+"</td><td>"+data.data[i].user.name+"</td><td>"+data.data[i].user.age+"</td><td>"+data.data[i].user.sex+"</td><td>"+data.data[i].user.city+"</td><td>"+data.data[i].user.email+"</td><td>"+data.data[i].user.exp_time+"</td><td>"+data.data[i].position.p_posi_name+"</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
-                       str+=ss
-                   }
-
-                }
-                str += "</table>"
-                $("#container").html(str)
-                var en=document.getElementsByClassName("look");
-
-                for (var i=0;i<en.length;i++) {
-                    en[i].onclick = function () {
-                        var ii= this.parentElement.parentElement
-                        var qs=ii.children[0].innerHTML;
-                        var qq=ii.children[1].innerHTML;
-                        var z=data.data[qq].d_id
+          $(function () {
+                    $.ajax({
+                        url: "/readresume",
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
 
 
-                        $.ajax({
-                            url:"/getuserresume",
-
-                            data:"id="+qs,
-                            type:"post",
-                            dataType:"json",
-                            success:function (dat ){
-                                console.log(qs+"qq")
-                                console.log(dat)
-                                var  divone=document.getElementById("container")
-                                divone.style.visibility="hidden"
-                                var  divtwo=document.getElementById("personal_resume")
-                                divtwo.style.visibility="visible"
-                                var jlnr="<text><h4>姓名:"+dat.data[0].resume.r_name+"     毕业学校:"+dat.data[0].resume.r_edu_school+"     专业:"+dat.data[0].resume.r_edu_class+"     文凭:"+dat.data[0].resume.r_edu_education+"工作年龄:"+dat.data[0].resume.r_exp_time+"地址:"+dat.data[0].resume.r_work_addr+"工作性质:"+dat.data[0].resume.r_work_nature+"期望薪资:"+dat.data[0].resume.r_hope_sal+"联系电话:"+dat.data[0].resume.phonenumber+"   工作行业:"+dat.data[0].resume.r_work_industry+"</h4><h2>工作经验</h2><table class= ta> <tr><td>公司</td><td>职位</td> <td>工作时间</td> <td>行业</td><td>薪资</td> <td>工作描述</td></tr>"
-                                 var gzjy=""
-                                for(var jl=0;jl<dat.data.length;jl++){
-                                    gzjy="<tr><td>"+dat.data[jl].e_comp_name+"</td><td>"+dat.data[jl].e_comp_position+"</td><td>"+dat.data[jl].e_date+"</td><td>"+dat.data[jl].e_industry+"</td><td>"+dat.data[jl].e_sal+"</td><td>"+dat.data[jl].e_word_des+"</td></tr>"
-                                    jlnr+=gzjy
+                            for (var i = 0; i < data.data.length; i++) {
+                                if (data.data[i].d_pass != "是") {
+                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.name + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
+                                    str += ss
                                 }
-                                jlnr += "<button id='pass'>未通过</button> <button id='yes'>邀请面试</button></table></text>"
-                                $("#personal_resume").html(jlnr)
 
-                                var pas=document.getElementById("pass")
-                                pas.onclick=function (){
+                            }
+                            str += "</table>"
+                            $("#container").html(str)
+                            var en = document.getElementsByClassName("look");
+
+                            for (var I = 0; I < en.length; I++) {
+                                en[I].onclick = function () {
+                                    var ii = this.parentElement.parentElement
+                                    var qs = ii.children[0].innerHTML;
+                                    var qq = ii.children[1].innerHTML;
+                                    var z = data.data[qq].d_id
                                     $.ajax({
-                                        url:"/updatestate",
-                                        data:"d_id="+z+"&state=不合适",
-                                        type:"post",
-                                        dataType:"json",
-                                        success:function (da){
-                                            alert("操作成功!")
+                                        url: "/getresume",
+                                        data: "id=" + qs,
+                                        type: "post",
+                                        dataType: "json",
+                                        success: function (dat) {
+                                               console.log(dat)
+                                            var divone = document.getElementById("container")
+                                            divone.style.visibility = "hidden"
+                                            var divtwo = document.getElementById("personal_resume")
+                                            divtwo.style.visibility = "visible"
+                                            var jlnr = "<text><h4>姓名:" + dat.data.r_name + "     毕业学校:" + dat.data.r_edu_school + "     专业:" + dat.data.r_edu_class + "     文凭:" + dat.data.r_edu_education + "工作年龄:" + dat.data.r_exp_time + "地址:" + dat.data.r_work_addr + "工作性质:" + dat.data.r_work_nature + "期望薪资:" + dat.data.r_hope_sal + "联系电话:" + dat.data.phonenumber + "   工作行业:" + dat.data.r_work_industry + "</h4><h2>工作经验</h2><table class= ta> <tr><td>公司</td><td>职位</td> <td>工作时间</td> <td>行业</td><td>薪资</td> <td>工作描述</td></tr>"
+                                            var gzjy = ""
+                                            console.log(qs)
+                                            $.ajax({
+                                                url: "/getuserresume",
+                                                data: "id=" + qs,
+                                                type: "post",
+                                                dataType: "json",
+                                                success: function (res) {
+                                               console.log(res)
+                                                    console.log(res.data[0].e_id)
+                                                    console.log(res.data[1].e_comp_name)
+                                               if (res.b){
+
+                                                for (var j = 0; j < res.data.length; j++) {
+                                                 gzjy = "<tr><td>" + res.data[j].e_comp_name+ "</td><td>" + res.data[j].e_comp_position + "</td><td>" + res.data[j].e_date + "</td><td>" + res.data[j].e_industry + "</td><td>" + res.data[j].e_sal + "</td><td>" + res.data[j].e_word_des + "</td></tr>"
+                                                    jlnr+=gzjy
+                                                    console.log("循坏")
+                                                        }
+
+                                                    }else {
+                                                     gzjy ="<tr><td>无工作经历</td></tr>"
+
+                                                     jlnr += gzjy
+                                                     }
+
+                                                    jlnr += "<button id='pass'>未通过</button> <button id='yes'>邀请面试</button><button id='fh'>返回</button></table></text>"
+                                                    $("#personal_resume").html(jlnr)
+
+
+                                                }
+                                            })
+
+
+                                            var hh = document.getElementById("fh")
+                                             hh.onclick=function () {
+                                             var divone = document.getElementById("container")
+                                             divone.style.visibility = "visible"
+                                             var divtwo = document.getElementById("personal_resume")
+                                             divtwo.style.visibility = "hidden"
+                                            }
+
+                                            var yes = document.getElementById("yes")
+                                            yes.onclick = function () {
+                                                var divone = document.getElementById("qq")
+                                                divone.style.visibility = "visible"
+                                                var divtwo = document.getElementById("personal_resume")
+                                                divtwo.style.visibility = "hidden"
+                                            }
+
+                                            var pas = document.getElementById("pass")
+                                            pas.onclick = function () {
+                                                $.ajax({
+                                                    url: "/updatestate",
+                                                    data: "d_id=" + z + "&state=不合适",
+                                                    type: "post",
+                                                    dataType: "json",
+                                                    success: function (da) {
+                                                        alert("操作成功!")
+                                                    }
+
+                                                })
+                                            }
+
+
+
+
                                         }
 
                                     })
+
                                 }
-                              var yes=document.getElementById("yes")
-                                  yes.onclick=function () {
-                                 $.ajax({
-                                    url:"/updatestate",
-                                     data:"d_id"+z+"&state=邀请面试",
-                                     type:"post",
-                                     datatype:"json",
-                                     success:function (da) {
-
-                                     }
-
-                                 })
-
-
-
-                                  }
                             }
 
-                        })
 
-                    }
-                }
-
+                        }
+                    })
 
 
-
-            }
-        })
-
-
-    })
-
-
+                })
 
 
 
 
 </script>
-
-
-
 
 
 <body>
@@ -172,6 +215,23 @@
 <div id="personal_resume" style="visibility:hidden">
 
 </div>
+
+<div id="qq" style="visibility:hidden" >
+    <button id="ltfh">返回</button>
+    <textarea id="messages" rows="5" cols="20"></textarea><br />
+    <input id="text" type="text" />
+
+    <input id="send" type="button" value="send" /><br />
+    <video id="localVideo"></video>
+    <div id="remoteVideos"></div>
+
+
+
+
+
+
+</div>
+
 
 
 </body>

@@ -16,20 +16,25 @@ public class HTMLController {
     @RequestMapping("/load")
     @ResponseBody
     public Company Load(HttpServletRequest request){
-        System.out.println(request.getSession().getAttribute("company"));
+
 return (Company) request.getSession().getAttribute("company");
     }
-    //修改页面的ajax请求
+    //修改公司信息页面的ajax请求
     @RequestMapping("/dx")
     @ResponseBody
     public Company Loa(HttpServletRequest request){
-        System.out.println("页面");
-        System.out.println(request.getSession().getAttribute("company").toString());
+
+
         return (Company)request.getSession().getAttribute("company");
     }
+    //修改公司信息页面的ajax请求
+    @RequestMapping("/look")
+    @ResponseBody
+    public Company Loaa(HttpServletRequest request){
 
 
-
+        return (Company)request.getSession().getAttribute("company");
+    }
 
 }
 

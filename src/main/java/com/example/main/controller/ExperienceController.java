@@ -67,8 +67,7 @@ return message;
 @ResponseBody
     public Message QueryByUser(User user) {
     List<Experience> experiences=exService.QueryByUser(user.getId());
-    System.out.println(user.getId());
-    System.out.println(experiences);
+
     Message message=new Message();
         if (experiences.size()>0){
         message.setB(true);
