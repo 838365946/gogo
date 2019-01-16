@@ -1,9 +1,6 @@
 package com.example.main.controller;
 
-import com.example.main.model.Delivery;
-import com.example.main.model.Message;
-import com.example.main.model.Position;
-import com.example.main.model.User;
+import com.example.main.model.*;
 import com.example.main.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -52,9 +49,12 @@ return message;
 }
 @RequestMapping("/getdeliverystate")
     @ResponseBody
-    public Message GetDeliveryState(String state,User user){
+    public Message GetDeliveryState(String state, User user, Company company){
 Message message=new Message();
 List<Delivery> deliveries=deliveryService.SelectByState(state,user.getId());
+if(state.equals("邀请面试")){
+    WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+"邀请您进行面试");
+}
 if(deliveries.size()>0){
 message.setB(true);
 message.setDes("成功");
