@@ -27,30 +27,8 @@ public class ShowMessController {
     System.out.println("当前页码" +page);
     Message message=new Message();
     PageRequest pageRequest=PageRequest.of(page,10);
-    Page<Position> positionspage=  fp.ShowMess(pageRequest);
-    List<Position> positions = new ArrayList<Position>();
-    List<Company> companies = new ArrayList<Company>();
-    CompanyIO companyIO=new CompanyIO();
-    if(positionspage.getContent()!=null){
-        positions=positionspage.getContent();
-        for(int i=0;i<positions.size();i++){
-            if(companies.size()>0){
-            for (Company company:companies){
-                if (positions.get(i).getCompany()!=company){
-                    System.out.println(positions.toString());
-                    String des=positions.get(i).getCompany().getC_des();
-                    String str= String.valueOf(companyIO.ReadDes(des));
-                    positions.get(i).getCompany().setC_des(str);
-                    companies.add(positions.get(i).getCompany());
-                }
-            }}else {
-                String des=positions.get(i).getCompany().getC_des();
-                String str= String.valueOf(companyIO.ReadDes(des));
-                positions.get(i).getCompany().setC_des(str);
-                companies.add(positions.get(i).getCompany());
-            }
-            }
-               }
+    List<Position> positions=  fp.ShowMess(pageRequest);
+
         message.setB(true);
         message.setDes("获取职位成功");
         message.setData(positions);
@@ -71,8 +49,8 @@ public Message QueryByInput(@Param("page")Integer page,@Param("input") String in
         positions=positionspage.getContent();
         for(int i=0;i<positions.size();i++){
             if(companies.size()>0){
-                for (Company company:companies){
-                    if (positions.get(i).getCompany()!=company){
+                for (int a=0;a<companies.size();a++){
+                    if (positions.get(i).getCompany()!=companies.get(a)){
                         String des=positions.get(i).getCompany().getC_des();
                         String str= String.valueOf(companyIO.ReadDes(des));
                         positions.get(i).getCompany().setC_des(str);

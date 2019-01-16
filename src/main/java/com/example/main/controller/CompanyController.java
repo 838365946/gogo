@@ -200,6 +200,7 @@ private PositionService positionService;
     public ModelAndView Reg(Company company){
         ModelAndView modelAndView=new ModelAndView();
         System.out.println(company.toString());
+        company.setC_check_status("未审核");
         Company company1=companyService.addcompany(company);
         if (company1!=null){
             modelAndView.setViewName("login");
