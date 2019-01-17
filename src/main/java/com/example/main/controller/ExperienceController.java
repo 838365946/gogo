@@ -143,7 +143,7 @@ return message;
 
     @RequestMapping("/userupdate3")
     @ResponseBody
-    public Message UserUpdateE (User user,Experience experience) throws IOException {
+    public Message UserUpdateE (User user, Experience experience) throws IOException {
         System.out.println(user.toString());
         Message message=new Message();
         List<Experience> experiences= exService.QueryByUser(user.getId());

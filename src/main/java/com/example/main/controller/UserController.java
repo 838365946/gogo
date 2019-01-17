@@ -45,7 +45,7 @@ if (users.size()>0){
     User u=userService.save(user1);
     if(u!=null){
         message.setB(true);
-        message.setDes("修改成功");
+        message.setDes("修改信息成功");
         message.setData(u);
     }else {
         message.setB(false);
@@ -100,7 +100,7 @@ return message;
 @ResponseBody
     public Message Login(User user){
 
-
+    System.out.println(user.toString());
     Message message=new Message();
     User user1=userService.Login(user);
 if (user1!=null){
@@ -120,7 +120,7 @@ return message;
 
 ModelAndView modelAndView=new ModelAndView();
         User user1=userService.Login(user);
-      
+
         if (user1!=null){
             if (user1.getIsadmin().equals("是")){
                 modelAndView.setViewName("mainht");
@@ -149,12 +149,14 @@ ModelAndView modelAndView=new ModelAndView();
     }
         return message;
     }
-    @RequestMapping("adduser")
-    @ResponseBody
+   @RequestMapping("/adduser")
+   @ResponseBody
     public Message AddUser(User user){
+        System.out.println(user.toString());
         Message message=new Message();
         user.setHeadicon("/userlogo/moren/moren.png");
         User user1=userService.AddUser(user);
+
         if (user1!=null){
             message.setB(true);
             message.setDes("注册成功");

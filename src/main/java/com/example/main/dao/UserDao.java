@@ -18,7 +18,7 @@ public interface UserDao extends JpaRepository<User,Long> {
     @Query(value = "select * from user u where u.phone_number =:phonenumber and u.password=:password ",nativeQuery = true)
      User Login(@Param("phonenumber") String phone_number,@Param("password") String password);
     @Query(value = "select * from user u where u.phone_number =:phonenumber",nativeQuery = true)
-     User WxLogin(@Param("phonenumber")String phone_number);
+    User WxLogin(@Param("phonenumber")String phone_number);
        @Query(value = "select * from user u left join delivery d on u.id=d.u_id LEFT JOIN company c on d.c_id=c.c_id  where c.c_id=:c_id ",nativeQuery = true)
        List<User> findbyid1(@Param("c_id") int id);
        @Query(value = "select * from user u where u.phone_number=:phonenumber",nativeQuery = true)

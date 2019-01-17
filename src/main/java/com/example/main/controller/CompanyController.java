@@ -107,7 +107,7 @@ private PositionService positionService;
         company1.setC_welfare(company.getC_welfare());
         company1.setC_industry(company.getC_industry());
         company1.setC_scale(company.getC_scale());
-
+        company1.setC_nature(company.getC_nature());
         Company company2=companyService.addcompany(company1);
         if (company2==null){
 
@@ -183,7 +183,7 @@ private PositionService positionService;
     }
 
     @RequestMapping("/clogin")
-    public ModelAndView CompanyLogin(Company company, HttpServletRequest request){
+    public ModelAndView CompanyLogin(Company company, HttpServletRequest request)throws NullPointerException{
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
       if(company1!=null){
@@ -201,6 +201,9 @@ private PositionService positionService;
         ModelAndView modelAndView=new ModelAndView();
         System.out.println(company.toString());
         company.setC_check_status("未审核");
+        company.setC_img("未上传");
+        company.setC_des("未上传");
+        company.setLogopath("未上传");
         Company company1=companyService.addcompany(company);
         if (company1!=null){
             modelAndView.setViewName("login");
