@@ -227,7 +227,7 @@ private PositionService positionService;
             message.setData(deliveries);
         }else {
             message.setB(false);
-            message.setDes("获取失败.");
+            message.setDes("获取失败");
         }
 
         return message;

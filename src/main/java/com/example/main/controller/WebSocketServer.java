@@ -108,11 +108,20 @@ public static void sendInfo(String message){
         }
 
     }
-    public static void sendtoone(String userid,String cname,String messes){
+    public static void sendtoone(String userid,String cname,String messess){
         String sf=new SimpleDateFormat().format(new Date());
-        String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messes+"\"}";
+        String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messess+"\"}";
             try {
-                webSocketSet.get(userid).sendMessage(str);
+                if(webSocketSet.get(userid)!=null){
+                    System.out.println("zaixain");
+                    webSocketSet.get(userid).sendMessage(str);
+                }else{
+                    System.out.println("buzaixian");
+                        users.add(userid);
+                        messes.add(str);
+
+                }
+
             } catch (IOException e) {
 
             }

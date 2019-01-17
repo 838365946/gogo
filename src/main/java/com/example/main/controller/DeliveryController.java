@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -34,11 +35,16 @@ public Message CheckPost(User user, Position position){
 }
 @RequestMapping("/updatestate")
 @ResponseBody
-public Message CheckDelivery(Delivery delivery,@Param("state")String state){
-    System.out.println(state);
+public Message CheckDelivery(Delivery delivery, @Param("state")String state, User user, HttpServletRequest request){
+    System.out.println(state+user.getId());
 Message message=new Message();
 int i=deliveryService.Updatestate(state,delivery);
+Company company= (Company) request.getSession().getAttribute("company");
+
 if (i>0){
+    if(state.equals("邀请面试")){
+        WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+"邀请您进行面试");
+    }
     message.setB(true);
     message.setDes("成功");
 }else {
@@ -50,11 +56,10 @@ return message;
 @RequestMapping("/getdeliverystate")
     @ResponseBody
     public Message GetDeliveryState(String state, User user, Company company){
+
 Message message=new Message();
 List<Delivery> deliveries=deliveryService.SelectByState(state,user.getId());
-if(state.equals("邀请面试")){
-    WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+"邀请您进行面试");
-}
+
 if(deliveries.size()>0){
 message.setB(true);
 message.setDes("成功");
@@ -62,7 +67,7 @@ message.setData(deliveries);
 
 }else {
     message.setB(false);
-    message.setDes("失败");
+    message.setDes("失败a");
 }
 return message;
 }
