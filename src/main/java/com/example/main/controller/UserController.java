@@ -153,7 +153,7 @@ ModelAndView modelAndView=new ModelAndView();
     @ResponseBody
     public Message AddUser(User user){
         Message message=new Message();
-        user.setHeadicon("/userlogo/1/head.png");
+        user.setHeadicon("/userlogo/moren/moren.png");
         User user1=userService.AddUser(user);
         if (user1!=null){
             message.setB(true);
