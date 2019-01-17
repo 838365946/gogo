@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 
     @Entity
     @Table
-public class User implements Serializable{
+public class User extends Date implements Serializable{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
