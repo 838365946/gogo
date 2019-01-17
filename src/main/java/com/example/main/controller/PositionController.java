@@ -57,7 +57,7 @@ return message;
         Position position1=positionService.QueryById(position.getP_id());
         if(position1!=null){
             message.setB(true);
-            message.setDes("成功le");
+            message.setDes("成功");
             message.setData(position1);
         }else {
             message.setB(false);
