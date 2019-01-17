@@ -10,8 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2018/12/6.
@@ -27,26 +28,15 @@ private CompanyIO companyIO=new CompanyIO();
     public List<Position> ShowMess(Pageable pageable) {
         Page<Position> positionses=  positionDao.findAllS(pageable);
                 List<Position> positions=positionses.getContent();
-        List<Company> companies=new ArrayList<Company>();
+        Set<Company> companies=new HashSet<Company>();
         for(int i=0;i<positions.size();i++){
-            if(companies.size()>0){
-                for (int y=0;y<companies.size();y++){
-                    if (positions.get(i).getCompany()!=companies.get(y)){
-                        String des=positions.get(i).getCompany().getC_des();
-                        String str= String.valueOf(companyIO.ReadDes(des));
-                        positions.get(i).getCompany().setC_des(str);
-                        companies.add(positions.get(i).getCompany());
-                    }
-                }}else {
-                String des=positions.get(i).getCompany().getC_des();
-                String str= String.valueOf(companyIO.ReadDes(des));
-                positions.get(i).getCompany().setC_des(str);
-                companies.add(positions.get(i).getCompany());
-            }
+            companies.add(positions.get(i).getCompany());
+            positions.get(i).setP_des(String.valueOf(companyIO.ReadDes(positions.get(i).getP_des())));
         }
-
-
-
+        System.out.println(companies.toString());
+        for(Company company:companies){
+            company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
+        }
         return  positions;
     }
 

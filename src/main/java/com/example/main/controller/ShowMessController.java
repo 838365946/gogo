@@ -28,13 +28,11 @@ public class ShowMessController {
     Message message=new Message();
     PageRequest pageRequest=PageRequest.of(page,10);
     List<Position> positions=  fp.ShowMess(pageRequest);
-
         message.setB(true);
         message.setDes("获取职位成功");
         message.setData(positions);
     return message;
 }
-
 @RequestMapping("/querybyinput")
 public Message QueryByInput(@Param("page")Integer page,@Param("input") String input){
     System.out.println("当前页码" +page);

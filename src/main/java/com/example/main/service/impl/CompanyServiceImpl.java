@@ -3,6 +3,7 @@ package com.example.main.service.impl;
 import com.example.main.dao.CompanyDao;
 import com.example.main.model.Company;
 import com.example.main.service.CompanyService;
+import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.List;
 public class CompanyServiceImpl  implements CompanyService {
 @Autowired
     private CompanyDao companyDao;
+private CompanyIO companyIO=new CompanyIO();
     @Override
     public Company registered(Company company) {
         Company company1=companyDao.save(company);
@@ -23,6 +25,9 @@ public class CompanyServiceImpl  implements CompanyService {
     @Override
     public Page<Company> findall(Pageable pageable) {
         Page<Company> companies=companyDao.findAll(pageable);
+        for(Company c:companies.getContent()){
+            c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+        }
         return companies;
     }
 
@@ -39,8 +44,9 @@ public class CompanyServiceImpl  implements CompanyService {
 
     @Override
     public Company CLogin(Company company) {
-        System.out.println(company.toString());
-        return companyDao.CLogin(company.getC_username(),company.getC_password());
+        Company company1=companyDao.CLogin(company.getC_username(),company.getC_password());
+        company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
+        return company1;
     }
 
 
@@ -67,18 +73,21 @@ public class CompanyServiceImpl  implements CompanyService {
 
     @Override
     public List<Company> CheckCusername(String cusername) {
-
         return companyDao.checkcusername(cusername);
     }
-
     @Override
     public List<Company> QueryBystate(String state) {
-        return companyDao.QueryBystate(state);
+List<Company> companies=companyDao.QueryBystate(state);
+for(Company c:companies){
+    c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+}
+        return companies;
     }
-
     @Override
     public Company QueryByCname(String cname) {
-        return companyDao.QueryByCname(cname);
+Company company=companyDao.QueryByCname(cname);
+company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
+        return company;
     }
 
 
