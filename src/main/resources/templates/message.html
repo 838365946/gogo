@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>UserInfo</title>
-
-    <style type="text/css">
-        .Content-Main{
+	
+    <style type="text/css">  
+	.Content-Main{
             max-width: 500px;
             margin: auto;
             border: none;
-            border-radius: 5px;
+            border-radius: 5px; 
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
             font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,12 +22,12 @@
             display: block;
             border-bottom: 1px solid #444;
         }
-
+        
         .Content-Main label{
             margin: 0px 0px 5px;
             display: block;
         }
-
+        
         .Content-Main label>span{
             width: 20%;
             float: left;
@@ -36,14 +36,14 @@
             margin-top: 10px;
             font-weight: bold;
         }
-
+        
 
         .Content-Main textarea{
             height: 100px;
             width: 70%;
             padding: 5px 0px 0px 5px;
-            resize: none;
-            border-radius: 5px;
+			resize: none;
+			border-radius: 5px;
         }
         .Content-Main .button{
             padding: 8px 24px 8px 24px;
@@ -59,27 +59,35 @@
             -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
             color: #585858;
             background: #99CCCC;
-            margin-left: 395px;
+			margin-left: 395px;
         }
         .Content-Main .button:hover{
             color:  #333;
             background-color:  #EBEBEB ;
         }
-    </style>
+	</style>
+    <script>
+
+        
+    </script>
+    
+    
 </head>
 <body>
-<div class="Content-Main">
-    <form  action="" method="post" class="form-userInfo">
-        <h1>面试邀请信息</h1>
-        <p>
-            <label>
-                <span>消息内容:</span>
-                <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea>
-            </label>
-            <label>
-                <input type="submit" class="button" value="提交">
-            </label>
-    </form>
-</div>
+        <div class="Content-Main">
+            <form  action="" method="post" class="form-userInfo">
+                <h1>面试邀请信息</h1>               
+                <p>
+                <label>
+                    <span>消息内容:</span>
+                    <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea>
+                </label>
+                <label>
+                    <input type="submit" class="button" value="提交">
+
+                    <button id="fh">返回</button>
+                </label>
+            </form>
+        </div>
 </body>
 </html>
