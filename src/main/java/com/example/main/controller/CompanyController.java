@@ -141,7 +141,7 @@ private PositionService positionService;
     @ResponseBody
     public Message audit() {
         Message message = new Message();
-        List<Company> companies=companyService.CheckCompany("未审核");
+        List<Company> companies=companyService.CheckCompany("正常");
         if (companies.size()>0){
             message.setB(true);
             message.setDes("获取未审核公司成功");
@@ -260,7 +260,7 @@ private PositionService positionService;
     @RequestMapping("/nobanned")
     @ResponseBody
     public Message Passccc(Company company){
-    int i=companyService.PassChecka(company,"未审核");
+    int i=companyService.PassChecka(company,"正常");
     if(i>0){
         message.setB(true);
     }else {
@@ -272,7 +272,7 @@ private PositionService positionService;
     @RequestMapping("/losecheck")
     @ResponseBody
     public Message LoseCheck(Company company){
-        int i=companyService.PassCheck(company,"审核失败");
+        int i=companyService.PassCheck(company,"未通过审核");
         if (i>0){
             message.setB(true);
             message.setDes("审核失败了，返回成功");

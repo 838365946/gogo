@@ -90,7 +90,7 @@ html{*overflow:auto;}
 /***** 第二层面板 *****/
 .uew-opt-panel ul ul{position:absolute;left:102px;top:0px;box-shadow:1px 1px 4px rgba(102,102,102,0.3);}
 
-.system-switch{ display:none;position:absolute;top:64px;left:0; z-index:111;font-size:14px;min-width:235px;}
+
 .system-switch ul{background:#f2f2f2;padding:12px 0;}
 .system-switch ul li{position:relative;}
 .system-switch ul li i{/*position:absolute;*/float:left;margin:8px 8px 0 0;width:4px;height:6px;background:url(../../img/skin_/switch-system/toplist.png);}
