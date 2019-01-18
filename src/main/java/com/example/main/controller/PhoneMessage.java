@@ -82,6 +82,34 @@ public class PhoneMessage {
     }
 
 
+    //2.发送短信
+
+    public static void sendm(String phone){
+
+        String result =null;
+        String url ="http://v.juhe.cn/sms/send";//请求接口地址
+        Map params = new HashMap();//请求参数
+        params.put("mobile",phone);//接收短信的手机号码
+        params.put("tpl_id","131210");//短信模板ID，请参考个人中心短信模板设置
+        params.put("tpl_value","#code#=1234");
+        params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
+        params.put("dtype","json");//返回数据的格式,xml或json，默认json
+        try {
+            result =net(url, params, "GET");
+            JSONObject object = JSONObject.fromObject(result);
+            if(object.getInt("error_code")==0){
+                System.out.println(object.get("result"));
+
+            }else{
+                System.out.println("lose");
+                System.out.println(object.get("error_code")+":"+object.get("reason"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main(String[] args) {
 
     }

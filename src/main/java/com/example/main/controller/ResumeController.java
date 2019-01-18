@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,9 +37,31 @@ public class ResumeController {
     private ExService exService;
     @RequestMapping("/addresume")
 public Message SaveResume(Resume resume, User user, Experience experience){
+        int age = 0;
+        try {
+            Calendar now = Calendar.getInstance();
+            now.setTime(new Date());// 当前时间
+            Calendar birth = Calendar.getInstance();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date bithday = format.parse(user.getBirthday());
+            birth.setTime(bithday);
+
+            if (birth.after(now)) {//如果传入的时间，在当前时间的后面，返回0岁
+                age = 0;
+            } else {
+                age = now.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+                if (now.get(Calendar.DAY_OF_YEAR) > birth.get(Calendar.DAY_OF_YEAR)) {
+                    age += 1;
+                }
+            }
+
+        } catch (Exception e) {//兼容性更强,异常后返回数据
+            age=0;
+        }
     Message message =new Message();
     List<Experience>experiences=new ArrayList<Experience>();
     experiences.add(experience);
+    user.setAge(age);
     resume.setUser(user);
     resume.setExperiences(experiences);
     Resume resume1=resumeService.SaveResume(resume);

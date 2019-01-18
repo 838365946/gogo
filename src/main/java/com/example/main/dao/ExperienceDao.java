@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface ExperienceDao extends JpaRepository<Experience,Integer> {
-@Query(value = "select * from experience e left join resume r on e.r_id=r.r_id where u_id=:uid",nativeQuery = true)
+@Query(value = "select * from experience e left join resume r on e.r_id=r.r_id where u_id=:uid order by e_id desc",nativeQuery = true)
     List<Experience> QueryByUser(@Param("uid") int uid);
 }

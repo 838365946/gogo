@@ -19,7 +19,7 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
     Company CLogin(@Param("c_username") String c_username, @Param("password") String password);
 @Query(value = "select * from company c where c.c_id = :id",nativeQuery = true)
     Company findById(@Param("id") int id);
-@Query(value = "select * from company c where c.c_check_status =:status",nativeQuery = true)
+@Query(value = "select * from company c where c.c_check_status =:status  order by c_id desc",nativeQuery = true)
     List<Company> chenckcompany(@Param("status")String status);
 @Modifying
 @Transactional
@@ -35,7 +35,7 @@ public interface CompanyDao extends JpaRepository<Company,Long>{
 
     @Query(value = "select * from company c where c.c_username=:cusername",nativeQuery = true)
     List<Company> checkcusername(@Param("cusername")String cusername);
-    @Query(value = "select * from company c where c.c_check_status=:state",nativeQuery = true)
+    @Query(value = "select * from company c where c.c_check_status=:state  order by c_id desc",nativeQuery = true)
     List<Company> QueryBystate(@Param("state")String state);
     @Query(value = "select * from company c where c.c_check_status='正常' and c.c_name=:cname",nativeQuery = true)
     Company QueryByCname(@Param("cname")String cname);

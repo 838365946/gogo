@@ -70,8 +70,8 @@
         resize:none;
         height: 300px;
         width: 200px;
-        position: absolute;
-        top: 0px;
+
+
 
     }
 
@@ -105,6 +105,33 @@
 
 
 
+                             var yem =document.getElementsByClassName("qq")
+
+
+                            for (var df = 0; df < yem.length; df++){
+                                yem[df].onclick=function () {
+                                    var lt = this.parentElement.parentElement
+                                    //User的ID
+                                    var userid = lt.children[0].innerHTML;
+                                    $.ajax({
+                                        url: "/dx",
+                                        type: "post",
+                                        dataType: "json",
+                                        success: function (gs) {
+                                         var gss=gs.c_id
+                                        var link ="message.html" + '?value1='+userid + '&value2='+gss;
+                                            window.location.href=link;
+
+                                        }
+
+
+                                    })
+
+                                }
+
+
+                            }
+
 
 
 
@@ -116,6 +143,7 @@
                                     var ii = this.parentElement.parentElement
                                     var qs = ii.children[0].innerHTML;
                                     var qq = ii.children[1].innerHTML;
+                                    var msgw=ii.children[9].innerHTML;
                                     var z = data.data[qq].d_id;
                                     var gsid=data.data[0].position.company.c_name;
                                     $.ajax({
@@ -131,7 +159,7 @@
                                              type: "post",
                                              dataType: "json",
                                              success: function (sss) {
-
+                                                 var iphone=dat.data.user.phone_number;
                                                  var divone = document.getElementById("container")
                                                  divone.style.visibility = "hidden"
                                                  var divtwo = document.getElementById("personal_resume")
@@ -177,7 +205,7 @@
 
                                                                $.ajax({
                                                             url:"/updatestate",
-                                                            data: "d_id=" + z + "&state=邀请面试&id="+qs,
+                                                            data: "d_id=" + z + "&state=邀请面试&id="+qs+"&p_posi_name="+msgw+"&phone_number="+iphone,
                                                             type: "post",
                                                             dataType: "json",
                                                             success:function (aaaaa) {
@@ -194,7 +222,7 @@
                                                          pas.onclick = function () {
                                                              $.ajax({
                                                                  url: "/updatestate",
-                                                                 data: "d_id=" + z + "&state=不合适",
+                                                                 data: "d_id=" + z + "&state=不合适"+"&p_posi_name="+msgw,
                                                                  type: "post",
                                                                  dataType: "json",
                                                                  success: function (da) {
@@ -238,7 +266,7 @@
 
 </div>
 
-<div id="qq" style="visibility:hidden" >
+<div id="qqq" style="visibility:hidden" >
     <button id="ltfh">返回</button>
     <textarea id="messages" rows="5" cols="20"></textarea><br />
     <input id="text" type="text" />

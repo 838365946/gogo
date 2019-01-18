@@ -28,20 +28,28 @@ private PositionService positionService;
 @RequestMapping("/addPosition")
 @ResponseBody
 public Message AddPosition(Position position, HttpServletRequest request){
+    Message message=new Message();
 Company company= (Company) request.getSession().getAttribute("company");
-    System.out.println("传值"+company.getC_des());
-    System.out.println("查询到的值慢慢来"+String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
-company.setC_des(String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
-position.setCompany(company);
-Message message=new Message();
-if(positionService.addposition(position)!=null){
-    message.setB(true);
-    message.setDes("true");
-}else {
-    message.setB(false);
-    message.setDes("false");
-}
-    System.out.println(message.toString());
+   if(company.getC_check_status().equals("正常")){
+       company.setC_des(String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
+       position.setCompany(company);
+
+       if(positionService.addposition(position)!=null){
+           message.setB(true);
+           message.setDes("true");
+       }else {
+           message.setB(false);
+           message.setDes("false");
+       }
+   }else if (company.getC_check_status().equals("未审核")){
+       message.setB(false);
+       message.setDes("公司的资料还没通过审核");
+
+   }else if(company.getC_check_status().equals("封禁")){
+        message.setB(false);
+        message.setDes("公司已被管理员封禁");
+   }
+
 return message;
 }
 
