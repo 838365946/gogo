@@ -24,7 +24,7 @@
         dataType:"json",
         success:function(data) {
             for (var i=0;i<data.data.length;i++){
-                ss="<tr class='modifyss'><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_des+"</td><td>"+data.data[i].c_addr+"</td><td>"+data.data[i].c_check_status+"</td><td><button class='yx' >允许通过</button></td><td><button class='byx'>不允许</button></td></tr>"
+                ss="<tr class='modifyss'><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_des+"</td><a><td>"+data.data[i].c_addr+"</td></a><td>"+data.data[i].c_check_status+"</td><td><button class='yx' >允许通过</button></td><td><button class='byx'>不允许</button></td></tr>"
                 str+=ss
             }
             str+="</table>"
