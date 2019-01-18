@@ -8,11 +8,14 @@ html{*overflow:auto;}
 .hd-top .logo .logo-icon{ position:absolute; right:0; top:18px; width:16px; height:15px; background:url(../../img/skin_/topxl.png);}
 .hd-top .logo .logo-icon:hover,.hd-top .logo .logo-icon.active{ background:url(../../img/skin_/switch-system/h.png);}
 /*用户登录信息*/
+
+
 .hd-top .user-info{ float:left; margin-left:33px; width:110px; height:49px; line-height:49px;}
 .hd-top .user-info .user-avatar{ position:relative; float:left; margin-top:6px; width:40px; height:40px; background:url(../../img/skin_/userfacebg.png); }
 .hd-top .user-info .user-avatar span{ position:absolute; top:2px; left:2px; width:34px; height:34px; background:url(../../img/skin_/userface.png);}
 .hd-top .user-info .user-avatar span .info-num{ position:absolute; top:-4px; right:-4px; width:16px; height:16px; line-height:16px; text-align:center; background:url(../../img/skin_/msg.png); color:#fff; font-style:normal;}
-.hd-top .user-info .user-name{ float:left; margin-left:6px; color:#fff;}
+.hd-top .user-info { float:left; margin-left:6px; color:#fff;}
+.user-name{ float:left; color:#fff;}
 .hd-top .user-info .more-info{ float:left; margin:19px 0 0 10px;width:16px;height:15px; background:url(../../img/skin_/userxl.png) center center no-repeat;}
 .hd-top .user-info .more-info.active,.hd-top .user-info .more-info:hover{ width:16px;height:15px;background:url(../../img/skin_/topxl.png);}
 /*顶部设置部分*/

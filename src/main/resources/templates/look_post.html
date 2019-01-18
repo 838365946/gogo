@@ -65,13 +65,16 @@
             type:"post",
             dataType:"json",
             success:function (data) {
+                console.log(data)
                 var aa=data.c_id
+                console.log(aa)
                 $.ajax({
                     url:"/getpositionbycompany",
                     data:"c_id="+aa,
                     type:"post",
                     dataType:"json",
                     success:function (da){
+                        console.log(da)
                         for(var i=0;i<da.data.length;i++){
                             ss="<tr><td>"+da.data[i].p_id+"</td><td>"+da.data[i].p_posi_name+"</td><td>"+da.data[i].p_education+"</td><td>"+da.data[i].p_sal+"</td><td>"+da.data[i].p_addr+"</td><td>"+da.data[i].p_exp_time+"</td><td>"+da.data[i].p_date+"</td><td><button class='look'>取消岗位</button></td></tr>"
                               str+=ss
@@ -91,7 +94,9 @@
                                     dataType:"json",
                                     success:function (dt) {
                                         console.log(dt)
+                                        location.reload(true);
                                         alert("删除成功!")
+
 
                                     }
                                 })
