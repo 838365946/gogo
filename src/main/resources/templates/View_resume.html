@@ -94,7 +94,7 @@
                            console.log(data)
                             for (var i = 0; i < data.data.length; i++) {
                                 if (data.data[i].d_pass != "是") {
-                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.name + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
+                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.nickname + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
                                     str += ss
                                 }
 
@@ -151,7 +151,7 @@
                                                              for (var j = 0; j < res.data.length; j++) {
                                                                  gzjy = "<tr><td>" + res.data[j].e_comp_name + "</td><td>" + res.data[j].e_comp_position + "</td><td>" + res.data[j].e_date + "</td><td>" + res.data[j].e_industry + "</td><td>" + res.data[j].e_sal + "</td><td>" + res.data[j].e_word_des + "</td></tr>"
                                                                  jlnr += gzjy
-                                                                 console.log("循坏")
+
                                                              }
                                                          } else {
                                                              gzjy = "<tr><td>无工作经历</td></tr>"
@@ -164,10 +164,12 @@
 
                                                          var hh = document.getElementById("fh")
                                                          hh.onclick = function () {
+
                                                              var divone = document.getElementById("container")
                                                              divone.style.visibility = "visible"
                                                              var divtwo = document.getElementById("personal_resume")
                                                              divtwo.style.visibility = "hidden"
+
                                                          }
 
                                                          var qqlove=document.getElementById("yes")
@@ -179,7 +181,8 @@
                                                             type: "post",
                                                             dataType: "json",
                                                             success:function (aaaaa) {
-                                                                       console.log(aaaaa)
+
+                                                                alert("操作成功!")
                                                               }
                                                                })
 
@@ -195,6 +198,7 @@
                                                                  type: "post",
                                                                  dataType: "json",
                                                                  success: function (da) {
+                                                                     location.reload(true);
                                                                      alert("操作成功!")
                                                                  }
 
