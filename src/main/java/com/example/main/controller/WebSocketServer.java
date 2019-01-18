@@ -70,7 +70,7 @@ public class WebSocketServer {
         String sf=new SimpleDateFormat().format(new Date());
         if (webSocketSet.get(tousername)!=null){
             try {
-                String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
+                String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\",\"touser\":\""+tousername+"\"}";
                 webSocketSet.get(tousername).sendMessage(str);
                 webSocketSet.get(username).sendMessage(str);
 
@@ -79,7 +79,7 @@ public class WebSocketServer {
             }
         }else{
             try {
-                String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\"}";
+                String str="{\"time\":\""+sf+"\",\"name\":\""+username+"\",\"mess\":\""+mess+"\",\"touser\":\""+tousername+"\"}";
                 users.add(tousername);
                 messes.add(str);
                 webSocketSet.get(username).sendMessage(str);
@@ -110,7 +110,7 @@ public static void sendInfo(String message){
     }
     public static void sendtoone(String userid,String cname,String messess){
         String sf=new SimpleDateFormat().format(new Date());
-        String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messess+"\"}";
+        String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messess+"\",\"touser\":\""+userid+"\"}";
             try {
                 if(webSocketSet.get(userid)!=null){
                     System.out.println("zaixain");
