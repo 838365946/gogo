@@ -1,7 +1,6 @@
 package com.example.main.service.impl;
 
 import com.example.main.dao.PositionDao;
-import com.example.main.model.Company;
 import com.example.main.model.Position;
 import com.example.main.service.PositionService;
 import com.example.main.util.CompanyIO;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,29 +37,21 @@ public class PositionServiceImpl implements PositionService{
 
     @Override
     public List<Position> QueryByCompany (int cid) throws NullPointerException{
-        List<Position> positions=positionDao.QueryByCompany(cid);
-        List<Company> companies=new ArrayList<Company>();
-        for(int i=0;i<positions.size();i++){
-            if(companies.size()>0){
-                for (Company company:companies){
-                    if (positions.get(i).getCompany()!=company){
-                        String des=positions.get(i).getCompany().getC_des();
-                        String str= String.valueOf(companyIO.ReadDes(des));
-                        positions.get(i).getCompany().setC_des(str);
-                        companies.add(positions.get(i).getCompany());
-                    }
-                }}else {
-                String des=positions.get(i).getCompany().getC_des();
-                String str= String.valueOf(companyIO.ReadDes(des));
-                positions.get(i).getCompany().setC_des(str);
-                companies.add(positions.get(i).getCompany());
-            }
-        }
-        return positionDao.QueryByCompany(cid);
+        List<Position> positions=  positionDao.QueryByCompany(cid);
+
+
+        return  positions;
     }
 
     @Override
     public Position QueryById(int p_id) {
-        return positionDao.QueryById(p_id);
+        Position position=positionDao.QueryById(p_id);
+
+        return position;
+    }
+
+    @Override
+    public int DelPOsition(int pid) {
+        return positionDao.DelPosition(pid);
     }
 }

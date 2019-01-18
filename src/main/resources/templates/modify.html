@@ -22,6 +22,13 @@
                 $("#c_scale").val(data.c_scale)
                 $("#c_des").val(data.c_des)
                 data.c_name
+                var aa= document.getElementById("submit")
+                aa.onclick=function () {
+                    console.log("带动还好")
+                    alert("操作成功!")
+
+                }
+
 
             }
         })
@@ -63,7 +70,7 @@
 
                 <div class="form-group">
                     <label for="c_nature">公司性质:</label>
-                    <input type="text"  name="c_nature"  id="c_nature" class="form-control" placeholder="输入公司福利" v-model="c_nature" value="" readonly unselectable="on">
+                    <input type="text"  name="c_nature"  id="c_nature" class="form-control" placeholder="输入公司福利" v-model="c_nature" value="">
 
                 </div>
 
@@ -79,7 +86,7 @@
                     文件：<input type="file" name="files"/>
                         <input type="file" name="files"/>
                         <input type="file" name="logo">
-                        <input type="submit" value="上传"/>
+                        <input  type="submit" value="上传"/>
                             <div class="form-group">
 
                     <input type="reset" value="重置" class="btn btn-danger">

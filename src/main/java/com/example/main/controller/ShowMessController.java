@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2018/12/6.
@@ -22,41 +24,28 @@ import java.util.List;
 public class ShowMessController {
 @Autowired
     private FindPositionService fp;
+private CompanyIO companyIO=new CompanyIO();
     @RequestMapping("/showmess")
     public Message ShowMess(@Param("page")Integer page){
     System.out.println("当前页码" +page);
     Message message=new Message();
     PageRequest pageRequest=PageRequest.of(page,10);
-    Page<Position> positionspage=  fp.ShowMess(pageRequest);
-    List<Position> positions = new ArrayList<Position>();
-    List<Company> companies = new ArrayList<Company>();
-    CompanyIO companyIO=new CompanyIO();
-    if(positionspage.getContent()!=null){
-        positions=positionspage.getContent();
+    Page<Position> positionses=  fp.ShowMess(pageRequest);
+        List<Position> positions=positionses.getContent();
+        Set<Company> companies=new HashSet<Company>();
         for(int i=0;i<positions.size();i++){
-            if(companies.size()>0){
-            for (Company company:companies){
-                if (positions.get(i).getCompany()!=company){
-                    System.out.println(positions.toString());
-                    String des=positions.get(i).getCompany().getC_des();
-                    String str= String.valueOf(companyIO.ReadDes(des));
-                    positions.get(i).getCompany().setC_des(str);
-                    companies.add(positions.get(i).getCompany());
-                }
-            }}else {
-                String des=positions.get(i).getCompany().getC_des();
-                String str= String.valueOf(companyIO.ReadDes(des));
-                positions.get(i).getCompany().setC_des(str);
-                companies.add(positions.get(i).getCompany());
-            }
-            }
-               }
+            companies.add(positions.get(i).getCompany());
+            positions.get(i).setP_des(String.valueOf(companyIO.ReadDes(positions.get(i).getP_des())));
+        }
+        System.out.println(companies.toString());
+        for(Company company:companies){
+            company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
+        }
         message.setB(true);
         message.setDes("获取职位成功");
         message.setData(positions);
     return message;
 }
-
 @RequestMapping("/querybyinput")
 public Message QueryByInput(@Param("page")Integer page,@Param("input") String input){
     System.out.println("当前页码" +page);
@@ -65,25 +54,17 @@ public Message QueryByInput(@Param("page")Integer page,@Param("input") String in
     PageRequest pageRequest=PageRequest.of(page,10);
     Page<Position> positionspage=  fp.QueryByInput(input,pageRequest);
     List<Position> positions = new ArrayList<Position>();
-    List<Company> companies = new ArrayList<Company>();
     CompanyIO companyIO=new CompanyIO();
     if(positionspage.getContent()!=null){
         positions=positionspage.getContent();
+        Set<Company> companies=new HashSet<Company>();
         for(int i=0;i<positions.size();i++){
-            if(companies.size()>0){
-                for (Company company:companies){
-                    if (positions.get(i).getCompany()!=company){
-                        String des=positions.get(i).getCompany().getC_des();
-                        String str= String.valueOf(companyIO.ReadDes(des));
-                        positions.get(i).getCompany().setC_des(str);
-                        companies.add(positions.get(i).getCompany());
-                    }
-                }}else {
-                String des=positions.get(i).getCompany().getC_des();
-                String str= String.valueOf(companyIO.ReadDes(des));
-                positions.get(i).getCompany().setC_des(str);
-                companies.add(positions.get(i).getCompany());
-            }
+            companies.add(positions.get(i).getCompany());
+            positions.get(i).setP_des(String.valueOf(companyIO.ReadDes(positions.get(i).getP_des())));
+        }
+        System.out.println(companies.toString());
+        for(Company company:companies){
+            company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
         }
     }
     message.setB(true);

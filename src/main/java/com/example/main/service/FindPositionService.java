@@ -9,5 +9,5 @@ import org.springframework.data.domain.Pageable;
  */
 public interface FindPositionService {
     Page<Position> ShowMess(Pageable pageable);
-Page<Position> QueryByInput(String input,Pageable pageable);
+Page<Position> QueryByInput(String input, Pageable pageable);
 }

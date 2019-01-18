@@ -1463,6 +1463,7 @@ jQuery.support = (function() {
 	select.disabled = true;
 	support.optDisabled = !opt.disabled;
 
+
 	// Test to see if it's possible to delete an expando from an element
 	// Fails in Internet Explorer
 	try {
@@ -3622,7 +3623,9 @@ jQuery.each({
 	};
 });
 
-// IE submit delegation
+// IE submit delegation是
+
+
 if ( !jQuery.support.submitBubbles ) {
 
 	jQuery.event.special.submit = {

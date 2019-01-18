@@ -32,6 +32,7 @@ public class CompanyIO {
         StringBuffer sb=new StringBuffer();
         String str=null;
         try {
+            System.out.println(filepath+"看");
             Reader reader= new InputStreamReader(new FileInputStream(filepath));
             BufferedReader bf = new BufferedReader(reader);
             while ((str=bf.readLine())!=null){

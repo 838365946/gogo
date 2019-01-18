@@ -26,7 +26,6 @@ private String c_img;
         private String c_password;
 @Column
 private String logopath;
-
 //公司福利
     @Column
         private String c_welfare;

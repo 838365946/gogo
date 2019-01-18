@@ -24,7 +24,7 @@ public class DocUtil {
             file.mkdir();
         }
         //Write the Document in file system
-        FileOutputStream out = new FileOutputStream(file.getPath()+"\\"+resume.getR_name()+"的简历.doc");
+        FileOutputStream out = new FileOutputStream(file.getPath()+"/resume.doc");
 
         //添加标题
         XWPFParagraph titleParagraph = document.createParagraph();
@@ -135,7 +135,7 @@ public class DocUtil {
         comTableRowOne.getCell(0).setText("开始时间");
         comTableRowOne.addNewTableCell().setText("结束时间");
         comTableRowOne.addNewTableCell().setText("公司名称");
-        comTableRowOne.addNewTableCell().setText("title");
+        comTableRowOne.addNewTableCell().setText("工作介绍");
 
         List<Experience> experiences=resume.getExperiences();
 for(Experience e:experiences){
@@ -155,7 +155,7 @@ for(Experience e:experiences){
         CTP ctpHeader = CTP.Factory.newInstance();
         CTR ctrHeader = ctpHeader.addNewR();
         CTText ctHeader = ctrHeader.addNewT();
-        String headerText = "Java POI create MS word file.";
+        String headerText = "快乐招聘";
         ctHeader.setStringValue(headerText);
         XWPFParagraph headerParagraph = new XWPFParagraph(ctpHeader, document);
         //设置为右对齐
@@ -169,7 +169,7 @@ for(Experience e:experiences){
         CTP ctpFooter = CTP.Factory.newInstance();
         CTR ctrFooter = ctpFooter.addNewR();
         CTText ctFooter = ctrFooter.addNewT();
-        String footerText = "http://blog.csdn.net/zhouseawater";
+        String footerText = "http://www.s4rain.vip";
         ctFooter.setStringValue(footerText);
         XWPFParagraph footerParagraph = new XWPFParagraph(ctpFooter, document);
         headerParagraph.setAlignment(ParagraphAlignment.CENTER);
@@ -180,7 +180,7 @@ for(Experience e:experiences){
 
         document.write(out);
         out.close();
-      return   "/src/main/resources/static/resume/"+resume.getR_id()+"/"+resume.getR_name()+"的简历.doc";
+      return   "/src/main/resources/static/resume/"+resume.getR_id()+"/resume.doc";
 
 
 

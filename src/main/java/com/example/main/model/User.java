@@ -11,50 +11,48 @@ import java.util.List;
  */
 //用户类
 
-    @Entity
-    @Table
+@Entity
+@Table
 public class User implements Serializable{
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
-@Column
-        private String nickname;
-@Column
-        private String headicon;
-@Column
-private String name;
-
-@Column
-        private String password;
-@Column
-        private String wx_number;
-@Column
-        private String phone_number;
-@Column
-        private String email;
-@Column
-private String birthday;
-@Column
-        private String city;
-@Column
-private String status;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String nickname;
+    @Column
+    private String headicon;
+    @Column
+    private String name;
 
     @Column
+    private String password;
+    @Column
+    private String wx_number;
+    @Column
+    private String phone_number;
+    @Column
+    private String email;
+    @Column
+    private String birthday;
+    @Column
+    private String city;
+    @Column
+    private String status;
+    @Column
 
-        private String sex;
-@Column
-        private int age;
-@Column
-private String isadmin;
-@Column
-private String exp_time;
+    private String sex;
+    @Column
+    private int age;
+    @Column
+    private String isadmin;
+    @Column
+    private String exp_time;
     @JsonIgnore
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
-        private List<Resume> resumes;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
+    private List<Resume> resumes;
     @JsonIgnore
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
-private List<Delivery> deliveries;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
+    private List<Delivery> deliveries;
 
     public String getIsadmin() {
         return isadmin;

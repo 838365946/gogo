@@ -54,7 +54,7 @@ private PositionService positionService;
             company1.setC_des(despath);
             company1.setC_img(imgpath);
             company1.setLogopath(logopath);
-            company1.setC_check_status("未审核");
+
           c=   companyService.registered(company1);
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ private PositionService positionService;
            return message;
        }else {
            message.setB(false);
-           message.setDes("完善资料失败，请等待审核");
+           message.setDes("完善资料失败");
        }
        return message;
     }
@@ -83,7 +83,7 @@ private PositionService positionService;
         company.setC_des("修改中");
         Company company1= (Company) request.getSession().getAttribute("company");
         String imgpath,despath,logopath;
-        if (files!=null){
+        if (files.length>0){
             String path=System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id();
             companyIO.delFolder(path);
             imgpath = companyIO.UploadImg(files, company1.getC_id());
@@ -95,7 +95,7 @@ private PositionService positionService;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (logo!=null){
+        if (!logo.isEmpty()){
             String path=System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id();
             companyIO.delFolder(path);
             logopath=companyIO.LogoUpload(logo,company1.getC_id());
@@ -107,12 +107,12 @@ private PositionService positionService;
         company1.setC_welfare(company.getC_welfare());
         company1.setC_industry(company.getC_industry());
         company1.setC_scale(company.getC_scale());
-        company1.setC_check_status("未审核");
+        company1.setC_nature(company.getC_nature());
         Company company2=companyService.addcompany(company1);
         if (company2==null){
 
         message.setB(false);
-        message.setDes("修改失败");
+        message.setDes("修改失败了");
 
         }else {
             company2.setC_des(des);
@@ -183,11 +183,11 @@ private PositionService positionService;
     }
 
     @RequestMapping("/clogin")
-    public ModelAndView CompanyLogin(Company company, HttpServletRequest request){
+    public ModelAndView CompanyLogin(Company company, HttpServletRequest request)throws NullPointerException{
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
       if(company1!=null){
-          company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
+
           request.getSession().setAttribute("company",company1);
           modelAndView.addObject("name",company1.getC_name());
           modelAndView.setViewName("main");
@@ -200,6 +200,10 @@ private PositionService positionService;
     public ModelAndView Reg(Company company){
         ModelAndView modelAndView=new ModelAndView();
         System.out.println(company.toString());
+        company.setC_check_status("正常");
+        company.setC_img("未上传");
+        company.setC_des("未上传");
+        company.setLogopath("未上传");
         Company company1=companyService.addcompany(company);
         if (company1!=null){
             modelAndView.setViewName("login");
@@ -324,6 +328,21 @@ private PositionService positionService;
         }
         return message;
     }
+    @RequestMapping("/querycompanybycname")
+    @ResponseBody
+    public Message QueryByCname(Company company){
+        Company company1=companyService.QueryByCname(company.getC_name());
+        if(company1!=null){
+            message.setB(true);
+            message.setDes("获取成功");
+            message.setData(company1);
+        }else {
+            message.setB(false);
+            message.setDes("获取失败");
+        }
+        return message;
+    }
+
 }
 
 

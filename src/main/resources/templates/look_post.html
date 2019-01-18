@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<style type="text/css">
+
+    li{
+        width: 600px;
+        margin: auto;
+        margin-left:10px;
+        margin-top: 20px;
+    }
+    p{
+        width: 600px;
+        margin: auto;
+    }
+    table{
+        width: 1200px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .table-1{
+        border: 1px solid #ccc;
+        border-collapse: collapse;/*合并相邻表格的间距*/
+    }
+    .ta{
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+    }
+    .ta tr,.ta td{
+        border: 1px solid #ccc;
+    }
+    .table-1 tr,.table-1 td{
+        border: 1px solid #ccc;
+    }
+    #look{
+        float:left;
+
+    }
+
+
+    #personal_resume{
+        float:left;
+        position:fixed;
+        top: 0px;
+    }
+
+</style>
+
+
+
+
+
+<script>
+    var str="<table class= table-1> <tr><td>id</td><td>职位</td><td>文凭</td> <td>薪水</td><td>城市</td> <td>工作经验</td><td>发布时间</td><td>操作</td> </tr>"
+    var ss=""
+    $(function () {
+        $.ajax({
+
+            url:"/look",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                var aa=data.c_id
+                $.ajax({
+                    url:"/getpositionbycompany",
+                    data:"c_id="+aa,
+                    type:"post",
+                    dataType:"json",
+                    success:function (da){
+                        for(var i=0;i<da.data.length;i++){
+                            ss="<tr><td>"+da.data[i].p_id+"</td><td>"+da.data[i].p_posi_name+"</td><td>"+da.data[i].p_education+"</td><td>"+da.data[i].p_sal+"</td><td>"+da.data[i].p_addr+"</td><td>"+da.data[i].p_exp_time+"</td><td>"+da.data[i].p_date+"</td><td><button class='look'>取消岗位</button></td></tr>"
+                              str+=ss
+                        }
+                        str += "</table>"
+                        $("#look").html(str)
+                        var sc=document.getElementsByClassName("look")
+                        for (var s=0;s<sc.length;s++){
+                            sc[s].onclick = function (){
+                                var ii= this.parentElement.parentElement
+                                var qs=ii.children[0].innerHTML;
+                                console.log(qs)
+                                $.ajax({
+                                    url:"/delposition",
+                                    data:"p_id="+qs,
+                                    type:"post",
+                                    dataType:"json",
+                                    success:function (dt) {
+                                        console.log(dt)
+                                        alert("删除成功!")
+
+                                    }
+                                })
+
+
+                            }
+
+                        }
+
+                    }
+                })
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+        })
+
+    })
+
+
+</script>
+
+
+<body>
+
+
+<div id="look">
+
+
+
+</div>
+
+</body>
+</html>

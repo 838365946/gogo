@@ -46,6 +46,7 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
                             <!--<input name="p_education"type="text" placeholder="请输入招聘职位学历要求" />-->
                         <!--</div>-->
                         <input type="radio" name="p_education" value="不限" />不限
+                        <input type="radio" name="p_education" value="高中" />高中
                         <input type="radio" name="p_education" value="大专" />大专
                         <input type="radio" name="p_education" value="本科" />本科
                         <input type="radio" name="p_education" value="本科以上" />本科以上
@@ -55,25 +56,27 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
                     <div class="subfild-content base-info">
                         <div class="kv-item ue-clear">
                             <label><span class="impInfo">*</span>职位薪资</label>
-                            <!--<div class="kv-item-content">-->
-                                <!--<input name="p_sal"type="text" placeholder="请输入招聘职位工资范围" />-->
-                            <!--</div>-->
                             <input type="radio" name="p_sal" value="面议" />面议
-                            <input type="radio" name="p_sal" value="4K-6K" />4K-6K
-                            <input type="radio" name="p_sal" value="6K-8K" />6K-8K
-                            <input type="radio" name="p_sal" value="8K-10K" />8K-10K
-                            <input type="radio" name="p_sal" value="10K以上" />10K以上
+                            <input type="radio" name="p_sal" value="1001-3000" />1001-3000
+                            <input type="radio" name="p_sal" value="3001-5000" />3001-5000
+                            <input type="radio" name="p_sal" value="5001-8000" />5001-8000
+                            <input type="radio" name="p_sal" value="8001-10000" />8001-10000
+                            <input type="radio" name="p_sal" value="10000以上" />10000以上
                         </div>
+                    </div>
+            <div class="subfild-content base-info">
 				<div class="kv-item ue-clear">
                 	<label><span class="impInfo">*</span>经验要求</label>
-                	<div class="kv-item-content">
-                    	<input type="text" name="p_exp_time" placeholder="请输入经验，例：三年以上" />
+                        <input type="radio" name="p_exp_time" value="三年以内" />三年以内
+                        <input type="radio" name="p_exp_time" value="三到五年" />三到五年
+                        <input type="radio" name="p_exp_time" value="五到七年" />五到七年
+                        <input type="radio" name="p_exp_time" value="七年以上" />七年以上
                     </div>
                 </div>
 				<div class="kv-item ue-clear">
                 	<label><span class="impInfo">*</span>工作地点</label>
                 	<div class="kv-item-content">
-                    	<input type="text" name="p_addr" placeholder="请输入工作地点，例：北京" />
+                    	<input type="text" name="p_addr" placeholder="请输入工作地点，例：北京市" />
                     </div>
                 </div>
                 <div class="kv-item ue-clear time">
@@ -88,18 +91,16 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
             	<span>职位描述</span>
             </h2>
             
-            <div class="subfild-content remarkes-info">
+
             	<div class="kv-item ue-clear">
                 	<label><span class="impInfo">*</span>岗位要求</label>
                 	<div class="kv-item-content">
-                    	<textarea placeholder="岗位职责" name="p_des" id="content" style="width:800px;height:240px;"></textarea>
+                        <textarea  placeholder="岗位职责" name="p_des"  style="width:700px;height:600px;"></textarea>
                     </div>
                 </div>
-            </div>
-            <"确认 class="buttons">
+
                 <input class="button" onclick="addPo()" value="确认修改" />
-            </div>
-        </div>
+
     </div>
 	</form>
 </div>
