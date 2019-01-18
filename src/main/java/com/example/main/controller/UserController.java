@@ -273,7 +273,7 @@ return message;
     @ResponseBody
     public  Message GaiZt(User user){
         Message message=new Message();
-        int i = userService.GaiZt(user,"普通用户");
+        int i = userService.GaiZt(user,"正常");
         if(i>0){
             message.setB(true);
             message.setDes("解除");
