@@ -29,7 +29,7 @@ public interface UserDao extends JpaRepository<User,Long> {
     int UpdatePsw(@Param("password")String password,@Param("phonenumber")String phonenumber);
     @Query(value = "select * from user u where u.id=:uid ",nativeQuery = true)
     List<User> findbyuser(@Param("uid") int id);
-    @Query(value = "select * from user u where u.status=:status",nativeQuery = true)
+    @Query(value = "select * from user u where u.status=:status order by id desc",nativeQuery = true)
     List<User> findbystatus(@Param("status") String status);
     @Transactional
     @Modifying
