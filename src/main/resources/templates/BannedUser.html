@@ -20,7 +20,7 @@
         $.ajax({
             url:"/getuserbystatus",
             type:"post",
-            data:"status=普通用户",
+            data:"status=正常",
             dataType:"json",
             success:function(data) {
                 for (var i=0;i<data.data.length;i++){
