@@ -30,7 +30,8 @@ private CompanyIO companyIO=new CompanyIO();
     System.out.println("当前页码" +page);
     Message message=new Message();
     PageRequest pageRequest=PageRequest.of(page,10);
-    List<Position> positions=  fp.ShowMess(pageRequest);
+    Page<Position> positionses=  fp.ShowMess(pageRequest);
+        List<Position> positions=positionses.getContent();
         Set<Company> companies=new HashSet<Company>();
         for(int i=0;i<positions.size();i++){
             companies.add(positions.get(i).getCompany());

@@ -1,7 +1,6 @@
 package com.example.main.service.impl;
 
 import com.example.main.dao.PositionDao;
-import com.example.main.model.Company;
 import com.example.main.model.Position;
 import com.example.main.service.FindPositionService;
 import com.example.main.util.CompanyIO;
@@ -9,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2018/12/6.
@@ -25,11 +20,11 @@ public class FindPositionServiceImpl implements FindPositionService {
     private PositionDao positionDao;
 private CompanyIO companyIO=new CompanyIO();
     @Override
-    public List<Position> ShowMess(Pageable pageable) {
+    public Page<Position> ShowMess(Pageable pageable) {
         Page<Position> positionses=  positionDao.findAllS(pageable);
-                List<Position> positions=positionses.getContent();
 
-        return  positions;
+
+        return  positionses;
     }
 
     @Override
