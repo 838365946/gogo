@@ -6,13 +6,16 @@ import com.example.main.model.Message;
 import com.example.main.model.Position;
 import com.example.main.service.CompanyService;
 import com.example.main.service.PositionService;
+import com.example.main.util.CompanyIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PositionController {
@@ -20,12 +23,15 @@ public class PositionController {
 private PositionService positionService;
     @Autowired
     private CompanyService companyService;
+    private CompanyIO companyIO=new CompanyIO();
 
 @RequestMapping("/addPosition")
 @ResponseBody
 public Message AddPosition(Position position, HttpServletRequest request){
 Company company= (Company) request.getSession().getAttribute("company");
-company.setC_des(String.valueOf(companyService.QueryByCname(company.getC_name())));
+    System.out.println("传值"+company.getC_des());
+    System.out.println("查询到的值慢慢来"+String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
+company.setC_des(String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
 position.setCompany(company);
 Message message=new Message();
 if(positionService.addposition(position)!=null){
@@ -44,6 +50,15 @@ return message;
     public Message QueryByCompany(Company company){
     Message message=new Message();
     List<Position> positions=positionService.QueryByCompany(company.getC_id());
+    Set<Company> companies=new HashSet<Company>();
+    for(int i=0;i<positions.size();i++){
+        companies.add(positions.get(i).getCompany());
+        positions.get(i).setP_des(String.valueOf(companyIO.ReadDes(positions.get(i).getP_des())));
+    }
+    System.out.println(companies.toString());
+    for(Company c:companies){
+        c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
+    }
     if(positions.size()>0){
         message.setB(true);
         message.setDes("获取职位成功");
@@ -60,6 +75,7 @@ return message;
 
         Message message=new Message();
         Position position1=positionService.QueryById(position.getP_id());
+    position1.setP_des(String.valueOf(companyIO.ReadDes(position.getP_des())));
         if(position1!=null){
             message.setB(true);
             message.setDes("成功");

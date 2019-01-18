@@ -20,4 +20,5 @@ public interface CompanyService {
     List<Company> CheckCusername(String cusername);
     List<Company> QueryBystate(String state);
     Company QueryByCname(String cname);
+    Company findByid(int cid);
 }

@@ -187,7 +187,7 @@ private PositionService positionService;
         ModelAndView modelAndView = new ModelAndView();
         Company company1 = companyService.CLogin(company);
       if(company1!=null){
-          company1.setC_des(String.valueOf(companyIO.ReadDes(company1.getC_des())));
+
           request.getSession().setAttribute("company",company1);
           modelAndView.addObject("name",company1.getC_name());
           modelAndView.setViewName("main");

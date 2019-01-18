@@ -90,5 +90,10 @@ company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
         return company;
     }
 
+    @Override
+    public Company findByid(int cid) {
+        return companyDao.findById(cid);
+    }
+
 
 }
