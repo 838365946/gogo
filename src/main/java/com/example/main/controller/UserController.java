@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -152,9 +155,31 @@ ModelAndView modelAndView=new ModelAndView();
    @RequestMapping("/adduser")
    @ResponseBody
     public Message AddUser(User user){
+       int age = 0;
+       try {
+           Calendar now = Calendar.getInstance();
+           now.setTime(new Date());// 当前时间
+           Calendar birth = Calendar.getInstance();
+           SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+           Date bithday = format.parse(user.getBirthday());
+           birth.setTime(bithday);
+
+           if (birth.after(now)) {//如果传入的时间，在当前时间的后面，返回0岁
+               age = 0;
+           } else {
+               age = now.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+               if (now.get(Calendar.DAY_OF_YEAR) > birth.get(Calendar.DAY_OF_YEAR)) {
+                   age += 1;
+               }
+           }
+
+       } catch (Exception e) {//兼容性更强,异常后返回数据
+           age=0;
+       }
         System.out.println(user.toString());
         Message message=new Message();
         user.setHeadicon("/userlogo/moren/moren.png");
+        user.setAge(age);
         User user1=userService.AddUser(user);
 
         if (user1!=null){

@@ -92,9 +92,8 @@ return message;
         try {
             Calendar now = Calendar.getInstance();
             now.setTime(new Date());// 当前时间
-
             Calendar birth = Calendar.getInstance();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Date bithday = format.parse(user.getBirthday());
             birth.setTime(bithday);
 
