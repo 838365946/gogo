@@ -90,7 +90,7 @@ public class PhoneMessage {
         String url ="http://v.juhe.cn/sms/send";//请求接口地址
         Map params = new HashMap();//请求参数
         params.put("mobile",phone);//接收短信的手机号码
-        params.put("tpl_id","120605");//短信模板ID，请参考个人中心短信模板设置
+        params.put("tpl_id","131210");//短信模板ID，请参考个人中心短信模板设置
         params.put("tpl_value","#code#=1234");
         params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
         params.put("dtype","json");//返回数据的格式,xml或json，默认json
