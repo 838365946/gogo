@@ -95,7 +95,7 @@ private PositionService positionService;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (logo.isEmpty()){
+        if (!logo.isEmpty()){
             String path=System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id();
             companyIO.delFolder(path);
             logopath=companyIO.LogoUpload(logo,company1.getC_id());

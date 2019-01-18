@@ -71,11 +71,12 @@ return message;
 }
 @RequestMapping("/getbyid")
     @ResponseBody
-    public Message QueryById(Position position){
+    public Message QueryById(Position position)throws NullPointerException{
 
         Message message=new Message();
         Position position1=positionService.QueryById(position.getP_id());
-    position1.setP_des(String.valueOf(companyIO.ReadDes(position.getP_des())));
+    System.out.println(position1.toString());
+    position1.setP_des(String.valueOf(companyIO.ReadDes(position1.getP_des())));
         if(position1!=null){
             message.setB(true);
             message.setDes("成功");
