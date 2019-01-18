@@ -71,7 +71,7 @@ private PositionService positionService;
            return message;
        }else {
            message.setB(false);
-           message.setDes("完善资料失败，请等待审核");
+           message.setDes("完善资料失败");
        }
        return message;
     }
@@ -83,7 +83,7 @@ private PositionService positionService;
         company.setC_des("修改中");
         Company company1= (Company) request.getSession().getAttribute("company");
         String imgpath,despath,logopath;
-        if (files!=null){
+        if (files.length>0){
             String path=System.getProperty("user.dir")+"/src/main/resources/static/img/" + company1.getC_id();
             companyIO.delFolder(path);
             imgpath = companyIO.UploadImg(files, company1.getC_id());
@@ -95,7 +95,7 @@ private PositionService positionService;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (logo!=null){
+        if (logo.isEmpty()){
             String path=System.getProperty("user.dir")+"/src/main/resources/static/logo/" + company1.getC_id();
             companyIO.delFolder(path);
             logopath=companyIO.LogoUpload(logo,company1.getC_id());
@@ -200,7 +200,7 @@ private PositionService positionService;
     public ModelAndView Reg(Company company){
         ModelAndView modelAndView=new ModelAndView();
         System.out.println(company.toString());
-        company.setC_check_status("未审核");
+        company.setC_check_status("正常");
         company.setC_img("未上传");
         company.setC_des("未上传");
         company.setLogopath("未上传");

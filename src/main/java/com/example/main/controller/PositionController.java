@@ -4,6 +4,7 @@ package com.example.main.controller;
 import com.example.main.model.Company;
 import com.example.main.model.Message;
 import com.example.main.model.Position;
+import com.example.main.service.CompanyService;
 import com.example.main.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,14 @@ import java.util.List;
 public class PositionController {
     @Autowired
 private PositionService positionService;
+    @Autowired
+    private CompanyService companyService;
+
 @RequestMapping("/addPosition")
 @ResponseBody
 public Message AddPosition(Position position, HttpServletRequest request){
 Company company= (Company) request.getSession().getAttribute("company");
+company.setC_des(String.valueOf(companyService.QueryByCname(company.getC_name())));
 position.setCompany(company);
 Message message=new Message();
 if(positionService.addposition(position)!=null){

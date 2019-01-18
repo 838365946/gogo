@@ -28,15 +28,7 @@ private CompanyIO companyIO=new CompanyIO();
     public List<Position> ShowMess(Pageable pageable) {
         Page<Position> positionses=  positionDao.findAllS(pageable);
                 List<Position> positions=positionses.getContent();
-        Set<Company> companies=new HashSet<Company>();
-        for(int i=0;i<positions.size();i++){
-            companies.add(positions.get(i).getCompany());
-            positions.get(i).setP_des(String.valueOf(companyIO.ReadDes(positions.get(i).getP_des())));
-        }
-        System.out.println(companies.toString());
-        for(Company company:companies){
-            company.setC_des(String.valueOf(companyIO.ReadDes(company.getC_des())));
-        }
+
         return  positions;
     }
 
