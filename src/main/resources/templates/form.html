@@ -153,10 +153,12 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
             data: $('#form1').serialize(),
             success:function(data) {
                 console.log(data.des+"qqq");//打印服务端返回的数据(调试用)
-                if (data.b == true) {
+                if (data.b) {
                     alert("SUCCESS");
                     location.reload(true);
-                };
+                }else{
+                    alert(data.des);
+                }
             },
 
         });
