@@ -170,7 +170,7 @@ private PositionService positionService;
         }
         if(companies1.size()>0){
             message.setB(true);
-            message.setDes("获取成功l");
+            message.setDes("获取成功");
             for (Company c:companies1){
                 c.setC_des(String.valueOf(companyIO.ReadDes(c.getC_des())));
             }

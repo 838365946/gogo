@@ -72,7 +72,7 @@ message.setData(deliveries);
 
 }else {
     message.setB(false);
-    message.setDes("失败a");
+    message.setDes("失败");
 }
 return message;
 }
