@@ -108,7 +108,7 @@ public static void sendInfo(String message){
         }
 
     }
-    public static void sendtoone(int userid,String cname,String messess){
+    public static void sendtoone(String userid,String cname,String messess){
         String sf=new SimpleDateFormat().format(new Date());
         String str="{\"time\":\""+sf+"\",\"name\":\""+cname+"\",\"mess\":\""+messess+"\",\"touser\":\""+userid+"\"}";
             try {
@@ -117,7 +117,7 @@ public static void sendInfo(String message){
                     webSocketSet.get(userid).sendMessage(str);
                 }else{
                     System.out.println("buzaixian");
-                        users.add(String.valueOf(userid));
+                        users.add(userid);
                         messes.add(str);
 
                 }
