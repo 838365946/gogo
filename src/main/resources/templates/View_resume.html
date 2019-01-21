@@ -81,8 +81,6 @@
 <script>
 
 
-
-
     var str="<table class= table-1> <tr><td>id</td><td>序号</td><td>姓名</td> <td>年龄</td> <td>性别</td><td>城市</td> <td>email</td><td>工作经验</td><td>面试岗位</td><td>操作</td> </tr>"
     var ss=""
           $(function () {
@@ -103,47 +101,19 @@
                             $("#container").html(str)
 
 
-
-
-                             var yem =document.getElementsByClassName("qq")
-
-
-                            for (var df = 0; df < yem.length; df++){
-                                yem[df].onclick=function () {
-                                    var lt = this.parentElement.parentElement
-                                    //User的ID
-                                    var userid = lt.children[0].innerHTML;
-                                    $.ajax({
-                                        url: "/dx",
-                                        type: "post",
-                                        dataType: "json",
-                                        success: function (gs) {
-                                         var gss=gs.c_id
-                                        var link ="message.html" + '?value1='+userid + '&value2='+gss;
-                                            window.location.href=link;
-
-                                        }
-
-
-                                    })
-
-                                }
-
-
-                            }
-
-
-
-
-
-
                             var en = document.getElementsByClassName("look");
                             for (var I = 0; I < en.length; I++) {
                                 en[I].onclick = function () {
+
+
                                     var ii = this.parentElement.parentElement
                                     var qs = ii.children[0].innerHTML;
                                     var qq = ii.children[1].innerHTML;
-                                    var msgw=ii.children[9].innerHTML;
+                                    var did=data.data[qq].d_id
+                                    var msgw=ii.children[8].innerHTML;
+
+                                    var userid = ii.children[0].innerHTML;
+
                                     var z = data.data[qq].d_id;
                                     var gsid=data.data[0].position.company.c_name;
                                     $.ajax({
@@ -203,16 +173,19 @@
                                                          var qqlove=document.getElementById("yes")
                                                          qqlove.onclick=function () {
 
-                                                               $.ajax({
+                                                 var link ="message.html" + '?d_id='+did + '&p_posi_name='+msgw+'&phone_number='+iphone+'&id='+userid;
+                                                     window.location.href=link;
+                                                        /*       $.ajax({
                                                             url:"/updatestate",
                                                             data: "d_id=" + z + "&state=邀请面试&id="+qs+"&p_posi_name="+msgw+"&phone_number="+iphone,
                                                             type: "post",
                                                             dataType: "json",
                                                             success:function (aaaaa) {
 
+                                                               console.log(iphone)
                                                                 alert("邀请成功!")
                                                               }
-                                                               })
+                                                               })*/
 
 
                                                            }

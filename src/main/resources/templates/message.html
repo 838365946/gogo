@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>UserInfo</title>
-	
+    <script type="text/javascript" src="js/jquery.js"></script>
     <style type="text/css">  
 	.Content-Main{
             max-width: 500px;
@@ -84,80 +84,75 @@
                      margin-top: 30px;
         }
 	</style>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript">
-
-        function GetRequest() {
-            var url = location.search; //获取url中"?"符后的字串
-            var theRequest = new Object();
-            if (url.indexOf("?") != -1) {
-                var str = url.substr(1);
-                strs = str.split("&");
-                for(var i = 0; i < strs.length; i ++) {
-                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
-                }
-            }
-            return theRequest;
-        }
 
 
-        var id=GetRequest().value1;
-        var cname=GetRequest().value2;
-var socket;
-$(function () {
-    if (typeof (WebSocket)=="undefined"){
-        console.log("客户端不支持socket")
-    }else {
-        socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
-        socket.onopen=function () {
-            console.log("socket链接打开")
-        };
-        socket.onmessage=function (msg) {
-            console.log(msg.data())
-        };
-        socket.onerror=function () {
-            socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
-        }
-        socket.onclose=function () {
-            console.log("bye")
-        };
-        function innerhtmls(innerhtml) {
-            var mess=JSON.parse(innerhtml)
-            if(mess.name==cname){
-            document.getElementsByClassName("me").innerHTML += innerhtml + '<br/>';
-            }else if (mess.name==id){
-                document.getElementsByClassName("other").innerHTML += innerhtml + '<br/>';
-            }
-        }
-    }
-});function send() {
-
-        var mess=document.getElementById("message").value;
-        var message=mess+"|"+id;
-        console.log(message);
-        socket.send(message);
-        document.getElementById("message").value="";
-    }
-
-
-    </script>
-    
-    
 </head>
+<script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    var d_id=GetRequest().d_id;
+    var p_posi_name=GetRequest().p_posi_name;
+    var phone_number=GetRequest().phone_number;
+    var user_id=GetRequest().id;
+
+    window.onload=function(){
+       var qq=document.getElementById("sub")
+        qq.onclick = function () {
+            var wz=document.getElementById("message").value;
+            if(wz==""){
+                  alert("请输入内容!!!!")
+              }else{
+                  $.ajax({
+                      url:"/updatestate",
+                      data:"d_id="+d_id+"&state=邀请面试"+"&id="+user_id+"&p_posi_name="+p_posi_name+"&phone_number"+phone_number+"&mess="+wz,
+                      type:"post",
+                      dataType:"json",
+                      success:function (data) {
+                          alert("邀请成功!")
+                          location.reload(true);
+                          window.location.href="View_resume.html";
+                      }
+
+
+                  })
+              }
+
+
+                }
+
+
+
+
+
+        }
+
+
+
+
+
+
+</script>
 <body>
         <div class="Content-Main">
-
-                <h1>面试邀请信息</h1>
-                <div class="messes">
-                <span class="other"></span>
-                    <span class="me"></span>
-
-                </div>
-                <p>
+            <h1>面试邀请信息</h1>
+            <p>
                 <label>
-
-                    <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea><button id="send" onclick="send()">发送</button>
+                <span>消息内容:</span>
+                <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea>
+                <button id="sub" class="button">发送</button>
                 </label>
+
 
 
         </div>
