@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>UserInfo</title>
 
     <style type="text/css">
@@ -100,20 +100,23 @@
             return theRequest;
         }
 
-
-        var id=GetRequest().value1;
-        var cname=GetRequest().value2;
+        var id=GetRequest().id;
+        var cname=GetRequest().company;
         var socket;
         $(function () {
+
+
+
             if (typeof (WebSocket)=="undefined"){
                 console.log("客户端不支持socket")
             }else {
                 socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
                 socket.onopen=function () {
+                    console.log(id+cname+"you");
                     console.log("socket链接打开")
                 };
                 socket.onmessage=function (msg) {
-                    console.log(msg.data())
+                    console.log(msg.data)
                 };
                 socket.onerror=function () {
                     socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
@@ -129,8 +132,9 @@
                         document.getElementsByClassName("other").innerHTML += innerhtml + '<br/>';
                     }
                 }
-            }
-        });function send() {
+            };
+
+        }); function send() {
 
             var mess=document.getElementById("message").value;
             var message=mess+"|"+id;

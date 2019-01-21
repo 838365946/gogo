@@ -92,7 +92,7 @@
                            console.log(data)
                             for (var i = 0; i < data.data.length; i++) {
                                 if (data.data[i].d_pass != "是") {
-                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.nickname + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
+                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.nickname + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qql'>发送消息</button></td></tr>"
                                     str += ss
                                 }
 
@@ -100,12 +100,27 @@
                             str += "</table>"
                             $("#container").html(str)
 
+                            var jishitox=document.getElementsByClassName("qql")
+                            for (var f=0;f<jishitox.length;f++){
+                                jishitox[f].onclick=function () {
+                                    var ii = this.parentElement.parentElement
+                                    var qs = ii.children[0].innerHTML;
+                                    var gsid=data.data[0].position.company.c_name;
+
+                                    var links ="tochat.html?id="+qs+"&company="+encodeURI(encodeURI(gsid));
+                                    window.location.href=links;
+
+
+                                }
+
+                            }
+
+
+
 
                             var en = document.getElementsByClassName("look");
                             for (var I = 0; I < en.length; I++) {
                                 en[I].onclick = function () {
-
-
                                     var ii = this.parentElement.parentElement
                                     var qs = ii.children[0].innerHTML;
                                     var qq = ii.children[1].innerHTML;
@@ -115,7 +130,8 @@
                                     var userid = ii.children[0].innerHTML;
 
                                     var z = data.data[qq].d_id;
-                                    var gsid=data.data[0].position.company.c_name;
+
+
                                     $.ajax({
                                         url: "/getresume",
                                         data: "id=" + qs,
@@ -217,7 +233,6 @@
 
                                 }
                             }
-
 
                         }
                     })
