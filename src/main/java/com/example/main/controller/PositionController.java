@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
@@ -27,30 +28,32 @@ private PositionService positionService;
 
 @RequestMapping("/addPosition")
 @ResponseBody
-public Message AddPosition(Position position, HttpServletRequest request){
+public ModelAndView AddPosition(Position position, HttpServletRequest request){
     Message message=new Message();
+    ModelAndView modelAndView=new ModelAndView();
 Company company= (Company) request.getSession().getAttribute("company");
    if(company.getC_check_status().equals("正常")){
        company.setC_des(String.valueOf(companyService.findByid(company.getC_id()).getC_des()));
        position.setCompany(company);
 
        if(positionService.addposition(position)!=null){
-           message.setB(true);
-           message.setDes("true");
+           modelAndView.setViewName("home.html");
        }else {
            message.setB(false);
            message.setDes("false");
+           modelAndView.addObject(message);
        }
    }else if (company.getC_check_status().equals("未审核")){
        message.setB(false);
        message.setDes("公司的资料还没通过审核");
-
+        modelAndView.addObject(message);
    }else if(company.getC_check_status().equals("封禁")){
         message.setB(false);
         message.setDes("公司已被管理员封禁");
+        modelAndView.addObject(message);
    }
 
-return message;
+return modelAndView;
 }
 
 @RequestMapping("/getpositionbycompany")
