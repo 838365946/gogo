@@ -43,6 +43,7 @@ int i=deliveryService.Updatestate(state,delivery);
 Company company= (Company) request.getSession().getAttribute("company");
 if (i>0){
     if(state.equals("邀请面试")){
+
         phoneMessage.sendm(user.getPhone_number());
         WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+mess);
     }else if(state.equals("不合适")){

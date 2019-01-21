@@ -116,7 +116,8 @@
                     console.log("socket链接打开")
                 };
                 socket.onmessage=function (msg) {
-                    console.log(msg.data)
+
+                    innerhtmls(msg.data)
                 };
                 socket.onerror=function () {
                     socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
