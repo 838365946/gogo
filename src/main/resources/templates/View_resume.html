@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>查看简历</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
@@ -141,7 +141,7 @@
                                                console.log(dat)
                                          $.ajax({
                                              url: "/updatestate",
-                                             data: "d_id=" + z + "&state=被查看&id="+qs,
+                                             data: "d_id=" + z + "&state=被查看&id="+qs+"&p_posi_name="+msgw,
                                              type: "post",
                                              dataType: "json",
                                              success: function (sss) {
@@ -189,7 +189,7 @@
                                                          var qqlove=document.getElementById("yes")
                                                          qqlove.onclick=function () {
 
-                                                 var link ="message.html" + '?d_id='+did + '&p_posi_name='+msgw+'&phone_number='+iphone+'&id='+userid;
+                                                 var link ="message.html" + '?d_id='+did + '&p_posi_name='+encodeURI(encodeURI(msgw))+'&phone_number='+iphone+'&id='+userid;
                                                      window.location.href=link;
                                                         /*       $.ajax({
                                                             url:"/updatestate",
