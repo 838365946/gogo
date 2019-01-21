@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>UserInfo</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <style type="text/css">  
@@ -106,12 +106,14 @@
     var phone_number=GetRequest().phone_number;
     var user_id=GetRequest().id;
 
+
     window.onload=function(){
        var qq=document.getElementById("sub")
         qq.onclick = function () {
             var wz=document.getElementById("message").value;
             if(wz==""){
                   alert("请输入内容!!!!")
+                console.log(p_posi_name)
               }else{
                   $.ajax({
                       url:"/updatestate",
