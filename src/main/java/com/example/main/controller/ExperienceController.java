@@ -39,7 +39,7 @@ public Message AddEx(User user,Experience experience){
     Resume resume=resumeService.QueryByUid(user.getId());
     if(experienceList.size()>=3){
 message.setB(false);
-message.setDes("最多只能填写三次工作经验");
+message.setDes("最多只能填写三次工作经验l");
     }else {
         Experience experience2=new Experience();
         int count=experienceList.size()+1;
