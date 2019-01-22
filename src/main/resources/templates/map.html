@@ -8,12 +8,12 @@
         #l-map{height:300px;width:100%;}
         #r-result{width:100%;}
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=aILEp5OO0CzVQHE9N0S6wMqgYUny3Ghq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8AXWMtMDhN8qQ7ZmTH3GI1Y7aB5a8mzx"></script>
     <title>关键字输入提示词条</title>
 </head>
 <body>
 <div id="l-map"></div>
-<div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="百度" style="width:150px;" /></div>
+<div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="春熙路" style="width:150px;"      /></div>
 <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 </body>
 </html>
@@ -24,7 +24,7 @@
     }
 
     var map = new BMap.Map("l-map");
-    map.centerAndZoom("北京",12);                   // 初始化地图,设置城市和地图级别。
+    map.centerAndZoom("成都",12);                   // 初始化地图,设置城市和地图级别。
 
     var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
         {"input" : "suggestId"
@@ -70,4 +70,5 @@
         });
         local.search(myValue);
     }
+    map.enableScrollWheelZoom(true);
 </script>
