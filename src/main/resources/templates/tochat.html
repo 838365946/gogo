@@ -116,8 +116,8 @@
                     console.log("socket链接打开")
                 };
                 socket.onmessage=function (msg) {
-
-                    innerhtmls(msg.data)
+                    console.log(msg.data);
+                    setMessageInnerHTML(msg.data);
                 };
                 socket.onerror=function () {
                     socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
@@ -125,13 +125,8 @@
                 socket.onclose=function () {
                     console.log("bye")
                 };
-                function innerhtmls(innerhtml) {
-                    var mess=JSON.parse(innerhtml)
-                    if(mess.name==cname){
-                        document.getElementsByClassName("me").innerHTML += innerhtml + '<br/>';
-                    }else if (mess.name==id){
-                        document.getElementsByClassName("other").innerHTML += innerhtml + '<br/>';
-                    }
+                function setMessageInnerHTML(innerHTML) {
+                    document.getElementById('sendmsg').innerHTML += innerHTML + '<br/>';
                 }
             };
 
@@ -153,9 +148,7 @@
 <div class="Content-Main">
 
     <h1>面试邀请信息</h1>
-    <div class="messes">
-        <span class="other"></span>
-        <span class="me"></span>
+    <div class="messes"  id="sendmsg">
 
     </div>
     <p>
