@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>查看简历</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
@@ -81,8 +81,6 @@
 <script>
 
 
-
-
     var str="<table class= table-1> <tr><td>id</td><td>序号</td><td>姓名</td> <td>年龄</td> <td>性别</td><td>城市</td> <td>email</td><td>工作经验</td><td>面试岗位</td><td>操作</td> </tr>"
     var ss=""
           $(function () {
@@ -94,7 +92,7 @@
                            console.log(data)
                             for (var i = 0; i < data.data.length; i++) {
                                 if (data.data[i].d_pass != "是") {
-                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.nickname + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qq'>发送消息</button></td></tr>"
+                                    ss = "<tr><td>" + data.data[i].user.id + "</td><td>" + i + "</td><td>" + data.data[i].user.nickname + "</td><td>" + data.data[i].user.age + "</td><td>" + data.data[i].user.sex + "</td><td>" + data.data[i].user.city + "</td><td>" + data.data[i].user.email + "</td><td>" + data.data[i].user.exp_time + "</td><td>" + data.data[i].position.p_posi_name + "</td><td><button class='look'>查看简历</button><button class='qql'>发送消息</button></td></tr>"
                                     str += ss
                                 }
 
@@ -102,37 +100,20 @@
                             str += "</table>"
                             $("#container").html(str)
 
+                            var jishitox=document.getElementsByClassName("qql")
+                            for (var f=0;f<jishitox.length;f++){
+                                jishitox[f].onclick=function () {
+                                    var ii = this.parentElement.parentElement
+                                    var qs = ii.children[0].innerHTML;
+                                    var gsid=data.data[0].position.company.c_name;
 
+                                    var links ="tochat.html?id="+qs+"&company="+encodeURI(encodeURI(gsid));
+                                    window.location.href=links;
 
-
-                             var yem =document.getElementsByClassName("qq")
-
-
-                            for (var df = 0; df < yem.length; df++){
-                                yem[df].onclick=function () {
-                                    var lt = this.parentElement.parentElement
-                                    //User的ID
-                                    var userid = lt.children[0].innerHTML;
-                                    $.ajax({
-                                        url: "/dx",
-                                        type: "post",
-                                        dataType: "json",
-                                        success: function (gs) {
-                                         var gss=gs.c_id
-                                        var link ="message.html" + '?value1='+userid + '&value2='+gss;
-                                            window.location.href=link;
-
-                                        }
-
-
-                                    })
 
                                 }
 
-
                             }
-
-
 
 
 
@@ -143,9 +124,14 @@
                                     var ii = this.parentElement.parentElement
                                     var qs = ii.children[0].innerHTML;
                                     var qq = ii.children[1].innerHTML;
-                                    var msgw=ii.children[9].innerHTML;
+                                    var did=data.data[qq].d_id
+                                    var msgw=ii.children[8].innerHTML;
+
+                                    var userid = ii.children[0].innerHTML;
+
                                     var z = data.data[qq].d_id;
-                                    var gsid=data.data[0].position.company.c_name;
+
+
                                     $.ajax({
                                         url: "/getresume",
                                         data: "id=" + qs,
@@ -155,7 +141,7 @@
                                                console.log(dat)
                                          $.ajax({
                                              url: "/updatestate",
-                                             data: "d_id=" + z + "&state=被查看&id="+qs,
+                                             data: "d_id=" + z + "&state=被查看&id="+qs+"&p_posi_name="+msgw,
                                              type: "post",
                                              dataType: "json",
                                              success: function (sss) {
@@ -203,16 +189,19 @@
                                                          var qqlove=document.getElementById("yes")
                                                          qqlove.onclick=function () {
 
-                                                               $.ajax({
+                                                 var link ="message.html" + '?d_id='+did + '&p_posi_name='+encodeURI(encodeURI(msgw))+'&phone_number='+iphone+'&id='+userid;
+                                                     window.location.href=link;
+                                                        /*       $.ajax({
                                                             url:"/updatestate",
                                                             data: "d_id=" + z + "&state=邀请面试&id="+qs+"&p_posi_name="+msgw+"&phone_number="+iphone,
                                                             type: "post",
                                                             dataType: "json",
                                                             success:function (aaaaa) {
 
+                                                               console.log(iphone)
                                                                 alert("邀请成功!")
                                                               }
-                                                               })
+                                                               })*/
 
 
                                                            }
@@ -244,7 +233,6 @@
 
                                 }
                             }
-
 
                         }
                     })

@@ -35,7 +35,7 @@ public Message CheckPost(User user, Position position){
 }
 @RequestMapping("/updatestate")
 @ResponseBody
-public Message CheckDelivery(Delivery delivery, @Param("state")String state, User user, HttpServletRequest request,Position position){
+public Message CheckDelivery(Delivery delivery, @Param("state")String state, User user, HttpServletRequest request,Position position,String mess){
     PhoneMessage phoneMessage=new PhoneMessage();
     System.out.println(state+user.getId());
 Message message=new Message();
@@ -43,8 +43,9 @@ int i=deliveryService.Updatestate(state,delivery);
 Company company= (Company) request.getSession().getAttribute("company");
 if (i>0){
     if(state.equals("邀请面试")){
+
         phoneMessage.sendm(user.getPhone_number());
-        WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+"邀请您进行面试"+position.getP_posi_name()+"岗位");
+        WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+mess);
     }else if(state.equals("不合适")){
         WebSocketServer.sendtoone(String.valueOf(user.getId()),company.getC_name(),company.getC_name()+"觉得您不合适"+position.getP_posi_name()+"岗位");
     }else if(state.equals("被查看")){
@@ -72,7 +73,7 @@ message.setData(deliveries);
 
 }else {
     message.setB(false);
-    message.setDes("失败a");
+    message.setDes("失败");
 }
 return message;
 }

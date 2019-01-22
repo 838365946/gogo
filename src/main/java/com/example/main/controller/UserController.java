@@ -195,11 +195,33 @@ ModelAndView modelAndView=new ModelAndView();
 @RequestMapping("/adduserdata")
 @ResponseBody
     public Message AddUserData(User user) throws NullPointerException{
-    System.out.println(user.toString());
-        List<User> users=userService.SelcectByuser(user.getId());
-    System.out.println(users.toString());
+    int age = 0;
+    try {
+        Calendar now = Calendar.getInstance();
+        now.setTime(new Date());// 当前时间
+        Calendar birth = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date bithday = format.parse(user.getBirthday());
+        birth.setTime(bithday);
+
+        if (birth.after(now)) {//如果传入的时间，在当前时间的后面，返回0岁
+            age = 0;
+        } else {
+            age = now.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+            if (now.get(Calendar.DAY_OF_YEAR) > birth.get(Calendar.DAY_OF_YEAR)) {
+                age += 1;
+            }
+        }
+
+    } catch (Exception e) {//兼容性更强,异常后返回数据
+        age=0;
+    }
+
+    List<User> users=userService.SelcectByuser(user.getId());
+
         Message message=new Message();
             if(users.size()>0){
+                user.setAge(age);
                 User u= users.get(0);
                 u.setBirthday(user.getBirthday());
                 u.setCity(user.getCity());

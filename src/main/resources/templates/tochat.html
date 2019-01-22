@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>UserInfo</title>
+
+    <style type="text/css">
+        .Content-Main{
+            max-width: 500px;
+            margin: auto;
+            border: none;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            color: white;
+            background: #1296db;
+        }
+        .Content-Main h1{
+            padding: 8px 0px 40px 10px;
+            display: block;
+            border-bottom: 1px solid #444;
+        }
+
+        .Content-Main label{
+            margin: 0px 0px 5px;
+            display: block;
+        }
+
+        .Content-Main label>span{
+            width: 20%;
+            float: left;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+
+        .Content-Main textarea{
+            height: 100px;
+            width: 84%;
+            margin-left: 10px;
+            padding: 5px 0px 0px 5px;
+            resize: none;
+            border-radius: 5px;
+        }
+        .Content-Main .button{
+            padding: 8px 24px 8px 24px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #FFE477;
+            box-shadow: 1px 1px 1px  #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            color: #585858;
+            background: #99CCCC;
+            margin-left: 395px;
+        }
+        .Content-Main .button:hover{
+            color:  #333;
+            background-color:  #EBEBEB ;
+        }.messes{
+             width: 480px;
+             margin: 0 auto;
+             height: 320px;
+             background-color: white;
+         }.me{
+              color: #00B83F;
+              float: right;
+          }
+        .other{
+            color: black;
+            float: left;
+        }#send{
+             position: absolute;
+             height: 48px;
+             width: 55px;
+             margin-top: 30px;
+         }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var id=GetRequest().id;
+        var cname=GetRequest().company;
+        var socket;
+        $(function () {
+
+
+
+            if (typeof (WebSocket)=="undefined"){
+                console.log("客户端不支持socket")
+            }else {
+                socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
+                socket.onopen=function () {
+                    console.log(id+cname+"you");
+                    console.log("socket链接打开")
+                };
+                socket.onmessage=function (msg) {
+
+                    innerhtmls(msg.data)
+                };
+                socket.onerror=function () {
+                    socket=new WebSocket("ws:www.s4rain.vip/websocket/"+cname);
+                }
+                socket.onclose=function () {
+                    console.log("bye")
+                };
+                function innerhtmls(innerhtml) {
+                    var mess=JSON.parse(innerhtml)
+                    if(mess.name==cname){
+                        document.getElementsByClassName("me").innerHTML += innerhtml + '<br/>';
+                    }else if (mess.name==id){
+                        document.getElementsByClassName("other").innerHTML += innerhtml + '<br/>';
+                    }
+                }
+            };
+
+        }); function send() {
+
+            var mess=document.getElementById("message").value;
+            var message=mess+"|"+id;
+            console.log(message);
+            socket.send(message);
+            document.getElementById("message").value="";
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+<div class="Content-Main">
+
+    <h1>面试邀请信息</h1>
+    <div class="messes">
+        <span class="other"></span>
+        <span class="me"></span>
+
+    </div>
+    <p>
+        <label>
+
+            <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea><button id="send" onclick="send()">发送</button>
+        </label>
+
+
+</div>
+</body>
+</html>

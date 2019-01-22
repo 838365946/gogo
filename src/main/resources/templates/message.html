@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>UserInfo</title>
-	
+    <script type="text/javascript" src="js/jquery.js"></script>
     <style type="text/css">  
 	.Content-Main{
             max-width: 500px;
@@ -40,7 +40,8 @@
 
         .Content-Main textarea{
             height: 100px;
-            width: 70%;
+            width: 84%;
+            margin-left: 10px;
             padding: 5px 0px 0px 5px;
 			resize: none;
 			border-radius: 5px;
@@ -64,30 +65,98 @@
         .Content-Main .button:hover{
             color:  #333;
             background-color:  #EBEBEB ;
+        }.messes{
+                     width: 480px;
+                     margin: 0 auto;
+                     height: 320px;
+        background-color: white;
+                 }.me{
+        color: #00B83F;
+        float: right;
+                                   }
+        .other{
+            color: black;
+            float: left;
+        }#send{
+                     position: absolute;
+                     height: 48px;
+                     width: 55px;
+                     margin-top: 30px;
         }
 	</style>
-    <script>
 
-        
-    </script>
-    
-    
+
 </head>
+<script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    var d_id=GetRequest().d_id;
+    var p_posi_name=GetRequest().p_posi_name;
+    var phone_number=GetRequest().phone_number;
+    var user_id=GetRequest().id;
+
+
+    window.onload=function(){
+       var qq=document.getElementById("sub")
+        qq.onclick = function () {
+            var wz=document.getElementById("message").value;
+            if(wz==""){
+                  alert("请输入内容!!!!")
+                console.log(p_posi_name)
+              }else{
+                  $.ajax({
+                      url:"/updatestate",
+                      data:"d_id="+d_id+"&state=邀请面试"+"&id="+user_id+"&p_posi_name="+p_posi_name+"&phone_number="+phone_number+"&mess="+wz,
+                      type:"post",
+                      dataType:"json",
+                      success:function (data) {
+                          alert("邀请成功!!")
+                          location.reload(true);
+                          window.location.href="View_resume.html";
+                      }
+
+
+                  })
+              }
+
+
+                }
+
+
+
+
+
+        }
+
+
+
+
+
+
+</script>
 <body>
         <div class="Content-Main">
-            <form  action="" method="post" class="form-userInfo">
-                <h1>面试邀请信息</h1>               
-                <p>
+            <h1>面试邀请信息</h1>
+            <p>
                 <label>
-                    <span>消息内容:</span>
-                    <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea>
+                <span>消息内容:</span>
+                <textarea id="message" name="message" placeholder="请输入您要发送的邀请信息"></textarea>
+                <button id="sub" class="button">发送</button>
                 </label>
-                <label>
-                    <input type="submit" class="button" value="提交">
 
-                    <button id="fh">返回</button>
-                </label>
-            </form>
+
+
         </div>
 </body>
 </html>
