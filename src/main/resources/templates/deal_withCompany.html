@@ -24,7 +24,7 @@
             dataType:"json",
             success:function(data) {
                 for (var i=0;i<data.data.length;i++){
-                    ss="<tr><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_phone_number+"</td><td>"+data.data[i].c_welfare+"</td><td><a>"+data.data[i].c_addr+"</a></td><td>"+data.data[i].c_check_status+"</td></tr>"
+                    ss="<tr><td >"+data.data[i].c_id+"</td><td>"+data.data[i].c_name+"</td><td>"+data.data[i].c_industry+"</td><td>"+data.data[i].c_nature+"</td><td>"+data.data[i].c_phone_number+"</td><td>"+data.data[i].c_welfare+"</td><td><a href='javascript:void(0);'  onclick= window.location.href='map.html'  target='_blank'>"+data.data[i].c_addr+"</a></td><td>"+data.data[i].c_check_status+"</td></tr>"
                     str+=ss
                 }
                 str+="</table>"
